@@ -1,0 +1,91 @@
+POST http://localhost:8000/auth/register
+Content-Type: application/json
+
+{
+    "username": "long1234",
+    "password": "long1234",
+    "confirmPassword": "long1234"
+}
+
+###
+POST http://localhost:8000/auth/login
+Content-Type: application/json
+
+{
+    "username": "admin123",
+    "password": "admin123"
+}
+
+###
+GET http://localhost:8000/api/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjgwYmY3ZGE1NjIwMzZmMTQzNjIwZSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNjUxNzY3MzYwfQ.TR-Y3g4IEYkurj3ZBM2_2offfqM1w7y5tsh6AYGIjt4
+
+
+###
+POST http://localhost:8000/exams/create
+Content-Type: application/json
+
+{
+    "id": 36,
+    "question": "Taxis don‘t follow any schedule; the come and go_____.",
+    "answer_a": "chronological",
+    "answer_b": "punctually",
+    "answer_c": "in sequence",
+    "answer_d": "at random",
+    "answer_true": "D"
+}
+
+###
+GET http://localhost:8000/exams/su12
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNjgwYmY3ZGE1NjIwMzZmMTQzNjIwZSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNjUxNzY3MzYwfQ.TR-Y3g4IEYkurj3ZBM2_2offfqM1w7y5tsh6AYGIjt4
+Content-Type: application/json
+
+###
+POST http://localhost:8000/results/save
+Content-Type: application/json
+
+{
+    "idUser": "62778dc10ce272c119766ab8",
+    "examName": "Lich su 12",
+    "result": "12",
+    "timeWork": "12 phut"
+}
+
+###
+GET http://localhost:8000/results/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzc4ZGMxMGNlMjcyYzExOTc2NmFiOCIsImFkbWluIjpmYWxzZSwiaWF0IjoxNjUyNzIwNjE1fQ.q09RmA6ap4GfCdKnyfJVbCVlVcMyGn8jKp-lYTs0SdA
+Content-Type: application/json
+
+###
+GET http://localhost:8000/admin/exams/su12
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGEwMzAxNzRiODk4ZTdkMjYwM2UxOCIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTM0Njc1NDN9.rDhIHYUEu3N-QvRsuiWEMRp82hzVsOKJx98YsBBgqMk
+Content-Type: application/json
+
+###
+PUT http://localhost:8000/admin/exams/update/6284b21f57abd7718c6be9f7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGEwMzAxNzRiODk4ZTdkMjYwM2UxOCIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTM1NjMzNTh9.bMB6s-0xwxlfpLxRUak2WyoMYBBT1LaPXG9D-n6qbzY
+Content-Type: application/json
+
+{"question":"Pháp luật là gì?", "answer_a":"A", "answer_b": "B", "answer_c": "C","answer_d": "D", "answer_true": "B"}
+
+###
+GET http://localhost:8000/exams/try/su-12
+Content-Type: application/json
+
+###
+POST http://localhost:8000/admin/exams/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGEwMzAxNzRiODk4ZTdkMjYwM2UxOCIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTQwNjgxMzR9.R9OyITArFNYJbk3N0L4WAyrLPxei5SU3YcP5mbIPMDE
+Content-Type: application/json
+
+{"name": "su-12","type": "su", "question":"Pháp luật là", "answer_a":"A", "answer_b": "B", "answer_c": "C","answer_d": "D", "answer_true": "B"}
+
+###
+GET http://localhost:8000/admin/exams/gdcd-12
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGEwMzAxNzRiODk4ZTdkMjYwM2UxOCIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTQwNzM3MTR9.ZMZiKDI65scj1wSE6cf_EE-fKGM4vfwD-lj0W3FkHKM
+Content-Type: application/json
+
+{
+    "page": 2,
+    "pagesize": 20
+}
+
