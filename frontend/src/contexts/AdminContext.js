@@ -3,10 +3,16 @@ import axios from 'axios'
 import typeReducer from '../reducers/typeReducer'
 import userReducer from '../reducers/userReducer'
 import examReducer from '../reducers/examReducer'
+import statisticReducer from '../reducers/statisticReducer'
 
 const AdminContext = createContext()
 
 const AdminContextProvider = ({children}) => {
+    const [statisticState, statisticDispatch] = useReducer(statisticReducer, {
+        statistics: [],
+        statisticsLoading: true
+    })
+
     const [typeState, typeDispatch] = useReducer(typeReducer, {
         types: [],
         typesLoading: true
@@ -23,6 +29,16 @@ const AdminContextProvider = ({children}) => {
         examsLoading: true
     })
 
+    // Lấy số liệu được thống kê
+    const getStatistic = useCallback(async() => {
+        try {
+            const response = await axios.get('http://localhost:8000/admin/count')
+            if(response.data.success)
+                statisticDispatch({type: 'STATISTICS_LOADED_SUCCESS', payload: response.data.statistics})
+        } catch (error) {
+            statisticDispatch({type: 'STATISTICS_LOADED_FAIL'})
+        }
+    }, [])
     
     const createExam = useCallback(async(createForm) => {
         try {
@@ -101,7 +117,7 @@ const AdminContextProvider = ({children}) => {
         }
     }, [])
     
-    const adminContextData = {typeState, getTypes, userState, getUsers, examState, getAllExams, updateExam, createExam, deleteExam, deleteUser}
+    const adminContextData = {typeState, getTypes, userState, getUsers, examState, getAllExams, statisticState, getStatistic, updateExam, createExam, deleteExam, deleteUser}
 
     return (
         <AdminContext.Provider value={adminContextData}>

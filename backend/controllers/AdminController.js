@@ -3,8 +3,27 @@ const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const Exam = require('../models/Exam')
 const Result = require('../models/Result')
+const Subject = require('../models/Subject')
 
 const AdminController = {
+    statistic: async (req, res) => {
+        try {
+            let statistics = {}
+            const countUser = await User.count({admin: false})
+            const countSubject = await Subject.count()
+            const countExam = await Subject.aggregate([{$project: {count: {$size: '$type'}}}])
+            const countQuiz = await Exam.count()
+            const sortUser = await User.find({admin: false}, {'password': 0}).limit(5).sort({'createdAt': -1})
+            const sortResult = await Result.find().limit(10).sort({'updatedAt': -1})
+
+            statistics = {countUser, countSubject, countExam, countQuiz, sortUser, sortResult}
+            res.json({success: true, statistics})
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({success: false, message: 'Lỗi server'})
+        }
+    },
+
     showUsers: async (req, res) => {
         try {
             const users = await User.find()

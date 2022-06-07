@@ -36,7 +36,7 @@ function App() {
                 <Route path='/login' element={<Auth authRoute='login'/>} />
                 <Route path='/register' element={<Auth authRoute='register'/>} />
                 <Route path='/home' element={<LayoutRoute Component={Home}/>}/>
-                <Route path='/admin' element={<ProtectedAdmin Component={Admin}/>}/>
+                <Route path='/admin' element={<ProtectedAdmin Component={Admin} flag='no-nav'/>}/>
                 <Route path='/admin/exams-management/view/:slug' element={<ProtectedAdmin Component={UpdateExam} flag='no-nav'/>}/>
                 <Route path='/admin/exams-management/create/:slug' element={<ProtectedAdmin Component={CreateExam} flag='no-nav'/>}/>
                 <Route path='/admin/exams-management' element={<ProtectedAdmin Component={Exams} />}/>

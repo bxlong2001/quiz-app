@@ -64,7 +64,7 @@ const UpdateExam = () => {
     else {
       const body = []
       let i
-      for(i=1; i<=(Math.floor(total/10)); i++) {
+      for(i=1; i<=(Math.ceil(total/10)); i++) {
         body.push(
           <Button
             key={i}
@@ -127,7 +127,7 @@ const UpdateExam = () => {
               </Button>
                     {body.map(e => e)}
                 <Button
-                  style={{pointerEvents: page< Math.floor(total/10)? '' : 'none'}}
+                  style={{pointerEvents: page< Math.ceil(total/10)? '' : 'none'}}
                   onClick={handleNextPage}
                   to={{search: `?page=${page+1}&pagesize=${pagesize}`}}
                   className={page>=5 ? 'disabled-link btn-pag' : 'btn-pag'}

@@ -60,7 +60,7 @@ const Home = () => {
         </Carousel.Item>
       </Carousel>
         <div className="mt-4 mb-2 home-link">
-          <p style={{fontSize: 26}}>Các môn thi</p>
+          <span style={{fontSize: 26}}>Các môn thi</span>
           <Link style={{fontSize: 17, textDecoration: 'underline'}} className="text-info" to='/exams'>
             <span style={{marginRight: 5}}>Xem chi tiết</span>
             <FontAwesomeIcon icon={faAngleRight} />

@@ -11,5 +11,6 @@ router.post('/exams/create', verifyTokenAndAdmin, adminController.createExam)
 router.put('/exams/update/:id', verifyTokenAndAdmin, adminController.updateExam)
 router.delete('/exams/delete/:id', verifyTokenAndAdmin, adminController.deleteExam)
 router.get('/exams/:slug', verifyTokenAndAdmin, adminController.showExams)
+router.get('/count', verifyTokenAndAdmin, adminController.statistic)
 
 module.exports = router

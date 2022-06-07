@@ -13,6 +13,7 @@ const ModalUpdate = ({quiz, showUpdate, handleCloseUpdate}) => {
         
         try {
             await updateExam(updateForm)
+            window.location.reload(false)
         } catch (error) {
           console.log(error);
         }    

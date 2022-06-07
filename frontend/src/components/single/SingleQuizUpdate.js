@@ -1,13 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil, faTrash} from '@fortawesome/free-solid-svg-icons'
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import ModalUpdate from '../modals/ModalUpdate';
 import ModalDeleteExam from '../modals/ModalDeleteExam';
-import { AdminContext } from '../../contexts/AdminContext';
 
 const SingleQuizUpdate = ({exam}) => {
-    const {deleteExam} = useContext(AdminContext)
     const [showUpdate, setShowUpdate] = useState(false);
     const [showDeleteExam, setShowDeleteExam] = useState(false);
 
@@ -29,7 +27,6 @@ const SingleQuizUpdate = ({exam}) => {
                 quiz={exam}
                 showUpdate={showUpdate}
                 handleCloseUpdate={handleCloseUpdate}
-                handleSubmit={deleteExam}
             />}
             {showDeleteExam && <ModalDeleteExam
                 id={exam._id}

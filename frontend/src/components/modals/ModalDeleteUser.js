@@ -10,6 +10,7 @@ const ModalDeleteUser = ({id, showDeleteUser, handleCloseDeleteUser}) => {
 
         try {
             await deleteUser(id)
+            window.location.reload(false)
         } catch (error) {
             console.log(error);
         }

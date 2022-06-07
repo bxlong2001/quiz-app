@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { AdminContext } from '../../contexts/AdminContext'
+import { MathJax } from 'better-react-mathjax'
 
 const CreateExam = () => {
   const {slug} = useParams()
@@ -35,6 +36,7 @@ const CreateExam = () => {
   }
 
   const handleSeclectImg = (e) => {
+    console.log(e);
     const file = e.target.files[0]
     setCreateForm(prev => ({...prev, img: URL.createObjectURL(file)}))
   }
@@ -161,28 +163,30 @@ const CreateExam = () => {
       </Col>
       <Col>
         <div>Xem trước</div>
-        <div className="mb-1 title__question">
-          {question && `Câu hỏi: ${question}`}
-          <br></br>
-          {img && <img src={img} width={200}></img>}
-        </div>
-        <Row>
-            <Col>
-                <span>{answer_a}</span>
-            </Col>
-            <Col>
-                <span>{answer_b}</span>
-            </Col>
-        </Row>
-        <Row className="mb-4">
-            <Col>
-                <span>{answer_c}</span>
-            </Col>
-            <Col>
-                <span>{answer_d}</span>
-            </Col>
-        </Row>
-      </Col>
+        <MathJax>
+          <div className="mb-1 title__question">
+            {question && `Câu hỏi: ${question}`}
+            <br></br>
+            {img && <img src={img} width={200}></img>}
+          </div>
+          <Row>
+              <Col>
+                  <span>{answer_a}</span>
+              </Col>
+              <Col>
+                  <span>{answer_b}</span>
+              </Col>
+          </Row>
+          <Row className="mb-4">
+              <Col>
+                  <span>{answer_c}</span>
+              </Col>
+              <Col>
+                  <span>{answer_d}</span>
+              </Col>
+          </Row>
+        </MathJax>
+        </Col>
     </Row>
   )
 }

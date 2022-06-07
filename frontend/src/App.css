@@ -1,6 +1,8 @@
 
 :root {
     --height_img: 270px;
+    --color-primary: #5F5490;
+    --color-button: #34A25A;
 }
 
 * {
@@ -10,6 +12,10 @@
 
 html {
     scroll-behavior: smooth;
+}
+
+body {
+    background-color: #E3DFEF;
 }
 
 div {
@@ -82,7 +88,6 @@ div {
 .home-link {
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
 .test__wrap__button {
@@ -101,7 +106,7 @@ div {
 }
 
 input[type='radio']:checked::before {
-    background-color: #28a745;
+    background-color: var(--color-primary);
 }
 
 
@@ -172,25 +177,115 @@ input[type='radio']:checked::before {
 
 #btn-onTop {
     position: fixed;
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     bottom: 20px;
     right: 30px;
-    font-size: 18px;
-    border: none;
-    background-color: #dc3545;
-    color: white;
+    font-size: 16px;
+    border-style: solid 2px;
+    background-color: #fff;
+    color: #000;
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 7px;
     z-index: 99;
   }
   
 #btn-onTop:hover {
-    background-color: #28a745;
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
 }
 
 .btn-pag {
     background-color: #fff;
     color: #000;
     border-radius: 0;
+}
+
+.ui-admin {
+    background-color: #fff;
+    border: solid 2px var(--color-primary);
+    border-left: solid 10px var(--color-primary);
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.ui-admin-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.ui-admin-number {
+    font-size: 40px;
+}
+
+.ui-admin-text {
+    color: grey;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.btn-view {
+    font-size: 15px;
+    font-weight: 650;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background-color: #fff;
+    border: solid 2px var(--color-button);
+    color: var(--color-button);
+}
+
+.admin-box {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+}
+
+.admin-rank {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 11px auto;
+    border-radius: 10px;
+}
+
+.admin-rank img {
+    margin: 10px 26px;
+    width: 70px;
+    border: solid 5px gray;
+    border-radius: 50%;
+}
+
+.rank-1{
+    background-color: #28a745;
+}
+
+.rank-2{
+    background-color: var(--color-primary);
+}
+
+.rank-3{
+    background-color: #FFC000;
+}
+
+.rank{
+    color: #fff;
+    padding: 1px 30px;
+    border-radius: 9999px;
+    margin: 15px 0;
+}
+
+.rank-1 > .rank{
+    background-color: #2a8940;
+}
+
+.rank-2 > .rank{
+    background-color: #423a65;
+}
+
+.rank-3 > .rank{
+    background-color: #ca9800;
 }
