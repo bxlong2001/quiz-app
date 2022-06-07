@@ -91,7 +91,7 @@ const UpdateExam = () => {
           <Row>
             <Col>
               <MathJax>
-                <Table striped hover responsive="lg" >
+                <Table striped hover responsive="lg">
                   <thead>
                     <tr>
                       <th className='text-center'>Câu hỏi</th>

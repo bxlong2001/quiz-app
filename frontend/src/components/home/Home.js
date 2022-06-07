@@ -24,6 +24,18 @@ const Home = () => {
         <Carousel.Item>
           <img
             className="d-block w-100"
+            src="https://www.itl.cat/pngfile/big/294-2941154_kaziranga-national-park.jpg"
+            alt="Third slide"
+            style={{height: 330, borderRadius: 16}}
+          />
+          <Carousel.Caption>
+            <p style={{fontSize: 26}}>Trắc nghiệm Kỳ thi THPT Quốc gia</p>
+            <p>Tổng hợp kiến thức, sẵn sàng cho kỳ thi Trung học phổ thông Quốc Gia 2022.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
             src="https://i.pinimg.com/736x/1f/a7/0c/1fa70ced77406850449774062c03fabf.jpg"
             alt="First slide"
             style={{height: 330, borderRadius: 16}}
@@ -44,18 +56,6 @@ const Home = () => {
           <Carousel.Caption>
             <p style={{fontSize: 26}}>Trắc nghiệm Toán</p>
             <p>Ngân hàng đề đa dạng câu hỏi, phù hợp với mọi trình độ học vấn khác nhau.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://www.itl.cat/pngfile/big/294-2941154_kaziranga-national-park.jpg"
-            alt="Third slide"
-            style={{height: 330, borderRadius: 16}}
-          />
-          <Carousel.Caption>
-            <p style={{fontSize: 26}}>Trắc nghiệm Kỳ thi THPT Quốc gia</p>
-            <p>Tổng hợp kiến thức, sẵn sàng cho kỳ thi Trung học phổ thông Quốc Gia 2022.</p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
