@@ -288,3 +288,42 @@ input[type='radio']:checked::before {
 .rank-3 > .rank{
     background-color: #ca9800;
 }
+
+/* Info */
+.info-wrap {
+    display: flex;
+}
+
+.info-content {
+    margin-top: 20px;
+    flex: 1 1;
+    margin-right: 200px;
+}
+
+.info-input {
+    flex: 1;
+    width: 100%;
+    padding: 3px 10px;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,.09);
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.info-btn {
+    height: 32px;
+    width: 60px;
+    font-size: 16px;
+    margin: auto;
+}
+
+.info-label {
+    font-size: 20px;
+}
+
+.info-description {
+    font-weight: 400;
+    font-style: italic;
+    margin-top: 10px;
+}

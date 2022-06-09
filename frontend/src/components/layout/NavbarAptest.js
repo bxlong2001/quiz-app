@@ -25,7 +25,7 @@ const NavbarAptest = () => {
                 <button className='btn-nav'>Đăng ký</button>
               </Nav.Link>
             </>:
-            <NavDropdown title={user.username} id="basic-nav-dropdown">
+            <NavDropdown title={user.admin? 'Admin' : user.fullname} id="basic-nav-dropdown">
               {user.admin ?
               <>
                 <NavDropdown.Item to="/admin/exams-management" as={Link}>Quản lý ngân hàng đề</NavDropdown.Item>

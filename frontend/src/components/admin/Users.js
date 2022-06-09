@@ -39,9 +39,8 @@ const Users = () => {
                   <tr>
                     <th></th>
                     <th>STT</th>
-                    <th></th>
                     <th>Tài khoản</th>
-                    <th></th>
+                    <th>Tên người dùng</th>
                     <th>Ngày tạo tài khoản</th>
                     <th></th>
                   </tr>
@@ -54,9 +53,8 @@ const Users = () => {
                       <tr key={user._id}>
                             <td></td>
                             <td>{i++}</td>
-                            <td></td>
                             <td>{user.username}</td>
-                            <td></td>
+                            <td>{user.fullname}</td>
                             <td>{user.createdAt.split('T')[0]}</td>
                             <td>
                               <Button variant='danger' onClick={() => handleShowDeleteUser(user._id)}>

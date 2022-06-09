@@ -98,7 +98,7 @@ const Admin = () => {
                 {sortResult.map(result => (
                   <tr key={result._id}>
                     <td>{i++}</td>
-                    <td>{result.idUser}</td>
+                    <td>{result.infoUser[0].username}</td>
                     <td>{result.examName}</td>
                     <td>{result.result}</td>
                     <td>{result.timeWork}</td>

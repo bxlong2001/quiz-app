@@ -12,12 +12,13 @@ const RegisterForm = () => {
     //Local state
     const [registerForm, setRegisterForm] = useState({
         username: '',
+        fullname: '',
         password: '',
         confirmPassword: ''
     })
 
     const [alert, setAlert] = useState(null)
-    const {username, password, confirmPassword} = registerForm
+    const {username, fullname, password, confirmPassword} = registerForm
 
     const handleRegister = (e) => {
         setRegisterForm({
@@ -54,6 +55,18 @@ const RegisterForm = () => {
             <Form.Group>
                 <Form.Control
                     type='text'
+                    placeholder='Nhập họ tên'
+                    name='fullname'
+                    value={fullname}
+                    maxLength={30}
+                    minLength={6}
+                    required
+                    onChange={handleRegister}
+                />
+            </Form.Group>
+            <Form.Group>
+                <Form.Control
+                    type='text'
                     placeholder='Nhập tài khoản'
                     name='username'
                     required
@@ -61,14 +74,6 @@ const RegisterForm = () => {
                     onChange={handleRegister}
                 />
             </Form.Group>
-            {/* <Form.Group>
-                <Form.Control
-                    type='text'
-                    placeholder='Input email'
-                    name='email'
-                    required
-                />
-            </Form.Group> */}
             <Form.Group>
                 <Form.Control
                     type='password'
