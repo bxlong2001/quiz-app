@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Result = new mongoose.Schema({
     idUser: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
         required: true
     },
     examName: {

@@ -7,7 +7,11 @@ const Exam = new mongoose.Schema({
     },
     type: {
         type: String,
-        required: true,
+        required: true
+    },
+    part: {
+        type: String,
+        required: true
     },
     img: {
         type: String,

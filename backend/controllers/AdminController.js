@@ -13,8 +13,25 @@ const AdminController = {
             const countSubject = await Subject.count()
             const countExam = await Subject.aggregate([{$project: {count: {$size: '$type'}}}])
             const countQuiz = await Exam.count()
-            const sortUser = await User.find({admin: false}, {'password': 0}).limit(5).sort({'createdAt': -1})
-            const sortResult = await Result.find().limit(10).sort({'updatedAt': -1})
+            const sortUser = await User.find({admin: false}, {'password': 0}).limit(4).sort({'createdAt': -1})
+            const sortResult = await Result.aggregate([
+                {
+                    $limit: 9
+                },
+                {
+                    $sort: {
+                        'updatedAt': -1
+                    }
+                },
+                {   
+                    $lookup: {
+                        from: 'users',
+                        localField: 'idUser',
+                        foreignField: '_id',
+                        as: 'infoUser'
+                    }
+                }
+            ])
 
             statistics = {countUser, countSubject, countExam, countQuiz, sortUser, sortResult}
             res.json({success: true, statistics})

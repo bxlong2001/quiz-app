@@ -5,11 +5,12 @@ const jwt = require('jsonwebtoken')
 const AuthController = {
     register: async(req, res) => {
         // const {username, email, password} = req.body
-        const {username, password} = req.body
+        const {username, fullname, password} = req.body
+        
 
         // if(!username || !password || !email)
-        if(!username || !password)
-            return res.status(400).json({success: false, message: 'Vui lòng nhập tài khoản/ mật khẩu'})
+        if(!username || !password || !fullname)
+            return res.status(400).json({success: false, message: 'Vui lòng nhập đầy đủ thông tin'})
 
         try {
             //check existing username
@@ -27,7 +28,7 @@ const AuthController = {
             //hash password
             const hashPass = await argon2.hash(password)
             // const newUser = new User({username, email, password: hashPass})
-            const newUser = new User({username, password: hashPass})
+            const newUser = new User({username, fullname, password: hashPass})
             await newUser.save()
 
             //json web token
@@ -46,7 +47,7 @@ const AuthController = {
         const {username, password} = req.body
         
         if(!username || !password)
-            return res.status(400).json({success: false, message: 'Thiếu trường tài khoản/ mật khẩu'})
+            return res.status(400).json({success: false, message: 'Vui lòng nhập tài khoản/ mật khẩu'})
         
         try {
             const user = await User.findOne({username})
