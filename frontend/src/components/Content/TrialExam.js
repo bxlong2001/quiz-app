@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react"
 import { Badge, Button, Card, Col, Form, Modal, Row, Spinner, Table } from "react-bootstrap"
 import { Link, useParams } from "react-router-dom"
 import { ExamContext } from "../../contexts/ExamContext"
-import SingleQuestion from "../single/SingleQuestion"
+import SingleQuiz from "../single/SingleQuiz"
 import TimeOut from "./TimeOut"
 
 const TrialExam = () => {
@@ -127,7 +127,7 @@ const TrialExam = () => {
                 <MathJax>
                     {trialExams.map(trialExam => (
                         <Form.Group key={trialExam._id}>
-                            <SingleQuestion exam={trialExam} total={totalAnswerTrue.current} index={indexQues++}/>
+                            <SingleQuiz exam={trialExam} total={totalAnswerTrue.current} index={indexQues++}/>
                         </Form.Group>
                     ))}
                 </MathJax>

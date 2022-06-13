@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 
 const TimeOut = ({submit, timeOut, countdown}) => {
     const [time, setTime] = useState(countdown)
@@ -32,4 +32,4 @@ const TimeOut = ({submit, timeOut, countdown}) => {
     )
 }
 
-export default TimeOut
+export default memo(TimeOut)

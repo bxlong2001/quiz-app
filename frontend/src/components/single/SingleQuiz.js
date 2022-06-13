@@ -1,16 +1,16 @@
 import { memo } from "react"
 import { Col, Form, Row } from "react-bootstrap"
 
-const SingleQuestion = ({exam: {_id, question, answer_a, answer_b, answer_c, answer_d, answer_true, img}, total, index}) => {
+const SingleQuiz = ({exam: {_id, question, answer_a, answer_b, answer_c, answer_d, answer_true, img}, total, index}) => {
     const handleRadio = (e) => {
-        const id = e.target.id.split('-')[2]
+        const id = e.target.id.split('-')[1]
         const badgeSelected = document.getElementById(`Badge-${id}`)
         badgeSelected.classList.remove('bg-primary')
         badgeSelected.classList.add('bg-success')
-        if(e.target.id.split('-')[1].toUpperCase() === answer_true){
-            total[index-1] = 1
+        if(e.target.id.split('-')[0].toUpperCase() === answer_true){
+            total[index-1] = {select: e.target.id.split('-')[0], isAnswerTrue: 1}
         }else {
-            total[index-1] = 0
+            total[index-1] = {select: e.target.id.split('-')[0], isAnswerTrue: 0}
         }
         console.log(total);
     }
@@ -27,7 +27,7 @@ const SingleQuestion = ({exam: {_id, question, answer_a, answer_b, answer_c, ans
                         label={answer_a}
                         name={`group${_id}`}
                         type='radio'
-                        id={`answer-a-${_id}`}
+                        id={`a-${_id}`}
                         onChange={handleRadio}
                     />
                 </Col>
@@ -36,7 +36,7 @@ const SingleQuestion = ({exam: {_id, question, answer_a, answer_b, answer_c, ans
                         label={answer_b}
                         name={`group${_id}`}
                         type='radio'
-                        id={`answer-b-${_id}`}
+                        id={`b-${_id}`}
                         onChange={handleRadio}
                     />
                 </Col>
@@ -47,7 +47,7 @@ const SingleQuestion = ({exam: {_id, question, answer_a, answer_b, answer_c, ans
                         label={answer_c}
                         name={`group${_id}`}
                         type='radio'
-                        id={`answer-c-${_id}`}
+                        id={`c-${_id}`}
                         onChange={handleRadio}
                     />
                 </Col>
@@ -56,7 +56,7 @@ const SingleQuestion = ({exam: {_id, question, answer_a, answer_b, answer_c, ans
                         label={answer_d}
                         name={`group${_id}`}
                         type='radio'
-                        id={`answer-d-${_id}`}
+                        id={`d-${_id}`}
                         onChange={handleRadio}
                     />
                 </Col>
@@ -65,4 +65,4 @@ const SingleQuestion = ({exam: {_id, question, answer_a, answer_b, answer_c, ans
     )
 }
 
-export default memo(SingleQuestion)
+export default memo(SingleQuiz)

@@ -43,7 +43,7 @@ const AdminContextProvider = ({children}) => {
     const createExam = useCallback(async(createForm) => {
         try {
             const response = await axios.post('http://localhost:8000/admin/exams/create', createForm)
-            alert(response.data.message)
+            return response.data
         } catch (error) {
             return error.response.data
 				? error.response.data
@@ -84,8 +84,7 @@ const AdminContextProvider = ({children}) => {
     const updateExam = useCallback(async (exam) => {
         try {
             const response = await axios.put(`http://localhost:8000/admin/exams/update/${exam._id}`, exam)
-            if(response.data.success)
-                alert(response.data.message)
+            return response.data
         } catch (error) {
             return error.response.data
 				? error.response.data

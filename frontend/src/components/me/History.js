@@ -7,6 +7,12 @@ const History = () => {
   
   useEffect(() => {getResults()}, [])
 
+  const handleTime = (time) => {
+    const minutes = Math.floor(time/60)
+    const second = time - minutes*60
+    return minutes+' phút '+second+' giây'
+  }
+
   let body = null
   if(resultsLoading)
     body = (
@@ -23,8 +29,8 @@ const History = () => {
                       <tr>
                       <th></th>
                       <th></th>
-                      <th></th>
                       <th>Môn thi</th>
+                      <th>Lần thi</th>
                       <th>Số câu đúng</th>
                       <th>Thời gian làm bài</th>
                       <th>Ngày thi</th>
@@ -43,10 +49,10 @@ const History = () => {
                       <tr>
                         <td></td>
                         <td></td>
-                        <td></td>
                         <td>{result.examName}</td>
+                        <td>{result.frequency}</td>
                         <td>{result.result}</td>
-                        <td>{result.timeWork}</td>
+                        <td>{handleTime(result.timeWork)}</td>
                         <td>{result.createdAt.split('T')[0]}</td>
                       </tr>
                   </tbody>

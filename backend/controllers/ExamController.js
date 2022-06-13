@@ -4,7 +4,11 @@ const Subject = require('../models/Subject')
 const ExamController = {
     showSubjects: async (req, res) => {
         try {
-            const subjects = await Subject.find()
+            const subjects = await Subject.aggregate(
+                [
+                    {$sort: {title: 1}}
+                ]
+            )
             res.json({success: true, subjects})
         } catch (error) {
             console.log(error);

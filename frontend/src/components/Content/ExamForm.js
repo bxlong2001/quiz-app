@@ -1,10 +1,13 @@
 import { MathJax } from "better-react-mathjax"
 import { useContext, useEffect, useRef, useState } from "react"
-import { Badge, Button, Card, Col, Form, Modal, Row, Spinner, Table } from "react-bootstrap"
-import { Link, useParams } from "react-router-dom"
+import { Badge, Button, Card, Col, Form, Modal, Row, Spinner } from "react-bootstrap"
+import { useParams } from "react-router-dom"
 import { ExamContext } from "../../contexts/ExamContext"
-import SingleQuestion from "../single/SingleQuestion"
+import SingleQuiz from "../single/SingleQuiz"
+import ExamResult from "./ExamResult"
 import TimeOut from "./TimeOut"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const ExamForm = () => {
     //get slug
@@ -29,37 +32,30 @@ const ExamForm = () => {
         e.preventDefault()
 
         totalAnswerTrue.current.forEach((e) => {
-            total.current += e
+            total.current += e.isAnswerTrue
         })
         
 
         const resultForm = {
             examName: slug,
             result: total.current,
-            timeWork: handleTime()
+            timeWork: 900 - time.current[0]
         }
 
-        
         try {
             const resultData = await saveResult(resultForm)
-            if(!resultData.success) {
-                alert(resultData.message)
-            }else {
+            if(resultData.success) {
                 setShowToast(true)
+                return toast.success(resultData.message)
             }
-            
+            return toast.error(resultData.message)
         } catch (error) {
             console.log(error);
         }
         
     }
     
-    const handleTime = () => {
-        const s = 900 - time.current[0]
-        const minutes = Math.floor(s/60)
-        const second = s - minutes*60
-        return minutes+' phút '+second+' giây'
-    }
+    
 
     let body = null
 
@@ -71,48 +67,18 @@ const ExamForm = () => {
         )
     else if(showToast)
     body = (
-        <Row>
-                <Col>
-                    <Link to='/home'>Quay về trang chủ</Link>
-                    <br></br>
-                    <Link to='/me/history'>Lịch sử thi</Link>
-                    <Table striped hover>
-                        <thead>
-                            <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Số câu đúng</th>
-                            <th>Thời gian làm bài</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className="table-success">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>{`${total.current}/${exams.length}`}</td>
-                            <td>{handleTime()}</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                    <div className='mt-4 col-lg-2 mx-auto'>
-                        <Button variant="info" onClick={() => window.location.reload(false)}>Thi lại</Button>
-                    </div>
-                </Col>
-            </Row>
+        <>
+            <ToastContainer theme="colored"/>
+            <ExamResult time={time.current} total={total.current} exams={[...exams]} totalAnswerTrue={totalAnswerTrue.current} />
+        </>
         )
     else if(exams.length){
         let indexNav = 1
-        let indexQues = 1
+        let indexQuiz = 1
         body = (
             <Row className="mx-auto">
                 <Col sm={3}>
-                <Card className="test__card position-fixed">
+                    <Card className="test__card position-fixed">
                         <Card.Header className="text-center">{`Mã đề: ${slug}`}</Card.Header>
                         <Card.Body className="text-center">
                             <h4>Thời gian làm bài:</h4>
@@ -135,7 +101,7 @@ const ExamForm = () => {
                         <MathJax>
                             {exams.map(exam => (
                                 <Form.Group key={exam.id}>
-                                    <SingleQuestion exam={exam} total={totalAnswerTrue.current} index={indexQues++}/>
+                                    <SingleQuiz exam={exam} total={totalAnswerTrue.current} index={indexQuiz++}/>
                                 </Form.Group>
                             ))}
                         </MathJax>

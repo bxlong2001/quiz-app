@@ -1,7 +1,7 @@
 
 :root {
     --height_img: 270px;
-    --color-primary: #5F5490;
+    --color-primary: #34A25A;
     --color-button: #34A25A;
 }
 
@@ -205,7 +205,7 @@ input[type='radio']:checked::before {
 .ui-admin {
     background-color: #fff;
     border: solid 2px var(--color-primary);
-    border-left: solid 10px var(--color-primary);
+    border-left: solid 10px #5F5490;
     padding: 30px;
     border-radius: 8px;
 }
@@ -263,7 +263,7 @@ input[type='radio']:checked::before {
 }
 
 .rank-2{
-    background-color: var(--color-primary);
+    background-color: #5F5490;
 }
 
 .rank-3{
@@ -326,4 +326,30 @@ input[type='radio']:checked::before {
     font-weight: 400;
     font-style: italic;
     margin-top: 10px;
+}
+
+.info-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Result */
+.answer-false {
+    color: red;
+}
+
+.result-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.answer-select--true{
+    color: #3bb44b;
+}
+
+.answer-select--false{
+    color: red;
 }

@@ -19,7 +19,9 @@ const ExamContextProvider = ({children}) => {
     })
 
     const [resultState, resultDispatch] = useReducer(resultReducer, {
+        maxResults: [],
         results: [],
+        maxResultsLoading: true,
         resultsLoading: true
     })
 
@@ -97,7 +99,17 @@ const ExamContextProvider = ({children}) => {
         }
     }
 
-    const examContextData = {examState, resultState, saveResult, getExams, getTopic, getResults, getSubjects, getTrialExams}
+    const getRanks = async(slug) => {
+        try {
+            const response = await axios.get(`http://localhost:8000/results/rank/${slug}`)
+            if(response.data.success)
+                resultDispatch({type: 'MAXRESULTS_LOADED_SUCCESS', payload: response.data.results})
+        } catch (error) {
+            resultDispatch({type: 'MAXRESULTS_LOADED_FAIL'})
+        }
+    }
+
+    const examContextData = {examState, resultState, saveResult, getExams, getTopic, getResults, getSubjects, getTrialExams, getRanks}
 
     return (
         <ExamContext.Provider value={examContextData}>

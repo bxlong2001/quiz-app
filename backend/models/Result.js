@@ -9,12 +9,16 @@ const Result = new mongoose.Schema({
         type: String,
         required: true
     },
+    frequency: {
+        type: Number,
+        required: true
+    },
     result: {
         type: String,
         required: true
     },
     timeWork: {
-        type: String,
+        type: Number,
         required: true
     }
 }, {timestamps: true})

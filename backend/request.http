@@ -93,3 +93,7 @@ Content-Type: application/json
 GET http://localhost:8000/admin/count
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGEwMzAxNzRiODk4ZTdkMjYwM2UxOCIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTQ1MzQzMDN9.eb0tDGbFZmsyUe4zlYQJW-o5IkN1mQys5MHlF3rad14
 Content-Type: application/json
+
+###
+GET http://localhost:8000/results/rank/su-12
+Content-Type: application/json

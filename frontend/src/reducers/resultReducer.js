@@ -14,6 +14,18 @@ const resultReducer = (state, action) => {
                 results: [],
                 resultsLoading: false
             }
+        case 'MAXRESULTS_LOADED_SUCCESS':
+            return {
+                ...state,
+                maxResults: payload,
+                maxResultsLoading: false
+            }
+        case 'MAXRESULTS_LOADED_FAIL':
+            return {
+                ...state,
+                maxResults: [],
+                maxResultsLoading: false
+            }
         default:
             return state
     }
