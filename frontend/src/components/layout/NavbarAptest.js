@@ -5,7 +5,6 @@ import { AuthContext } from "../../contexts/AuthContext"
 
 const NavbarAptest = () => {
   const {authState: {user}, logoutUser} = useContext(AuthContext)
-    
   return (
     <Navbar bg='light' expand="lg" id="navbar">
       <Container>
@@ -25,22 +24,27 @@ const NavbarAptest = () => {
                 <button className='btn-nav'>Đăng ký</button>
               </Nav.Link>
             </>:
-            <NavDropdown title={user.admin? 'Admin' : user.fullname} id="basic-nav-dropdown">
-              {user.admin ?
-              <>
-                <NavDropdown.Item to="/admin/exams-management" as={Link}>Quản lý ngân hàng đề</NavDropdown.Item>
-                <NavDropdown.Item to="/admin/users-management" as={Link}>Quản lý người dùng</NavDropdown.Item>
-              </>
-              :
-              <>
-                <NavDropdown.Item to="/me/info" as={Link}>Thông tin cá nhân</NavDropdown.Item>
-                <NavDropdown.Item to="/me/rank" as={Link}>Xếp hạng cá nhân</NavDropdown.Item>
-                <NavDropdown.Item to="/me/history" as={Link}>Lịch sử thi</NavDropdown.Item>
-              </>
-              }
-              <NavDropdown.Divider />
-              <NavDropdown.Item onClick={logoutUser}>Đăng xuất</NavDropdown.Item>
-            </NavDropdown>
+            <div className="nav-user">
+              <Link to={'/me/info'}>
+                <img src={require(`../../../public/img/${user.avt}`)} alt='avatar' className="nav-user-avt"/>
+              </Link>
+              <NavDropdown title={user.admin? 'Admin' : user.fullname} id="basic-nav-dropdown">
+                {user.admin ?
+                <>
+                  <NavDropdown.Item to="/admin/exams-management" as={Link}>Quản lý ngân hàng đề</NavDropdown.Item>
+                  <NavDropdown.Item to="/admin/users-management" as={Link}>Quản lý người dùng</NavDropdown.Item>
+                </>
+                :
+                <>
+                  <NavDropdown.Item to="/me/info" as={Link}>Thông tin cá nhân</NavDropdown.Item>
+                  <NavDropdown.Item to="/me/rank" as={Link}>Xếp hạng cá nhân</NavDropdown.Item>
+                  <NavDropdown.Item to="/me/history" as={Link}>Lịch sử thi</NavDropdown.Item>
+                </>
+                }
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={logoutUser}>Đăng xuất</NavDropdown.Item>
+              </NavDropdown>
+            </div>
             }
           </Nav>
         </Navbar.Collapse>

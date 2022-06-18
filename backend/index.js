@@ -38,7 +38,9 @@ app.use(express.json())
 app.use(cors())
 
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: true,
+    limit: "50mb",
+    parameterLimit:50000
 }))
 
 //routes

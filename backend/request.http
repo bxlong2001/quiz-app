@@ -12,8 +12,8 @@ POST http://localhost:8000/auth/login
 Content-Type: application/json
 
 {
-    "username": "admin123",
-    "password": "admin123"
+    "username": "long2001",
+    "password": "long2001"
 }
 
 ###
@@ -97,3 +97,9 @@ Content-Type: application/json
 ###
 GET http://localhost:8000/results/rank/su-12
 Content-Type: application/json
+
+###
+POST http://localhost:8000/me/upload-avt
+Content-Disposition: form-data; name="imageURL"; filename="vi.jpg"
+Content-Type: image/jpeg
+

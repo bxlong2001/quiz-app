@@ -13,6 +13,10 @@ const User = new mongoose.Schema({
         required: true,
         minlength: 6
     },
+    avt: {
+        type: String,
+        default: 'no-avatar.png'
+    },
     fullname: {
         type: String,
         required: true
