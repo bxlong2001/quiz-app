@@ -40,10 +40,29 @@ const AdminContextProvider = ({children}) => {
         }
     }, [])
     
-    const createExam = useCallback(async(createForm) => {
+    const createExam = useCallback(async(createForm, img) => {
         try {
-            const response = await axios.post('http://localhost:8000/admin/exams/create', createForm)
-            return response.data
+            let form
+
+            if(img){
+                const formData = new FormData()
+                formData.append('img-quiz', img)
+                
+                const config = {
+                    headers: {
+                        "Content-Type": 'multipart/form-data; boundary=XXX;'
+                    }
+                }
+
+                const response1 = await axios.post('http://localhost:8000/admin/exams/save-img', formData, config)
+                if (!response1.data.success)
+                    return response1.data
+                
+                form = {...createForm, img: response1.data.filename}
+            }
+            
+            const response2 = await axios.post('http://localhost:8000/admin/exams/create', form || createForm)
+            return response2.data
         } catch (error) {
             return error.response.data
 				? error.response.data

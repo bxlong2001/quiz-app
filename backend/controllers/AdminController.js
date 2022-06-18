@@ -85,10 +85,19 @@ const AdminController = {
             res.status(500).json({success: false, message: 'Internal server error'})
         }
     },
+    
+    saveImg: async (req, res) => {
+        const img = req.file
+
+        if(!img)
+            return res.status(401).json({success: false, message: 'Không tìm thấy hình ảnh tải lên'})
+            
+        res.json({success: true, message: 'Tải ảnh thành công', filename: img.filename})
+    },
 
     createExam: async (req, res) => {
-        const {name, type, question, img, answer_a, answer_b, answer_c, answer_d, answer_true, part} = req.body
-
+        const {name, img, type, question, answer_a, answer_b, answer_c, answer_d, answer_true, part} = req.body
+        
         if(!name|| !part || !type || !question || !answer_a || !answer_b || !answer_c || !answer_d || !answer_true)
             return res.status(400).json({success: false, message: 'Tạo thất bại'})
 

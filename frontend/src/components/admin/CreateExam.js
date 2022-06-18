@@ -10,12 +10,12 @@ const CreateExam = () => {
   const {slug} = useParams()
   const type = slug.split('-')[0]
   const {createExam} = useContext(AdminContext)
+  const [img, setImg] = useState({file: '', prev: ''})
   const [createForm, setCreateForm] = useState({
     name: slug,
     type,
     question: '',
     part: null,
-    img: '',
     answer_a: '',
     answer_b: '',
     answer_c: '',
@@ -23,13 +23,13 @@ const CreateExam = () => {
     answer_true: ''
   })
 
-  const {question, img, part, answer_a, answer_b, answer_c, answer_d, answer_true} = createForm
+  const {question, part, answer_a, answer_b, answer_c, answer_d, answer_true} = createForm
 
   useEffect(() => {
     return () => {
-      URL.revokeObjectURL(img)
+      URL.revokeObjectURL(img.prev)
     }
-  }, [img])
+  }, [img.prev])
 
   const handleChange = (e) => {
     setCreateForm({
@@ -39,9 +39,8 @@ const CreateExam = () => {
   }
 
   const handleSeclectImg = (e) => {
-    console.log(e);
-    const file = e.target.files[0]
-    setCreateForm(prev => ({...prev, img: URL.createObjectURL(file)}))
+    if(e.target.files.length!==0)
+      setImg({file: e.target.files[0], prev: URL.createObjectURL(e.target.files[0])})
   }
 
   const submitForm = async (e) => {
@@ -50,13 +49,26 @@ const CreateExam = () => {
     try {
       const submit = await createExam({
         ...createForm,
+        part: Number(part),
         answer_a: `A. ${answer_a}`,
         answer_b: `B. ${answer_b}`,
         answer_c: `C. ${answer_c}`,
         answer_d: `D. ${answer_d}`
-      })
-      if(submit.success)
+      }, img.file)
+      if(submit.success){
+        setCreateForm({
+          name: slug,
+          type,
+          question: '',
+          part: null,
+          answer_a: '',
+          answer_b: '',
+          answer_c: '',
+          answer_d: '',
+          answer_true: ''
+        })
         return toast.success(submit.message)
+      }
       return toast.error(submit.message)
     } catch (error) {
       console.log(error);
@@ -74,7 +86,7 @@ const CreateExam = () => {
                 <Form.Control
                   as="textarea"
                   name='question'
-                  value={question}
+                  value={question || ''}
                   onChange={handleChange}
                   placeholder='Nhập câu hỏi'
                   required
@@ -85,7 +97,7 @@ const CreateExam = () => {
                 <Form.Control
                   type="file"
                   name='img'
-                  accept="image/png, image/jpeg"
+                  accept="image/png, image/jpeg, image/jpg"
                   onChange={handleSeclectImg}
                 />
             </Form.Group>
@@ -97,7 +109,7 @@ const CreateExam = () => {
                 <Form.Control 
                   as='select'
                   name='part'
-                  value={part}
+                  value={part || ''}
                   onChange={handleChange}
                 >
                 <option>--Chọn mức độ--</option>
@@ -114,6 +126,7 @@ const CreateExam = () => {
                 <Form.Control 
                   type="text"
                   name='answer_a'
+                  value={answer_a || ''}
                   onChange={handleChange}
                   placeholder='Nhập đáp án'
                   required
@@ -127,7 +140,7 @@ const CreateExam = () => {
                 <Form.Control 
                   type="text"
                   name='answer_b'
-                  value={answer_b}
+                  value={answer_b || ''}
                   onChange={handleChange}
                   placeholder='Nhập đáp án'
                   required
@@ -141,7 +154,7 @@ const CreateExam = () => {
                 <Form.Control 
                   type="text"
                   name='answer_c'
-                  value={answer_c}
+                  value={answer_c || ''}
                   onChange={handleChange}
                   placeholder='Nhập đáp án'
                   required
@@ -155,7 +168,7 @@ const CreateExam = () => {
                 <Form.Control 
                   type="text"
                   name='answer_d'
-                  value={answer_d}
+                  value={answer_d || ''}
                   onChange={handleChange}
                   placeholder='Nhập đáp án'
                   required
@@ -169,7 +182,7 @@ const CreateExam = () => {
                 <Form.Control 
                   as='select'
                   name='answer_true'
-                  value={answer_true}
+                  value={answer_true || ''}
                   onChange={handleChange}
                 >
                 <option>--Chọn đáp án đúng--</option>
@@ -197,7 +210,7 @@ const CreateExam = () => {
               <span>Câu hỏi: </span>
               <span>{question}</span>
               <br></br>
-              {img && <img src={img} width={200}></img>}
+              {img.prev && <img src={img.prev} width={200} alt="Hình ảnh minh họa"></img>}
             <Row>
                 <Col>
                     <span>A. </span>

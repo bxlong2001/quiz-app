@@ -20,13 +20,13 @@ const UserController = {
         const file = req.file
         console.log(req)
         if(!file)
-        return res.status(401).json({success: false, message: 'Không tìm thấy hình ảnh tải lên'})
+            return res.status(401).json({success: false, message: 'Không tìm thấy hình ảnh tải lên'})
         
         try {
             const findAvt = await User.findOneAndUpdate({_id: id},{avt: file.filename})
             
             if(!findAvt)
-            return res.status(401).json({success: false, message: 'Sửa thất bại'})
+                return res.status(401).json({success: false, message: 'Sửa thất bại'})
             
             if(findAvt.avt !== 'no-avatar.png')
                 fs.unlinkSync( '../frontend/public/img/' + findAvt.avt, error => {
