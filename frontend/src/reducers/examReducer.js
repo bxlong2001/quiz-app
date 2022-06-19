@@ -51,11 +51,13 @@ const examReducer = (state, action) => {
                 trialExams: [],
                 trialExamsLoading: false
             }
-        case 'UPDATE_EXAMS':
+            
+        case 'UPDATE_EXAM':
             return {
                 ...state,
-                exams: payload,
+                exams: [...state.exams, payload]
             }
+
         default:
             return state
     }

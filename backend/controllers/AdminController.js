@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken')
 const Exam = require('../models/Exam')
 const Result = require('../models/Result')
 const Subject = require('../models/Subject')
+const fs = require('fs')
+
 
 const AdminController = {
     statistic: async (req, res) => {
@@ -130,9 +132,16 @@ const AdminController = {
         const {id} = req.params
         try {
             const deleteExam = await Exam.findOneAndDelete({_id: id})
+
             if(!deleteExam)
                 return res.status(401).json({success: false,message: 'Xóa thất bại'})
-            res.json({success: true, message: 'Xóa thành công'})
+
+            if(deleteExam.img)
+                fs.unlinkSync('../frontend/public/img/' + deleteExam.img, err => {
+                    console.log(err);
+                })
+
+            res.json({success: true, message: 'Xóa thành công', examImg: deleteExam.img})
         }catch(error){
             console.log(error)
             res.status(500).json({ success: false, message: 'Internal server error' })

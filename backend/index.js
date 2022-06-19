@@ -50,5 +50,5 @@ app.use('/exams', examRouter)
 app.use('/results', resultRouter)
 app.use('/me', userRouter)
 
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))

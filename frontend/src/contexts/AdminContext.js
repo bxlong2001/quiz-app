@@ -103,6 +103,8 @@ const AdminContextProvider = ({children}) => {
     const updateExam = useCallback(async (exam) => {
         try {
             const response = await axios.put(`http://localhost:8000/admin/exams/update/${exam._id}`, exam)
+            if(response.data.success)
+                examDispatch({type: 'UPDATE_EXAM', payload: response.data.exam})
             return response.data
         } catch (error) {
             return error.response.data
@@ -114,8 +116,7 @@ const AdminContextProvider = ({children}) => {
     const deleteExam = useCallback(async (id) => {
         try {
             const response = await axios.delete(`http://localhost:8000/admin/exams/delete/${id}`)
-            if(response.data.success)
-                alert(response.data.message)
+
         } catch (error) {
             return error.response.data
 				? error.response.data
@@ -126,8 +127,6 @@ const AdminContextProvider = ({children}) => {
     const deleteUser = useCallback(async (id) => {
         try {
             const response = await axios.delete(`http://localhost:8000/admin/users/delete/${id}`)
-            if(response.data.success)
-                alert(response.data.message)
         } catch (error) {
             return error.response.data
 				? error.response.data

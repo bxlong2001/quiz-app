@@ -7,6 +7,7 @@ import { Link, useLocation, useParams } from 'react-router-dom'
 import { AdminContext } from '../../contexts/AdminContext'
 import SingleQuizUpdate from '../single/SingleQuizUpdate'
 import ScrollButton from '../layout/ScrollButton'
+import { ToastContainer } from 'react-toastify'
 
 
 
@@ -22,12 +23,9 @@ const UpdateExam = () => {
       setPage(+pageParam)
     }, [])
 
-    console.log(page);
-    console.log(total);
-
     useEffect(() => {
       getAllExams(slug, page, pagesize)
-    }, [page])
+    }, [page, exams])
 
     const handlePage = (e) => {
       setPage(+e.target.text)
@@ -79,6 +77,7 @@ const UpdateExam = () => {
       }
       return (
         <>
+          <ToastContainer theme='colored' />
           <div className='home-link'>
             <Link to='/admin/exams-management'>Quay lại</Link>
             <Link to={`/admin/exams-management/create/${slug}`}>

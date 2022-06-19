@@ -2,6 +2,7 @@ import {createContext, useEffect, useReducer} from 'react'
 import axios from 'axios'
 import authReducer from '../reducers/authReducer'
 import setAuthToken from '../utils/setAuthToken'
+import {apiUrl, LOCAL_STORAGE_TOKEN_NAME} from './constaints'
 
 const AuthContext = createContext()
 
@@ -14,12 +15,12 @@ const AuthContextProvider = ({children}) => {
 
     //Authenticate user
     const loadUser = async () => {
-		if (localStorage['access_token']) {
-			setAuthToken(localStorage['access_token'])
+		if (localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
+			setAuthToken(localStorage[LOCAL_STORAGE_TOKEN_NAME])
 		}
 
 		try {
-			const response = await axios.get('http://localhost:8000/auth')
+			const response = await axios.get(apiUrl + 'auth')
 			if (response.data.success) {
 				dispatch({
 					type: 'SET_AUTH',
@@ -27,7 +28,7 @@ const AuthContextProvider = ({children}) => {
 				})
 			}
 		} catch (error) {
-			localStorage.removeItem('access_token')
+			localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME)
 			setAuthToken(null)
 			dispatch({
 				type: 'SET_AUTH',
@@ -40,9 +41,9 @@ const AuthContextProvider = ({children}) => {
     //Register
     const registerUser = async registerForm => {
         try {
-            const response = await axios.post('http://localhost:8000/auth/register', registerForm)
+            const response = await axios.post(apiUrl + 'auth/register', registerForm)
             if(response.data.success)
-                localStorage.setItem('access_token',response.data.accessToken)
+                localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME,response.data.accessToken)
 
             await loadUser()
 
@@ -58,9 +59,9 @@ const AuthContextProvider = ({children}) => {
     //Login
     const loginUser = async loginForm => {
         try {
-            const response = await axios.post('http://localhost:8000/auth/login', loginForm)
+            const response = await axios.post(apiUrl + 'auth/login', loginForm)
             if(response.data.success)
-                localStorage.setItem('access_token',response.data.accessToken)
+                localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME,response.data.accessToken)
 
             await loadUser()
 
@@ -75,7 +76,7 @@ const AuthContextProvider = ({children}) => {
 
     //Logout
     const logoutUser = () => {
-        localStorage.removeItem('access_token')
+        localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME)
 			setAuthToken(null)
 			dispatch({
 				type: 'SET_AUTH',

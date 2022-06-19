@@ -10,7 +10,6 @@ const ModalDeleteExam = ({id, showDeleteExam, handleCloseDeleteExam}) => {
 
         try {
             await deleteExam(id)
-            window.location.reload(false)
         } catch (error) {
             console.log(error);
         }

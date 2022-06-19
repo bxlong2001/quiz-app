@@ -12,14 +12,13 @@ const SingleQuizUpdate = ({exam}) => {
     const handleCloseUpdate = useCallback(() => setShowUpdate(false), [])
     const handleCloseDeleteExam = useCallback(() => setShowDeleteExam(false), [])
 
-    const handleShowUpdate = () => {
+    const handleShowUpdate = useCallback(() => {
         setShowUpdate(true)
-    }
+    }, [])
 
-    const handleShowDeleteExam = () => {
+    const handleShowDeleteExam = useCallback(() => {
         setShowDeleteExam(true)
-    }
-
+    }, [])
 
     return (
         <>

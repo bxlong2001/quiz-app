@@ -1,6 +1,7 @@
 import { memo, useContext, useState } from 'react'
 import { AdminContext } from '../../contexts/AdminContext'
 import { Button, Form, Modal } from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify';
 
 const ModalUpdate = ({quiz, showUpdate, handleCloseUpdate}) => {
     const {updateExam} = useContext(AdminContext)
@@ -9,11 +10,15 @@ const ModalUpdate = ({quiz, showUpdate, handleCloseUpdate}) => {
     console.log(updateForm);
     const submitUpdateExam = async (e) => {
         e.preventDefault()
-        handleCloseUpdate()
         
         try {
-            await updateExam(updateForm)
-            window.location.reload(false)
+            const update = await updateExam(updateForm)
+            console.log(update);
+            if(update.success){
+                handleCloseUpdate()
+                return toast.success(update.message)
+            }
+            toast.error(update.message)
         } catch (error) {
           console.log(error);
         }    
@@ -26,6 +31,7 @@ const ModalUpdate = ({quiz, showUpdate, handleCloseUpdate}) => {
         })
     }
     return (
+        <>
         <Modal show={showUpdate} onHide={handleCloseUpdate}>
             <Modal.Header closeButton>
                 <Modal.Title>Sửa câu hỏi</Modal.Title>
@@ -117,6 +123,7 @@ const ModalUpdate = ({quiz, showUpdate, handleCloseUpdate}) => {
                 </Button>
             </Modal.Footer>
         </Modal>
+        </>
   )
 }
 
