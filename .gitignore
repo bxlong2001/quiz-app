@@ -1,9 +1,8 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 node_modules
-constaints.js
 
-# dependencies
+frontend/src/contexts/constaints.js
+
+
 /node_modules
 /.pnp
 .pnp.js
