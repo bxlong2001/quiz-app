@@ -2,6 +2,8 @@ import axios from "axios";
 import { createContext, useReducer } from "react";
 import examReducer from "../reducers/examReducer";
 import resultReducer from "../reducers/resultReducer";
+import {apiUrl} from './constaints'
+
 
 const ExamContext = createContext()
 
@@ -28,7 +30,7 @@ const ExamContextProvider = ({children}) => {
 
     const getTopic = async() => {
         try {
-            const response = await axios.get('http://localhost:8000/exams')
+            const response = await axios.get(apiUrl + 'exams')
             if (response.data.success) {
                 examDispatch({type: 'TOPICS_LOADED_SUCCESS', payload: response.data.topics})
             }
@@ -41,7 +43,7 @@ const ExamContextProvider = ({children}) => {
     //Get random exams
     const getExams = async(slug) => {
         try {
-            const response = await axios.get(`http://localhost:8000/exams/test/${slug}`)
+            const response = await axios.get(apiUrl + `exams/test/${slug}`)
             if (response.data.success) {
                 examDispatch({type: 'EXAMS_LOADED_SUCCESS', payload: response.data.exams})
             }
@@ -54,7 +56,7 @@ const ExamContextProvider = ({children}) => {
     //Get trial exams
     const getTrialExams = async(slug) => {
         try {
-            const response = await axios.get(`http://localhost:8000/exams/try/${slug}`)
+            const response = await axios.get(apiUrl + `exams/try/${slug}`)
             if (response.data.success) {
                 examDispatch({type: 'TRIALEXAMS_LOADED_SUCCESS', payload: response.data.exams})
             }
@@ -66,7 +68,7 @@ const ExamContextProvider = ({children}) => {
 
     const getSubjects = async() => {
         try {
-            const response = await axios.get('http://localhost:8000/exams/subjects')
+            const response = await axios.get(apiUrl + 'exams/subjects')
             if (response.data.success) {
                 examDispatch({type: 'SUBJECTS_LOADED_SUCCESS', payload: response.data.subjects})
             }
@@ -78,7 +80,7 @@ const ExamContextProvider = ({children}) => {
 
     const saveResult = async (examForm) => {
         try {
-            const response = await axios.post('http://localhost:8000/results/save', examForm)
+            const response = await axios.post(apiUrl + 'results/save', examForm)
             return response.data
         } catch (error) {
             if (error.response.data)
@@ -91,7 +93,7 @@ const ExamContextProvider = ({children}) => {
     //Get all results
     const getResults = async() => {
         try {
-            const response = await axios.get('http://localhost:8000/results')
+            const response = await axios.get(apiUrl + 'results')
             if(response.data.success)
                 resultDispatch({type: 'RESULTS_LOADED_SUCCESS', payload: response.data.results})
         } catch (error) {
@@ -101,7 +103,7 @@ const ExamContextProvider = ({children}) => {
 
     const getRanks = async(slug) => {
         try {
-            const response = await axios.get(`http://localhost:8000/results/rank/${slug}`)
+            const response = await axios.get(apiUrl + `results/rank/${slug}`)
             if(response.data.success)
                 resultDispatch({type: 'MAXRESULTS_LOADED_SUCCESS', payload: response.data.results})
         } catch (error) {

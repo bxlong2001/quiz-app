@@ -1,6 +1,7 @@
 import {createContext, useCallback} from 'react'
 import axios from 'axios'
 import FormData from 'form-data'
+import {apiUrl} from './constaints'
 
 
 const UserContext = createContext()
@@ -8,7 +9,7 @@ const UserContext = createContext()
 const UserContextProvider = ({children}) => {
     const updateInfo = useCallback(async (info, id) => {
         try {
-            const response = await axios.patch(`http://localhost:8000/me/info/${id}/update-fullname`, {fullname: info})
+            const response = await axios.patch(apiUrl + `me/info/${id}/update-fullname`, {fullname: info})
             return response.data
         } catch (error) {
             return error.response.data
@@ -27,7 +28,7 @@ const UserContextProvider = ({children}) => {
             }
         }
         try {
-            const response = await axios.patch(`http://localhost:8000/me/info/${id}/update-avatar`, formData, oldFile, config)
+            const response = await axios.patch(apiUrl + `me/info/${id}/update-avatar`, formData, oldFile, config)
             return response.data
         } catch (error) {
             return error.response.data
@@ -39,7 +40,7 @@ const UserContextProvider = ({children}) => {
     const updatePassword = async (img, id, oldFile) => {
 
         try {
-            const response = await axios.patch(`http://localhost:8000/me/info/${id}/update-password`)
+            const response = await axios.patch(apiUrl + `me/info/${id}/update-password`)
             return response.data
         } catch (error) {
             return error.response.data

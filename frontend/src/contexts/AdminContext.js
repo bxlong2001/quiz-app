@@ -4,6 +4,7 @@ import typeReducer from '../reducers/typeReducer'
 import userReducer from '../reducers/userReducer'
 import examReducer from '../reducers/examReducer'
 import statisticReducer from '../reducers/statisticReducer'
+import {apiUrl} from './constaints'
 
 const AdminContext = createContext()
 
@@ -32,7 +33,7 @@ const AdminContextProvider = ({children}) => {
     // Lấy số liệu được thống kê
     const getStatistic = useCallback(async() => {
         try {
-            const response = await axios.get('http://localhost:8000/admin/count')
+            const response = await axios.get(apiUrl + 'admin/count')
             if(response.data.success)
                 statisticDispatch({type: 'STATISTICS_LOADED_SUCCESS', payload: response.data.statistics})
         } catch (error) {
@@ -54,14 +55,14 @@ const AdminContextProvider = ({children}) => {
                     }
                 }
 
-                const response1 = await axios.post('http://localhost:8000/admin/exams/save-img', formData, config)
+                const response1 = await axios.post(apiUrl + 'admin/exams/save-img', formData, config)
                 if (!response1.data.success)
                     return response1.data
                 
                 form = {...createForm, img: response1.data.filename}
             }
             
-            const response2 = await axios.post('http://localhost:8000/admin/exams/create', form || createForm)
+            const response2 = await axios.post(apiUrl + 'admin/exams/create', form || createForm)
             return response2.data
         } catch (error) {
             return error.response.data
@@ -72,7 +73,7 @@ const AdminContextProvider = ({children}) => {
     
     const getTypes = useCallback(async() => {
         try {
-            const response = await axios.get('http://localhost:8000/admin/exams')
+            const response = await axios.get(apiUrl + 'admin/exams')
             if (response.data.success)
                 typeDispatch({type: 'TYPES_LOADED_SUCCESS', payload: response.data.types})
         } catch (error) {
@@ -82,7 +83,7 @@ const AdminContextProvider = ({children}) => {
 
     const getUsers = useCallback(async() => {
         try {
-            const response = await axios.get('http://localhost:8000/admin/users')
+            const response = await axios.get(apiUrl + 'admin/users')
             if (response.data.success)
                 userDispatch({type: 'USERS_LOADED_SUCCESS', payload: response.data.users})
         } catch (error) {
@@ -92,7 +93,7 @@ const AdminContextProvider = ({children}) => {
 
     const getAllExams = useCallback(async (slug, page, pagesize) => {
         try {
-            const response = await axios.get(`http://localhost:8000/admin/exams/${slug}`, {params: {page: page, pagesize: pagesize}})
+            const response = await axios.get(apiUrl + `admin/exams/${slug}`, {params: {page: page, pagesize: pagesize}})
             if (response.data.success)
                 examDispatch({type: 'EXAMS_LOADED_SUCCESS', payload: response.data.exams, total: response.data.totalCount})
         } catch (error) {
@@ -102,7 +103,7 @@ const AdminContextProvider = ({children}) => {
 
     const updateExam = useCallback(async (exam) => {
         try {
-            const response = await axios.put(`http://localhost:8000/admin/exams/update/${exam._id}`, exam)
+            const response = await axios.put(apiUrl + `admin/exams/update/${exam._id}`, exam)
             if(response.data.success)
                 examDispatch({type: 'UPDATE_EXAM', payload: response.data.exam})
             return response.data
@@ -115,7 +116,7 @@ const AdminContextProvider = ({children}) => {
 
     const deleteExam = useCallback(async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:8000/admin/exams/delete/${id}`)
+            const response = await axios.delete(apiUrl + `admin/exams/delete/${id}`)
 
         } catch (error) {
             return error.response.data
@@ -126,7 +127,7 @@ const AdminContextProvider = ({children}) => {
 
     const deleteUser = useCallback(async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:8000/admin/users/delete/${id}`)
+            const response = await axios.delete(apiUrl + `admin/users/delete/${id}`)
         } catch (error) {
             return error.response.data
 				? error.response.data
