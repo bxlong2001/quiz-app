@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.748c19c4.css",
+    "main.js": "/static/js/main.71a90a81.js",
+    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "static/media/1655543608432--udyr-runeterra-lol-freljord-2k-wallpaper-uhdpaper.com-459@1@f.jpg": "/static/media/1655543608432--udyr-runeterra-lol-freljord-2k-wallpaper-uhdpaper.com-459@1@f.9846967a4a2c4359c351.jpg",
+    "static/media/1655543588226--jpg": "/static/media/1655543588226--87930345220fe151b81e.78674f883c5f44c77593.jpg",
+    "static/media/1655574023545--kda-akali-all-out-lol-art-2k-wallpaper-uhdpaper.com-496@1@e.jpg": "/static/media/1655574023545--kda-akali-all-out-lol-art-2k-wallpaper-uhdpaper.com-496@1@e.838948b244f94ac25dc3.jpg",
+    "static/media/no-avatar.png": "/static/media/no-avatar.07262702af79c582e9f8.png",
+    "index.html": "/index.html",
+    "main.748c19c4.css.map": "/static/css/main.748c19c4.css.map",
+    "main.71a90a81.js.map": "/static/js/main.71a90a81.js.map",
+    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.748c19c4.css",
+    "static/js/main.71a90a81.js"
+  ]
+}
