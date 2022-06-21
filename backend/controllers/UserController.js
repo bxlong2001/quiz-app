@@ -28,7 +28,7 @@ const UserController = {
             if(!findAvt)
                 return res.status(401).json({success: false, message: 'Sửa thất bại'})
 
-            if(findAvt.avt !== 'no-avatar.png')
+            if(findAvt.avt !== 'uploads\\no-avatar.png')
                 fs.unlinkSync(findAvt.avt, error => {
                     return res.status(401).json({success: false, message: error})
                 })
