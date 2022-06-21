@@ -14,6 +14,7 @@ const userReducer = (state, action) => {
                 users: [],
                 usersLoading: false
             }
+        
         default:
             return state
     }

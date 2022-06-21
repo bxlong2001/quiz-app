@@ -8,6 +8,7 @@ const examRouter = require('./routes/exam')
 const resultRouter = require('./routes/result')
 const userRouter = require('./routes/user')
 const bodyParser = require('body-parser')
+const path = require('path')
 
 
 const app = express()
@@ -49,6 +50,7 @@ app.use('/auth', authRouter)
 app.use('/exams', examRouter)
 app.use('/results', resultRouter)
 app.use('/me', userRouter)
+app.use('/uploads', express.static('uploads'))
 
 const PORT = process.env.PORT || 8000
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))

@@ -7,7 +7,7 @@ import {apiUrl, LOCAL_STORAGE_TOKEN_NAME} from './constaints'
 const AuthContext = createContext()
 
 const AuthContextProvider = ({children}) => {
-    const [authState, dispatch] = useReducer(authReducer, {
+    const [authState, authDispatch] = useReducer(authReducer, {
         authLoading: true,
         isAuthenticated: false,
         user: null,
@@ -22,7 +22,7 @@ const AuthContextProvider = ({children}) => {
 		try {
 			const response = await axios.get(apiUrl + 'auth')
 			if (response.data.success) {
-				dispatch({
+				authDispatch({
 					type: 'SET_AUTH',
 					payload: { isAuthenticated: true, user: response.data.user}
 				})
@@ -30,7 +30,7 @@ const AuthContextProvider = ({children}) => {
 		} catch (error) {
 			localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME)
 			setAuthToken(null)
-			dispatch({
+			authDispatch({
 				type: 'SET_AUTH',
 				payload: { isAuthenticated: false, user: null}
 			})
@@ -78,14 +78,14 @@ const AuthContextProvider = ({children}) => {
     const logoutUser = () => {
         localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME)
 			setAuthToken(null)
-			dispatch({
+			authDispatch({
 				type: 'SET_AUTH',
 				payload: { isAuthenticated: false, user: null }
 			})
     }
 
     //Context data
-    const authContextData = { loginUser, registerUser, logoutUser, authState}
+    const authContextData = { loginUser, registerUser, logoutUser, authState, authDispatch}
 
     //return provider
     return (

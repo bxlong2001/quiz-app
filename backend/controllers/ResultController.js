@@ -10,7 +10,7 @@ const ResultController = {
             const newResult = new Result({
                 idUser: req.id,
                 examName,
-                frequency: findResult ? findResult[0].frequency+1 : 1, 
+                frequency: findResult.length!==0 ? findResult[0].frequency+1 : 1, 
                 result, 
                 timeWork
             })

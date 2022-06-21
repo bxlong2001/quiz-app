@@ -1,5 +1,6 @@
 import { memo } from "react"
 import { Col, Form, Row } from "react-bootstrap"
+import { apiUrl } from "../../contexts/constaints"
 
 const SingleQuiz = ({exam: {_id, question, answer_a, answer_b, answer_c, answer_d, answer_true, img}, total, index}) => {
     const handleRadio = (e) => {
@@ -20,7 +21,7 @@ const SingleQuiz = ({exam: {_id, question, answer_a, answer_b, answer_c, answer_
             <div id={_id} className="mb-1 title__question">
                 {`Câu ${index}: ${question}`}
                 <br></br>
-                {img && <img src={require(`../../../public/img/${img}`)} alt="Ảnh câu hỏi" width={200} height={160}/>}
+                {img && <img src={img.split('\\')[0]==='uploads' ? apiUrl + img : img} alt="Ảnh câu hỏi" width={200} height={160}/>}
             </div>
             <Row>
                 <Col>

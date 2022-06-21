@@ -6,6 +6,7 @@ import { UserContext } from '../../contexts/UserContext'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
+import { apiUrl } from '../../contexts/constaints'
 
 
 const Info = () => {
@@ -36,7 +37,6 @@ const Info = () => {
   }
 
   const submitUpdateFullname = async (e) => {
-    e.preventDefault()
 
     try {
       const req = await updateInfo(fullname, user._id)
@@ -56,6 +56,8 @@ const Info = () => {
     try {
       const req = await updateImg(img.file, user._id, user.avt)
       if(req.success){
+        URL.revokeObjectURL(img.prev)
+        setImg({file: '', prev: ''})
         return toast.success(req.message)
       }
       toast.error(req.message)
@@ -109,7 +111,7 @@ const Info = () => {
               <span className='info-label'>Hình đại diện</span>
               <br/>
               <div className='info-avatar'>
-                <img className='info-img' src={img.prev ? img.prev : require(`../../../public/img/${user.avt}`)} alt='avatar'/>
+                <img className='info-img' src={img.prev ? img.prev : apiUrl.concat(user.avt)} alt='avatar'/>
                 <div className='info-round'>
                   <input
                     type='file'

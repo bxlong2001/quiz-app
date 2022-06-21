@@ -1,4 +1,4 @@
-import {createContext, useCallback, useReducer} from 'react'
+import {createContext, useReducer} from 'react'
 import axios from 'axios'
 import typeReducer from '../reducers/typeReducer'
 import userReducer from '../reducers/userReducer'
@@ -31,7 +31,7 @@ const AdminContextProvider = ({children}) => {
     })
 
     // Lấy số liệu được thống kê
-    const getStatistic = useCallback(async() => {
+    const getStatistic = async() => {
         try {
             const response = await axios.get(apiUrl + 'admin/count')
             if(response.data.success)
@@ -39,9 +39,9 @@ const AdminContextProvider = ({children}) => {
         } catch (error) {
             statisticDispatch({type: 'STATISTICS_LOADED_FAIL'})
         }
-    }, [])
+    }
     
-    const createExam = useCallback(async(createForm, img) => {
+    const createExam = async(createForm, img) => {
         try {
             let form
 
@@ -69,9 +69,9 @@ const AdminContextProvider = ({children}) => {
 				? error.response.data
 				: { success: false, message: 'Server error' }
         }
-    }, [])
+    }
     
-    const getTypes = useCallback(async() => {
+    const getTypes = async() => {
         try {
             const response = await axios.get(apiUrl + 'admin/exams')
             if (response.data.success)
@@ -79,9 +79,9 @@ const AdminContextProvider = ({children}) => {
         } catch (error) {
             typeDispatch({type: 'TYPES_LOADED_FAIL'})
         }
-    },[])
+    }
 
-    const getUsers = useCallback(async() => {
+    const getUsers = async() => {
         try {
             const response = await axios.get(apiUrl + 'admin/users')
             if (response.data.success)
@@ -89,9 +89,9 @@ const AdminContextProvider = ({children}) => {
         } catch (error) {
             userDispatch({type: 'USERS_LOADED_FAIL'})
         }
-    }, [])
+    }
 
-    const getAllExams = useCallback(async (slug, page, pagesize) => {
+    const getAllExams = async (slug, page, pagesize) => {
         try {
             const response = await axios.get(apiUrl + `admin/exams/${slug}`, {params: {page: page, pagesize: pagesize}})
             if (response.data.success)
@@ -99,9 +99,9 @@ const AdminContextProvider = ({children}) => {
         } catch (error) {
             examDispatch({type: 'EXAMS_LOADED_FAIL'})
         }
-    }, [])
+    }
 
-    const updateExam = useCallback(async (exam) => {
+    const updateExam = async (exam) => {
         try {
             const response = await axios.put(apiUrl + `admin/exams/update/${exam._id}`, exam)
             if(response.data.success)
@@ -112,28 +112,31 @@ const AdminContextProvider = ({children}) => {
 				? error.response.data
 				: { success: false, message: 'Lỗi server' }
         }
-    }, [])
+    }
 
-    const deleteExam = useCallback(async (id) => {
+    const deleteExam = async (id) => {
         try {
             const response = await axios.delete(apiUrl + `admin/exams/delete/${id}`)
-
+            if(response.data.success)
+                return response.data
         } catch (error) {
             return error.response.data
 				? error.response.data
 				: { success: false, message: 'Lỗi server' }
         }
-    }, [])
+    }
 
-    const deleteUser = useCallback(async (id) => {
+    const deleteUser = async (id) => {
         try {
             const response = await axios.delete(apiUrl + `admin/users/delete/${id}`)
+            if(response.data.success)
+                return response.data
         } catch (error) {
             return error.response.data
 				? error.response.data
 				: { success: false, message: 'Lỗi server' }
         }
-    }, [])
+    }
     
     const adminContextData = {typeState, getTypes, userState, getUsers, examState, getAllExams, statisticState, getStatistic, updateExam, createExam, deleteExam, deleteUser}
 

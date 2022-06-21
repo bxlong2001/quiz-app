@@ -10,7 +10,7 @@ const Admin = () => {
   const {statisticState: {statistics, statisticsLoading}, getStatistic} = useContext(AdminContext)
   const {countExam, countQuiz, countSubject, countUser, sortUser, sortResult} = statistics
 
-  useEffect(() => {getStatistic()}, [])
+  useEffect(() => {getStatistic()}, [getStatistic])
   
   if(statisticsLoading)
     return(
@@ -77,9 +77,9 @@ const Admin = () => {
         <Row className="mt-4">
           <Col sm={8}>
             <div className="mb-2 home-link">
-              <span style={{fontSize: 20}}>Đề thi gần đây</span>
+              <span style={{fontSize: 20}}>Lịch sử thi gần đây</span>
             <Link to='exams-management'>
-              <button className="btn-view">Xem chi tiết</button>
+              <button className="btn-view">Xem chi tiết đề thi</button>
             </Link>
             </div>
               
@@ -135,24 +135,6 @@ const Admin = () => {
                     ))}
                   </tbody>
                 </Table>
-                
-                <div className="admin-box">
-                  <div className="admin-rank rank-1">
-                    <img src="https://img.hoidap247.com/picture/question/20200508/large_1588936738888.jpg"/>
-                    <span className="text-white">Long</span>
-                    <span className="rank">1st</span>
-                  </div>
-                  <div className="admin-rank rank-2">
-                    <img src="https://img.hoidap247.com/picture/question/20200508/large_1588936738888.jpg"/>
-                    <span className="text-white">Hiếu</span>
-                    <span className="rank">2nd</span>
-                  </div>
-                  <div className="admin-rank rank-3">
-                    <img src="https://img.hoidap247.com/picture/question/20200508/large_1588936738888.jpg"/>
-                    <span className="text-white">Mạnh</span>
-                    <span className="rank">3rd</span>
-                  </div>
-                </div>
             </div>
             
           </Col>

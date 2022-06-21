@@ -7,7 +7,6 @@ const AuthController = {
         // const {username, email, password} = req.body
         const {username, fullname, password} = req.body
         
-
         // if(!username || !password || !email)
         if(!username || !password || !fullname)
             return res.status(400).json({success: false, message: 'Vui lòng nhập đầy đủ thông tin'})
@@ -19,15 +18,8 @@ const AuthController = {
             if(user)
                 return res.status(400).json({success: false, message: 'Tài khoản đã được sử dụng'})
 
-            //check existing email
-            // const mail = await User.findOne({email})
-            
-            // if(mail)
-                // return res.status(400).json({success: false, message: 'Email already taken'})
-
             //hash password
             const hashPass = await argon2.hash(password)
-            // const newUser = new User({username, email, password: hashPass})
             const newUser = new User({username, fullname, password: hashPass})
             await newUser.save()
 

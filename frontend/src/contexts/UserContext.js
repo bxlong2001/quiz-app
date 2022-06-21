@@ -1,22 +1,28 @@
-import {createContext, useCallback} from 'react'
+import {createContext, useContext} from 'react'
 import axios from 'axios'
 import FormData from 'form-data'
 import {apiUrl} from './constaints'
+import { AuthContext } from './AuthContext'
 
 
 const UserContext = createContext()
 
 const UserContextProvider = ({children}) => {
-    const updateInfo = useCallback(async (info, id) => {
+    const {authDispatch} = useContext(AuthContext)
+
+    const updateInfo = async (info, id) => {
         try {
             const response = await axios.patch(apiUrl + `me/info/${id}/update-fullname`, {fullname: info})
+            if(response.data.success)
+                authDispatch({type: 'UPDATE_FULLNAME', payload: {user: response.data.info.fullname}})
+            console.log(response.data.info.fullname);
             return response.data
         } catch (error) {
             return error.response.data
 				? error.response.data
 				: { success: false, message: 'Lỗi server' }
         }
-    }, [])
+    }
 
     const updateImg = async (img, id, oldFile) => {
         const formData = new FormData();
@@ -29,6 +35,8 @@ const UserContextProvider = ({children}) => {
         }
         try {
             const response = await axios.patch(apiUrl + `me/info/${id}/update-avatar`, formData, oldFile, config)
+            if(response.data.success)
+                authDispatch({type: 'UPDATE_AVT', payload: {user: response.data.info.avt}})
             return response.data
         } catch (error) {
             return error.response.data

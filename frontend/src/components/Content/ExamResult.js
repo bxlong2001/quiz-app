@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 import ScrollButton from '../layout/ScrollButton'
+import { apiUrl } from '../../contexts/constaints'
 
 const ExamResult = ({time, total, exams, totalAnswerTrue}) => {
     const [showAnswerTrue, setShowAnswerTrue] = useState(false);
@@ -15,9 +16,6 @@ const ExamResult = ({time, total, exams, totalAnswerTrue}) => {
         const second = s - minutes*60
         return minutes+' phút '+second+' giây'
     }
-
-
-    console.log(exams.length);
 
     return (
         <Row>
@@ -72,7 +70,7 @@ const ExamResult = ({time, total, exams, totalAnswerTrue}) => {
                             {exam.img &&
                                 <>
                                     <br></br>
-                                    <img src={exam.img} width={200} />
+                                    <img src={exam.img.split('\\')[0]==='uploads' ? apiUrl + exam.img : exam.img} width={200} alt='Ảnh minh họa'/>
                                 </>}
                             <Row>
                                 <Col>

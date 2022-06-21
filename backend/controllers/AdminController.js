@@ -15,7 +15,7 @@ const AdminController = {
             const countSubject = await Subject.count()
             const countExam = await Subject.aggregate([{$project: {count: {$size: '$type'}}}])
             const countQuiz = await Exam.count()
-            const sortUser = await User.find({admin: false}, {'password': 0}).limit(4).sort({'createdAt': -1})
+            const sortUser = await User.find({admin: false}, {'password': 0}).limit(9).sort({'createdAt': -1})
             const sortResult = await Result.aggregate([
                 {
                     $limit: 9

@@ -15,7 +15,7 @@ const User = new mongoose.Schema({
     },
     avt: {
         type: String,
-        default: 'no-avatar.png'
+        default: 'uploads\\no-avatar.png'
     },
     fullname: {
         type: String,

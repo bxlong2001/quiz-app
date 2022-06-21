@@ -2,9 +2,11 @@ import { useContext} from "react"
 import { Navbar, Container, Nav, NavDropdown} from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../contexts/AuthContext"
+import { apiUrl } from "../../contexts/constaints"
 
 const NavbarAptest = () => {
   const {authState: {user}, logoutUser} = useContext(AuthContext)
+  
   return (
     <Navbar bg='light' expand="lg" id="navbar">
       <Container>
@@ -26,7 +28,7 @@ const NavbarAptest = () => {
             </>:
             <div className="nav-user">
               <Link to={'/me/info'}>
-                <img src={require(`../../../public/img/${user.avt}`)} alt='avatar' className="nav-user-avt"/>
+                <img src={user && (apiUrl + user.avt)} alt='avatar' className="nav-user-avt"/>
               </Link>
               <NavDropdown title={user.admin? 'Admin' : user.fullname} id="basic-nav-dropdown">
                 {user.admin ?

@@ -26,7 +26,9 @@ const ExamForm = () => {
     const handleShow = () => setShow(true);
     
     const {examState: {exams, examsLoading}, getExams} = useContext(ExamContext)
-    useEffect(() => {getExams(slug)}, [])
+    useEffect(() => {
+        getExams(slug)
+    },[slug])
     
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -35,10 +37,9 @@ const ExamForm = () => {
             total.current += e.isAnswerTrue
         })
         
-
         const resultForm = {
             examName: slug,
-            result: total.current,
+            result: Number(((10/exams.length) * total.current).toFixed(1)),
             timeWork: 900 - time.current[0]
         }
 
@@ -48,6 +49,7 @@ const ExamForm = () => {
                 setShowToast(true)
                 return toast.success(resultData.message)
             }
+            total.current = 0
             return toast.error(resultData.message)
         } catch (error) {
             console.log(error);

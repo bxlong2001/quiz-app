@@ -9,6 +9,16 @@ const authReducer = (state, action) => {
                 isAuthenticated,
                 user
             }
+        case 'UPDATE_AVT':
+            return {
+                ...state,
+                user: {...state.user, avt: user}
+            }
+        case 'UPDATE_FULLNAME':
+            return {
+                ...state,
+                user: {...state.user, fullname: user}
+            }
         default:
             return state
     }
