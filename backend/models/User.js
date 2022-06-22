@@ -24,6 +24,10 @@ const User = new mongoose.Schema({
     admin: {
         type: Boolean,
         default: false
+    },
+    point: {
+        type: Number,
+        default: 0
     }
 }, {timestamps: true})
 

@@ -131,7 +131,8 @@ const AdminContextProvider = ({children}) => {
         try {
             const response = await axios.delete(apiUrl + `admin/users/delete/${id}`)
             if(response.data.success)
-                return response.data
+                userDispatch({type: 'DELETE_USER', payload: response.data.user})
+            return response.data
         } catch (error) {
             return error.response.data
 				? error.response.data

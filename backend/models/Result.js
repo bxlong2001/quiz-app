@@ -14,7 +14,7 @@ const Result = new mongoose.Schema({
         required: true
     },
     result: {
-        type: String,
+        type: Number,
         required: true
     },
     timeWork: {

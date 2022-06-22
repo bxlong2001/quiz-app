@@ -65,7 +65,7 @@ const AdminController = {
                         return res.json({success: true, message: 'Xóa người dùng và kết quả thành công'})
                     return res.status(401).json({success: false,message: 'Xóa kết quả thất bại'})
                 }
-                return res.json({success: true, message: 'Xóa người dùng thành công'})
+                return res.json({success: true, message: 'Xóa người dùng thành công', user: deleteUser})
             }else 
                 return res.status(401).json({success: false,message: 'Xóa người dùng thất bại'})
             

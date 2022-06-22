@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { Button, Modal } from 'react-bootstrap'
+import { toast } from 'react-toastify';
 import { AdminContext } from '../../contexts/AdminContext';
 
 const ModalDeleteUser = ({id, showDeleteUser, handleCloseDeleteUser}) => {
@@ -9,7 +10,13 @@ const ModalDeleteUser = ({id, showDeleteUser, handleCloseDeleteUser}) => {
         handleCloseDeleteUser()
 
         try {
-            await deleteUser(id)
+          const dlt = await deleteUser(id)
+          if(dlt.success){
+            handleCloseDeleteUser()
+            return toast.success(dlt.message)
+          }
+          toast.error(dlt.message)
+
         } catch (error) {
             console.log(error);
         }
