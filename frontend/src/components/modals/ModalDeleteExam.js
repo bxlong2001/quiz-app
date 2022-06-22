@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { Button, Modal } from 'react-bootstrap'
 import { AdminContext } from '../../contexts/AdminContext';
+import { toast } from 'react-toastify';
+
 
 const ModalDeleteExam = ({id, showDeleteExam, handleCloseDeleteExam}) => {
     const {deleteExam} = useContext(AdminContext)
@@ -9,12 +11,16 @@ const ModalDeleteExam = ({id, showDeleteExam, handleCloseDeleteExam}) => {
         handleCloseDeleteExam()
 
         try {
-            await deleteExam(id)
+            const dlt = await deleteExam(id)
+            if(dlt.success){
+              handleCloseDeleteExam()
+              return toast.success(dlt.message)
+          }
+          toast.error(dlt.message)
         } catch (error) {
             console.log(error);
         }
     }
-    console.log('re-render');
   return (
     <Modal show={showDeleteExam} onHide={handleCloseDeleteExam} className="align-items-center">
         <Modal.Header closeButton>

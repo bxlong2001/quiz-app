@@ -56,6 +56,7 @@ const CreateExam = () => {
         answer_d: `D. ${answer_d}`
       }, img.file)
       if(submit.success){
+        URL.revokeObjectURL(img.prev)
         setCreateForm({
           name: slug,
           type,
@@ -67,6 +68,7 @@ const CreateExam = () => {
           answer_d: '',
           answer_true: ''
         })
+        setImg({file: '', prev: ''})
         return toast.success(submit.message)
       }
       return toast.error(submit.message)

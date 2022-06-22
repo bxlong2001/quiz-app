@@ -94,7 +94,7 @@ const AdminController = {
         if(!img)
             return res.status(401).json({success: false, message: 'Không tìm thấy hình ảnh tải lên'})
             
-        res.json({success: true, message: 'Tải ảnh thành công', filename: img.filename})
+        res.json({success: true, message: 'Tải ảnh thành công', imgPath: img.path})
     },
 
     createExam: async (req, res) => {
@@ -118,7 +118,7 @@ const AdminController = {
     updateExam: async (req, res) => {
         const {id} = req.params
         try {
-            const updateExam = await Exam.findOneAndUpdate({_id: id}, {...req.body})
+            const updateExam = await Exam.findOneAndUpdate({_id: id}, {...req.body},{new: true})
             if(!updateExam)
                 return res.status(401).json({success: false,message: 'Sửa thất bại'})
             res.json({success: true, message: 'Thay đổi thành công', exam: updateExam})
@@ -137,11 +137,11 @@ const AdminController = {
                 return res.status(401).json({success: false,message: 'Xóa thất bại'})
 
             if(deleteExam.img)
-                fs.unlinkSync('../frontend/public/img/' + deleteExam.img, err => {
+                fs.unlinkSync(deleteExam.img, err => {
                     console.log(err);
                 })
 
-            res.json({success: true, message: 'Xóa thành công', examImg: deleteExam.img})
+            res.json({success: true, message: 'Xóa thành công', exam: deleteExam})
         }catch(error){
             console.log(error)
             res.status(500).json({ success: false, message: 'Internal server error' })

@@ -59,7 +59,7 @@ const AdminContextProvider = ({children}) => {
                 if (!response1.data.success)
                     return response1.data
                 
-                form = {...createForm, img: response1.data.filename}
+                form = {...createForm, img: response1.data.imgPath}
             }
             
             const response2 = await axios.post(apiUrl + 'admin/exams/create', form || createForm)
@@ -118,6 +118,7 @@ const AdminContextProvider = ({children}) => {
         try {
             const response = await axios.delete(apiUrl + `admin/exams/delete/${id}`)
             if(response.data.success)
+                examDispatch({type: 'DELETE_EXAM', payload: response.data.exam})
                 return response.data
         } catch (error) {
             return error.response.data

@@ -10,7 +10,7 @@ const Admin = () => {
   const {statisticState: {statistics, statisticsLoading}, getStatistic} = useContext(AdminContext)
   const {countExam, countQuiz, countSubject, countUser, sortUser, sortResult} = statistics
 
-  useEffect(() => {getStatistic()}, [getStatistic])
+  useEffect(() => {getStatistic()}, [])
   
   if(statisticsLoading)
     return(

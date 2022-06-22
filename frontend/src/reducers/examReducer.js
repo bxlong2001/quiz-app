@@ -51,11 +51,18 @@ const examReducer = (state, action) => {
                 trialExams: [],
                 trialExamsLoading: false
             }
-            
-        case 'UPDATE_EXAM':
+        case 'DELETE_EXAM':
             return {
                 ...state,
-                exams: [...state.exams, payload]
+                exams: state.exams.filter(exam => exam._id !== payload._id)
+            }
+            
+        case 'UPDATE_EXAM':
+            const newExams = state.exams.map(exam => exam._id === payload._id ? payload : exam)
+
+            return {
+                ...state,
+                exams: newExams
             }
 
         default:

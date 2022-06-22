@@ -25,7 +25,7 @@ const UpdateExam = () => {
 
     useEffect(() => {
       getAllExams(slug, page, pagesize)
-    }, [page, exams])
+    }, [page])
 
     const handlePage = (e) => {
       setPage(+e.target.text)

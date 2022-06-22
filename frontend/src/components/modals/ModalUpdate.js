@@ -1,7 +1,7 @@
 import { memo, useContext, useState } from 'react'
 import { AdminContext } from '../../contexts/AdminContext'
 import { Button, Form, Modal } from 'react-bootstrap'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const ModalUpdate = ({quiz, showUpdate, handleCloseUpdate}) => {
     const {updateExam} = useContext(AdminContext)
@@ -13,7 +13,6 @@ const ModalUpdate = ({quiz, showUpdate, handleCloseUpdate}) => {
         
         try {
             const update = await updateExam(updateForm)
-            console.log(update);
             if(update.success){
                 handleCloseUpdate()
                 return toast.success(update.message)
