@@ -31,7 +31,7 @@ const TrialExam = () => {
     }
 
     const handleTime = () => {
-        const s = 900 - time.current[0]
+        const s = 1200 - time.current[0]
         const minutes = Math.floor(s/60)
         const second = s - minutes*60
         return minutes+' phút '+second+' giây'

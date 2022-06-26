@@ -1,17 +1,25 @@
 import { useContext, useEffect, useState} from 'react'
 import { Button, Card, Col, Form, NavLink, Row, Spinner } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import { ExamContext } from '../../contexts/ExamContext'
 import ScrollButton from '../layout/ScrollButton'
 
 const ExamContent = () => {
+    const [searchParams, setSearchParams] = useSearchParams()
     const {examState: {subjects, subjectsLoading}, getSubjects} = useContext(ExamContext)
     const {authState: {authLoading, isAuthenticated}} = useContext(AuthContext)
-    const [codeParam, setCodeParam] = useState()
-    const [levelParam, setLevelParam] = useState()
-
+    const [codeParam, setCodeParam] = useState(searchParams.get('code'))
+    const [levelParam, setLevelParam] = useState('')
+    console.log(codeParam);
     useEffect(() => {getSubjects()},[])
+
+    useEffect(() => {
+      searchParams.set('code', codeParam)
+      if(codeParam === '')
+        searchParams.delete('code')
+      setSearchParams(searchParams)
+    },[codeParam])
 
     let body = null
     if(authLoading || subjectsLoading)
@@ -23,7 +31,7 @@ const ExamContent = () => {
         <Row>
           <Col sm={8}></Col>
           <Col sm={2}>
-            <Form.Select aria-label="Default select example" onChange={e => setCodeParam(e.target.value)} className="mb-3">
+            <Form.Select value={codeParam} aria-label="Default select example" onChange={e => setCodeParam(e.target.value)} className="mb-3">
                 <option value=''>--Môn thi--</option>
               {subjects.map(subject => (
                 <option value={subject.code} key={subject.code}>{subject.title}</option>
@@ -49,7 +57,7 @@ const ExamContent = () => {
                       <Card.Body className='flex-column'>
                         <Card.Title className='text-center'>{type.title}</Card.Title>
                         <Card.Text>
-                          Thời gian làm bài: 15 phút
+                          Thời gian làm bài: 20 phút
                           <br></br>
                           Số câu hỏi: 20 câu
                         </Card.Text>

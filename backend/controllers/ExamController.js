@@ -19,11 +19,19 @@ const ExamController = {
     showExams: async (req, res) => {
         const {slug} = req.params
         try {
-            const exams = await Exam.aggregate([
-                { $match: { name: slug } },
-                { $sample: { size: 20 } }
+            const exams1 = await Exam.aggregate([
+                { $match: { name: slug, part: '1' } },
+                { $sample: { size: 7 } }
             ])
-            res.json({success: true, exams})
+            const exams2 = await Exam.aggregate([
+                { $match: { name: slug, part: '2' } },
+                { $sample: { size: 7 } }
+            ])
+            const exams3 = await Exam.aggregate([
+                { $match: { name: slug, part: '3' } },
+                { $sample: { size: 6 } }
+            ])
+            res.json({success: true, exams1, exams2, exams3})
         } catch (error) {
             console.log(error);
             res.status(500).json({success: false, message: 'Internal server error'})

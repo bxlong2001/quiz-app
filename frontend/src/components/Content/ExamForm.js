@@ -40,7 +40,7 @@ const ExamForm = () => {
         const resultForm = {
             examName: slug,
             result: Number(((10/exams.length) * total.current).toFixed(1)),
-            timeWork: 900 - time.current[0]
+            timeWork: 1200 - time.current[0]
         }
 
         try {
@@ -84,7 +84,7 @@ const ExamForm = () => {
                         <Card.Header className="text-center">{`Mã đề: ${slug}`}</Card.Header>
                         <Card.Body className="text-center">
                             <h4>Thời gian làm bài:</h4>
-                            <TimeOut submit={handleSubmit} timeOut={time.current} countdown={900}/>
+                            <TimeOut submit={handleSubmit} timeOut={time.current} countdown={1200}/>
                             <Card.Title>Số câu làm</Card.Title>
                             <div>
                                 {exams.map(exam => (
