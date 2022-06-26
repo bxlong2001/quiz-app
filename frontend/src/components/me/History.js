@@ -30,8 +30,8 @@ const History = () => {
                       <th></th>
                       <th></th>
                       <th>Môn thi</th>
-                      <th>Lần thi</th>
-                      <th>Số câu đúng</th>
+                      <th>Số lần thi</th>
+                      <th>Điểm</th>
                       <th>Thời gian làm bài</th>
                       <th>Ngày thi</th>
                       </tr>
