@@ -15,9 +15,10 @@ const ExamContent = () => {
     useEffect(() => {getSubjects()},[])
 
     useEffect(() => {
-      searchParams.set('code', codeParam)
       if(codeParam === '')
         searchParams.delete('code')
+      else
+        searchParams.set('code', codeParam)
       setSearchParams(searchParams)
     },[codeParam])
 

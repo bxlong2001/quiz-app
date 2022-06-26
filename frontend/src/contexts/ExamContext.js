@@ -111,7 +111,7 @@ const ExamContextProvider = ({children}) => {
         }
     }
 
-    const examContextData = {examState, resultState, saveResult, getExams, getTopic, getResults, getSubjects, getTrialExams, getRanks}
+    const examContextData = {examState, examDispatch, resultState, saveResult, getExams, getTopic, getResults, getSubjects, getTrialExams, getRanks}
 
     return (
         <ExamContext.Provider value={examContextData}>

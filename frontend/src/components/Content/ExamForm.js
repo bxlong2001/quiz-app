@@ -24,11 +24,12 @@ const ExamForm = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
-    const {examState: {exams, examsLoading}, getExams} = useContext(ExamContext)
+    const {examState: {exams, examsLoading}, examDispatch, getExams} = useContext(ExamContext)
     useEffect(() => {
         getExams(slug)
-    },[slug])
+        
+        return () => examDispatch({type: 'EXAMS_LOADED_FAIL'})
+    },[])
     
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -56,8 +57,6 @@ const ExamForm = () => {
         }
         
     }
-    
-    
 
     let body = null
 
@@ -102,7 +101,7 @@ const ExamForm = () => {
                     <Form className="me-auto" onSubmit={handleSubmit}>
                         <MathJax>
                             {exams.map(exam => (
-                                <Form.Group key={exam.id}>
+                                <Form.Group key={exam._id}>
                                     <SingleQuiz exam={exam} total={totalAnswerTrue.current} index={indexQuiz++}/>
                                 </Form.Group>
                             ))}

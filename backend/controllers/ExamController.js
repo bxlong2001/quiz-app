@@ -6,13 +6,14 @@ const ExamController = {
         try {
             const subjects = await Subject.aggregate(
                 [
-                    {$sort: {title: 1}}
+                    {$sort: {title: 1}},
+                    {$limit: 6}
                 ]
             )
             res.json({success: true, subjects})
         } catch (error) {
             console.log(error);
-            res.status(500).json({success: false, message: 'Internal server error'})
+            res.status(500).json({success: false, message: 'Lỗi server'})
         }
     },
 
@@ -31,10 +32,10 @@ const ExamController = {
                 { $match: { name: slug, part: '3' } },
                 { $sample: { size: 6 } }
             ])
-            res.json({success: true, exams1, exams2, exams3})
+            res.json({success: true, exams: [...exams1, ...exams2, ...exams3]})
         } catch (error) {
             console.log(error);
-            res.status(500).json({success: false, message: 'Internal server error'})
+            res.status(500).json({success: false, message: 'Lỗi server'})
         }
     },
 
@@ -45,7 +46,7 @@ const ExamController = {
             res.json({success: true, exams})
         } catch (error) {
             console.log(error);
-            res.status(500).json({success: false, message: 'Internal server error'})
+            res.status(500).json({success: false, message: 'Lỗi server'})
         }
     },
 
@@ -55,7 +56,7 @@ const ExamController = {
             res.json({success: true, topics})
         } catch (error) {
             console.log(error);
-            res.status(500).json({success: false, message: 'Internal server error'})
+            res.status(500).json({success: false, message: 'Lỗi server'})
         }
     },
 
@@ -65,7 +66,7 @@ const ExamController = {
             res.json({success: true, topics})
         } catch (error) {
             console.log(error);
-            res.status(500).json({success: false, message: 'Internal server error'})
+            res.status(500).json({success: false, message: 'Lỗi server'})
         }
     }
 }
