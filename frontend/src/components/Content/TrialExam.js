@@ -9,13 +9,17 @@ import TimeOut from "./TimeOut"
 const TrialExam = () => {
     let {slug} = useParams()
     const [show, setShow] = useState(false);
-    const {examState: {trialExams, trialExamsLoading}, getTrialExams} = useContext(ExamContext)
+    const {examState: {trialExams, trialExamsLoading}, examDispatch, getTrialExams} = useContext(ExamContext)
     const time = useRef([])
     const totalAnswerTrue = useRef([])
     const total = useRef(0)
     const [showToast, setShowToast] = useState(false);
 
-    useEffect(() => {getTrialExams(slug)}, [])
+    useEffect(() => {
+        getTrialExams(slug)
+        
+        return () => examDispatch({type: 'TRIALEXAMS_LOADED_FAIL'})
+    }, [])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

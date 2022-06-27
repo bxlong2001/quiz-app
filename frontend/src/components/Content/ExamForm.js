@@ -8,6 +8,7 @@ import ExamResult from "./ExamResult"
 import TimeOut from "./TimeOut"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import axios from "axios"
 
 const ExamForm = () => {
     //get slug
@@ -24,11 +25,15 @@ const ExamForm = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const {examState: {exams, examsLoading}, examDispatch, getExams} = useContext(ExamContext)
+    const {examState: {exams, examsLoading}, getExams} = useContext(ExamContext)
     useEffect(() => {
-        getExams(slug)
+        const cancelRequest = axios.CancelToken.source()
         
-        return () => examDispatch({type: 'EXAMS_LOADED_FAIL'})
+        getExams(slug, cancelRequest)
+        
+        return () => {
+            cancelRequest.cancel()
+        }
     },[])
     
     const handleSubmit = async (e) => {

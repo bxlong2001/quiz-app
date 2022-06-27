@@ -11,9 +11,7 @@ const ExamContent = () => {
     const {authState: {authLoading, isAuthenticated}} = useContext(AuthContext)
     const [codeParam, setCodeParam] = useState(searchParams.get('code'))
     const [levelParam, setLevelParam] = useState('')
-    console.log(codeParam);
     useEffect(() => {getSubjects()},[])
-
     useEffect(() => {
       if(codeParam === '')
         searchParams.delete('code')

@@ -41,9 +41,12 @@ const ExamContextProvider = ({children}) => {
     }
 
     //Get random exams
-    const getExams = async(slug) => {
+    const getExams = async(slug, cancelRequest) => {
         try {
-            const response = await axios.get(apiUrl + `exams/test/${slug}`)
+            const response = await axios.get(apiUrl + `exams/test/${slug}`, {
+                cancelToken: cancelRequest.token,
+            })
+            
             if (response.data.success) {
                 examDispatch({type: 'EXAMS_LOADED_SUCCESS', payload: response.data.exams})
             }

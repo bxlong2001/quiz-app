@@ -136,7 +136,7 @@ input[type='radio']:checked::before {
 }
 
 .img_subject {
-    height: 180px;
+    height: 150px;
     background-color: rgba(0, 0, 0, .1);
     background-position: 50%;
     background-repeat: no-repeat;

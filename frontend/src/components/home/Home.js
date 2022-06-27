@@ -28,12 +28,12 @@ const Home = () => {
             alt="Third slide"
             style={{height: 330, borderRadius: 16}}
           />
-          <Carousel.Caption>
+          <Carousel.Caption >
             <p style={{fontSize: 26}}>Trắc nghiệm Kỳ thi THPT Quốc gia</p>
             <p>Tổng hợp kiến thức, sẵn sàng cho kỳ thi Trung học phổ thông Quốc Gia 2022.</p>
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item>
+        <Carousel.Item  to={'/exams?code=ta'} as={Link}>
           <img
             className="d-block w-100"
             src="https://i.pinimg.com/736x/1f/a7/0c/1fa70ced77406850449774062c03fabf.jpg"
@@ -45,7 +45,7 @@ const Home = () => {
             <p>Tổng hợp hàng trăm câu trắc nghiệm Tiếng Anh Online giúp bạn ôn luyện và đạt điểm tốt trong các kỳ thi Tiếng Anh</p>
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item>
+        <Carousel.Item  to={'/exams?code=toan'} as={Link}>
           <img
             className="d-block w-100"
             src="https://marmotamaps.com/de/fx/wallpaper/download/faszinationen/Marmotamaps_Wallpaper_Berchtesgaden_Desktop_1920x1080.jpg"
@@ -68,11 +68,11 @@ const Home = () => {
         </div>
         <Row>
           {subjects.map(subject => (
-            <Col sm={4} key={subject.code}>
+            <Col sm={3} key={subject.code}>
               <Link className="img_subject" to={`/exams?code=${subject.code}`} variant="top" style={{backgroundImage: `url(${subject.img})`}}>
                 <button className="btn-subject">Xem đề thi</button>
               </Link>
-              <p style={{fontSize: 20}} className="text-center mb-4 mt-2">{subject.title}</p>
+              <p style={{fontSize: 18}} className="text-center mb-4 mt-2">{subject.title}</p>
             </Col>
           ))}
         </Row>

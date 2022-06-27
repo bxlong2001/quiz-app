@@ -7,7 +7,6 @@ const ExamController = {
             const subjects = await Subject.aggregate(
                 [
                     {$sort: {title: 1}},
-                    {$limit: 6}
                 ]
             )
             res.json({success: true, subjects})
@@ -20,19 +19,29 @@ const ExamController = {
     showExams: async (req, res) => {
         const {slug} = req.params
         try {
-            const exams1 = await Exam.aggregate([
-                { $match: { name: slug, part: '1' } },
-                { $sample: { size: 7 } }
-            ])
-            const exams2 = await Exam.aggregate([
-                { $match: { name: slug, part: '2' } },
-                { $sample: { size: 7 } }
-            ])
-            const exams3 = await Exam.aggregate([
-                { $match: { name: slug, part: '3' } },
-                { $sample: { size: 6 } }
-            ])
-            res.json({success: true, exams: [...exams1, ...exams2, ...exams3]})
+            if(slug.split('-')[0] !== 'ta') {
+                const exams1 = await Exam.aggregate([
+                    { $match: { name: slug, part: '1' } },
+                    { $sample: { size: 7 } }
+                ])
+                const exams2 = await Exam.aggregate([
+                    { $match: { name: slug, part: '2' } },
+                    { $sample: { size: 7 } }
+                ])
+                const exams3 = await Exam.aggregate([
+                    { $match: { name: slug, part: '3' } },
+                    { $sample: { size: 6 } }
+                ])
+
+                if(!exams1 || !exams2 || !exams3)
+                    return res.status(400).json({success: false, message: 'Không tìm thấy đề thi'})
+                return res.json({success: true, exams: [...exams1, ...exams2, ...exams3]})
+            }
+
+            const examsE = await Exam.find({name: slug})
+            if(!examsE)
+                return res.status(400).json({success: false, message: 'Không tìm thấy đề thi'})
+            return res.json({success: true, exams: examsE})
         } catch (error) {
             console.log(error);
             res.status(500).json({success: false, message: 'Lỗi server'})
