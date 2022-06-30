@@ -11,6 +11,12 @@ const Admin = () => {
   const {countExam, countQuiz, countSubject, countUser, sortUser, sortResult} = statistics
 
   useEffect(() => {getStatistic()}, [])
+
+  const convertTime = (time) => {
+    const minutes = Math.floor(time/60)
+    const second = time - minutes*60
+    return minutes + ' phút ' + second + ' giây'
+  }
   
   if(statisticsLoading)
     return(
@@ -29,7 +35,7 @@ const Admin = () => {
     return (
       <>
         <Row>
-          <Col>
+          <Col sm={6} md={6} xl={3} className='mb-2'>
             <div className="ui-admin">
               <div className="ui-admin-title">
                 <span className="ui-admin-number">
@@ -40,7 +46,7 @@ const Admin = () => {
               <span className="ui-admin-text">Người dùng</span>
             </div>
           </Col>
-          <Col>
+          <Col sm={6} md={6} xl={3} className='mb-2'>
             <div className="ui-admin">
               <div className="ui-admin-title">
                 <span className="ui-admin-number">
@@ -51,7 +57,7 @@ const Admin = () => {
               <span className="ui-admin-text">Môn thi</span>
             </div>
           </Col>
-          <Col>
+          <Col sm={6} md={6} xl={3}  className='mb-2'>
             <div className="ui-admin">
               <div className="ui-admin-title">
                 <span className="ui-admin-number">
@@ -62,7 +68,7 @@ const Admin = () => {
               <span className="ui-admin-text">Đề thi</span>
             </div>
           </Col>
-          <Col>
+          <Col sm={6} md={6} xl={3}  className='mb-2'>
             <div className="ui-admin">
               <div className="ui-admin-title">
                 <span className="ui-admin-number">
@@ -75,7 +81,7 @@ const Admin = () => {
           </Col>
         </Row>
         <Row className="mt-4">
-          <Col sm={8}>
+          <Col sm={12} md={12} xl={8}>
             <div className="mb-2 home-link">
               <span style={{fontSize: 20}}>Lịch sử thi gần đây</span>
             <Link to='exams-management'>
@@ -90,7 +96,7 @@ const Admin = () => {
                   <th>ID người dùng</th>
                   <th>Mã đề thi</th>
                   <th>Kết quả</th>
-                  <th>Thời gian làm bài</th>
+                  <th>Thời gian</th>
                   <th>Ngày thi</th>
                 </tr>
               </thead>
@@ -101,14 +107,14 @@ const Admin = () => {
                     <td>{result.infoUser[0].username}</td>
                     <td>{result.examName}</td>
                     <td>{result.result}</td>
-                    <td>{result.timeWork}</td>
+                    <td>{convertTime(result.timeWork)}</td>
                     <td>{result.updatedAt.split('T')[0]}</td>
                   </tr>
                 ))}
               </tbody>
             </Table>
           </Col>
-          <Col sm={4}>
+          <Col sm={12} md={12} xl={4}>
             <div>
                 <div className="mb-2 home-link">
                   <span style={{fontSize: 20}}>Người dùng gần đây</span>

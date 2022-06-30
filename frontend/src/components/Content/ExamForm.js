@@ -25,7 +25,8 @@ const ExamForm = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const {examState: {exams, examsLoading}, getExams} = useContext(ExamContext)
+    const {examState: {exams, examTime, examsLoading}, examDispatch,getExams} = useContext(ExamContext)
+    console.log(examsLoading);
     useEffect(() => {
         const cancelRequest = axios.CancelToken.source()
         
@@ -33,11 +34,12 @@ const ExamForm = () => {
         
         return () => {
             cancelRequest.cancel()
+            examDispatch({type: 'EXAMS_LOADED_FAIL'})
         }
     },[])
     
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e && e.preventDefault()
 
         totalAnswerTrue.current.forEach((e) => {
             total.current += e.isAnswerTrue
@@ -46,7 +48,7 @@ const ExamForm = () => {
         const resultForm = {
             examName: slug,
             result: Number(((10/exams.length) * total.current).toFixed(1)),
-            timeWork: 1200 - time.current[0]
+            timeWork: examTime - time.current[0]
         }
 
         try {
@@ -75,7 +77,7 @@ const ExamForm = () => {
     body = (
         <>
             <ToastContainer theme="colored"/>
-            <ExamResult time={time.current} total={total.current} exams={[...exams]} totalAnswerTrue={totalAnswerTrue.current} />
+            <ExamResult time={time.current} total={total.current} exams={[...exams]} examTime={examTime} totalAnswerTrue={totalAnswerTrue.current} />
         </>
         )
     else if(exams.length){
@@ -88,7 +90,7 @@ const ExamForm = () => {
                         <Card.Header className="text-center">{`Mã đề: ${slug}`}</Card.Header>
                         <Card.Body className="text-center">
                             <h4>Thời gian làm bài:</h4>
-                            <TimeOut submit={handleSubmit} timeOut={time.current} countdown={1200}/>
+                            <TimeOut submit={handleSubmit} timeOut={time.current} countdown={examTime}/>
                             <Card.Title>Số câu làm</Card.Title>
                             <div>
                                 {exams.map(exam => (

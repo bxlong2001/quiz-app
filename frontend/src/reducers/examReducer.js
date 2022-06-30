@@ -17,7 +17,8 @@ const examReducer = (state, action) => {
         case 'EXAMS_LOADED_SUCCESS':
             return {
                 ...state,
-                exams: payload,
+                exams: payload.exams,
+                examTime: payload.time,
                 total,
                 examsLoading: false
             }
@@ -25,6 +26,7 @@ const examReducer = (state, action) => {
             return {
                 ...state,
                 exams: [],
+                examTime: null,
                 examsLoading: false
             }
         case 'SUBJECTS_LOADED_SUCCESS':

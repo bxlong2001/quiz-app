@@ -1,4 +1,5 @@
 const Result = require('../models/Result')
+const User = require('../models/User')
 
 const ResultController = {
     save: async(req,res) => {
@@ -27,7 +28,7 @@ const ResultController = {
 
     show: async(req, res) => {
         try {
-            const results = await Result.find({idUser: req.id}).sort({updatedAt: -1})
+            const results = await Result.find({idUser: req.id}).sort({createdAt: -1})
             res.json({success: true, results})
         } catch (error) {
             console.log(error);
@@ -37,7 +38,12 @@ const ResultController = {
 
     rank: async(req, res) => {
         const {slug} = req.params
+        console.log(slug);
         try {
+            if(slug === 'all'){
+                const rankPoint = await User.find().select('-password').sort({point: -1}).limit(10)
+                return res.json({success: true, results: rankPoint})
+            }
             const results = await Result.aggregate(
                 [
                     {

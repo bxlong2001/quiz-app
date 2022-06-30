@@ -19,6 +19,7 @@ const ExamController = {
     showExams: async (req, res) => {
         const {slug} = req.params
         try {
+            const time = await Subject.findOne({'type.code': slug}, {'type.$': 1})
             if(slug.split('-')[0] !== 'ta') {
                 const exams1 = await Exam.aggregate([
                     { $match: { name: slug, part: '1' } },
@@ -32,16 +33,15 @@ const ExamController = {
                     { $match: { name: slug, part: '3' } },
                     { $sample: { size: 6 } }
                 ])
-
-                if(!exams1 || !exams2 || !exams3)
+                if(!exams1 || !exams2 || !exams3 || !time)
                     return res.status(400).json({success: false, message: 'Không tìm thấy đề thi'})
-                return res.json({success: true, exams: [...exams1, ...exams2, ...exams3]})
+                return res.json({success: true, exams: [...exams1, ...exams2, ...exams3], time: time})
             }
 
             const examsE = await Exam.find({name: slug})
             if(!examsE)
                 return res.status(400).json({success: false, message: 'Không tìm thấy đề thi'})
-            return res.json({success: true, exams: examsE})
+            return res.json({success: true, exams: examsE, time: time})
         } catch (error) {
             console.log(error);
             res.status(500).json({success: false, message: 'Lỗi server'})

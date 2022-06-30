@@ -1,24 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import {Col, Form, Row, Spinner, Table } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { ExamContext } from '../../contexts/ExamContext'
-import { useNavigate } from 'react-router-dom'
+import { apiUrl } from '../../contexts/constaints'
 
 const Rank = () => {
-  const navigative = useNavigate()
-  const [value, setValue] = useState('su-12')
+  const [value, setValue] = useState('all')
   const {
     examState: {topics, topicsLoading},
     resultState: {maxResults, maxResultsLoading},
+    resultDispatch,
     getTopic,
     getRanks
   } = useContext(ExamContext)
-
+  console.log(maxResults);
   useEffect(() => {getTopic()},[])
-  useEffect(() => {
-    if(value==='all')
-      return console.log('point');
+  useLayoutEffect(() => {
     getRanks(value)
   }, [value])
 
@@ -28,8 +26,8 @@ const Rank = () => {
     return minutes + ' phút ' + second + ' giây'
   }
 
-  console.log(maxResults);
   const handleChange = (e) => {
+    resultDispatch({type: 'MAXRESULTS_LOADED_FAIL'})
     setValue(e.target.value)
   }
 
@@ -45,13 +43,14 @@ const Rank = () => {
       <Col sm={10}/>
       <Col sm={2}>
         <Form.Select aria-label="Default select example" onChange={e => handleChange(e)} className="mb-3">
-          <option value='all'>--Đề thi--</option>
+          <option value='all' key={'all'}>--Đề thi--</option>
           {topics.map(topic => (
             <option value={topic} key={topic}>{topic}</option>
           ))}
         </Form.Select>
       </Col>
     </Row>
+    {value!=='all' ?
       <Table striped hover>
         <thead>
           <tr>
@@ -61,11 +60,11 @@ const Rank = () => {
             <th>Tài khoản</th>
             <th>Họ tên</th>
             <th>Điểm số</th>
-            <th>Thời gian làm bài</th>
+            <th>Thời gian</th>
           </tr>
         </thead>
         <tbody>
-          {maxResults.map(maxResult => (
+          { maxResults.map(maxResult => (
             <tr key={maxResult._id}>
               <td></td>
               <td></td>
@@ -77,10 +76,34 @@ const Rank = () => {
               <td>{maxResult.infoUser[0].fullname}</td>
               <td>{maxResult.maxResult}</td>
               <td>{convertTime(maxResult.minTimeWork)}</td>
-            </tr>
-          ))}
+            </tr>))
+          }
         </tbody>
       </Table>
+      :
+      maxResults.length !== 0 && 
+        <Row>
+          <Col>
+            <div className='myrank-wrap'>
+              <div className='on-top'>
+                <img className='myrank-avt rank2' src={apiUrl + maxResults[1].avt} alt='avatar'/>
+                <div>Top 2</div>
+                <div>{maxResults[1].username}</div>
+              </div>
+              <div className='on-top'>
+                <img className='myrank-avt' src={apiUrl + maxResults[0].avt} alt='avatar'/>
+                <div>Top 1</div>
+                <div>{maxResults[0].username}</div>
+              </div>
+              <div className='on-top'>
+                <img className='myrank-avt rank2' src={apiUrl + maxResults[2].avt} alt='avatar'/>
+                <div>Top 3</div>
+                <div>{maxResults[2].username}</div>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      }
     </>
   )
 }

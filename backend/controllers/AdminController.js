@@ -18,12 +18,12 @@ const AdminController = {
             const sortUser = await User.find({admin: false}, {'password': 0}).limit(9).sort({'createdAt': -1})
             const sortResult = await Result.aggregate([
                 {
-                    $limit: 9
-                },
-                {
                     $sort: {
                         'updatedAt': -1
                     }
+                },
+                {
+                    $limit: 9
                 },
                 {   
                     $lookup: {

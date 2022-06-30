@@ -12,6 +12,7 @@ const ExamContextProvider = ({children}) => {
     const [examState, examDispatch] = useReducer(examReducer, {
         topics: [],
         exams: [],
+        examTime: null,
         subjects: [],
         trialExams: [],
         topicsLoading: true,
@@ -48,7 +49,7 @@ const ExamContextProvider = ({children}) => {
             })
             
             if (response.data.success) {
-                examDispatch({type: 'EXAMS_LOADED_SUCCESS', payload: response.data.exams})
+                examDispatch({type: 'EXAMS_LOADED_SUCCESS', payload: {exams: response.data.exams, time: response.data.time.type[0].time}})
             }
 
         } catch (error) {
@@ -114,7 +115,7 @@ const ExamContextProvider = ({children}) => {
         }
     }
 
-    const examContextData = {examState, examDispatch, resultState, saveResult, getExams, getTopic, getResults, getSubjects, getTrialExams, getRanks}
+    const examContextData = {examState, examDispatch, resultState, resultDispatch, saveResult, getExams, getTopic, getResults, getSubjects, getTrialExams, getRanks}
 
     return (
         <ExamContext.Provider value={examContextData}>

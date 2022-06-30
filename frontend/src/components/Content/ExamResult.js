@@ -7,11 +7,11 @@ import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 import ScrollButton from '../layout/ScrollButton'
 import { apiUrl } from '../../contexts/constaints'
 
-const ExamResult = ({time, total, exams, totalAnswerTrue}) => {
+const ExamResult = ({time, total, exams, examTime, totalAnswerTrue}) => {
     const [showAnswerTrue, setShowAnswerTrue] = useState(false);
     
     const handleTime = () => {
-        const s = 900 - time[0]
+        const s = examTime - time[0]
         const minutes = Math.floor(s/60)
         const second = s - minutes*60
         return minutes+' phút '+second+' giây'

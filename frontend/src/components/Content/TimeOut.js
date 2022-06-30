@@ -3,7 +3,8 @@ import { memo, useEffect, useRef, useState } from "react"
 const TimeOut = ({submit, timeOut, countdown}) => {
     const [time, setTime] = useState(countdown)
     const intervalId = useRef()
-
+    console.log('time: ',time);
+    console.log('time out: ',timeOut);
     useEffect(() => {
         intervalId.current = setInterval(() => {
             setTime(prev => prev - 1)
@@ -13,16 +14,19 @@ const TimeOut = ({submit, timeOut, countdown}) => {
             clearInterval(intervalId.current)
         }
     }, [])
+
+    useEffect(() => {
+        if(time <= 0){
+            clearInterval(intervalId.current)
+            submit()
+        }
+    }, [time>0])
     
     useEffect(() => {
         timeOut[0] = time
     },[time])
 
     const convertTime = (time) => {
-        if(time <= 0){
-            clearInterval(intervalId.current)
-            submit()
-        }
         const minutes = Math.floor(time/60)
         const second = time - minutes*60
         return (minutes<10 ? '0'+minutes : minutes) + ': ' + (second<10 ? '0'+second : second)

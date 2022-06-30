@@ -13,7 +13,7 @@ const ExamContent = () => {
     const [levelParam, setLevelParam] = useState('')
     useEffect(() => {getSubjects()},[])
     useEffect(() => {
-      if(codeParam === '')
+      if(codeParam === '' || codeParam === null)
         searchParams.delete('code')
       else
         searchParams.set('code', codeParam)
@@ -56,7 +56,7 @@ const ExamContent = () => {
                       <Card.Body className='flex-column'>
                         <Card.Title className='text-center'>{type.title}</Card.Title>
                         <Card.Text>
-                          Thời gian làm bài: 20 phút
+                          {`Thời gian làm bài: ${type.time/60} phút`}
                           <br></br>
                           Số câu hỏi: 20 câu
                         </Card.Text>

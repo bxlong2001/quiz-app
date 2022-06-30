@@ -397,3 +397,64 @@ input[type='file']::-webkit-file-upload-button{
 .answer-select--false{
     color: red;
 }
+
+
+/* My rank */
+.myrank-avt {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: auto;
+    object-fit: cover;
+    border: 6px solid #eaeaea;
+}
+
+.myrank-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.myrank-title {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0px;
+    background-color: #34A25A;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+}
+
+.on-top {
+    position: relative;
+}
+
+.on-top::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 50px;
+    border-radius: 50%;
+    height: 50px;
+    background-color: #e74c3c;
+    transition: .25s;
+    z-index: 1;
+}
+
+.on-top::after {
+    content: "";
+    position: absolute;
+    bottom: -50%;
+    left: 0;
+    border-style: solid;
+    border-width: 100px;
+    border-color: #ccc #ccc transparent #ccc;
+    z-index: -1;
+}
+
+.rank2 {
+    width: 150px;
+    height: 150px;
+}

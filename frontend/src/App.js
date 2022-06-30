@@ -49,7 +49,7 @@ function App() {
                   <Route path='/exams/try/:slug' element={<LayoutRoute Component={TrialExam} flag='no-nav'/>} />
                   <Route path='/exams/:slug' element={<ProtectedRoute Component={TestForm} flag='no-nav' />} />
                   <Route path='/me/history' element={<ProtectedRoute Component={History} />} />
-                  <Route path='/me/rank' element={<ProtectedRoute Component={MyRank} />} />
+                  <Route path='/me/rank' element={<ProtectedRoute Component={MyRank} flag='no-nav'/>} />
                   <Route path='/me/info' element={<ProtectedRoute Component={Info} flag='no-nav'/>} />
                   <Route path='*' element={<NotFound />}></Route>
                 </Routes>
