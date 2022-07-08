@@ -27,8 +27,6 @@ const Admin = () => {
     
   else {
     let total = 0
-    let i = 1
-    let t = 1
     if(countExam)
         countExam.map(exam => total+=exam.count)
     
@@ -101,9 +99,9 @@ const Admin = () => {
                 </tr>
               </thead>
               <tbody>
-                {sortResult.map(result => (
+                {sortResult.map((result,index) => (
                   <tr key={result._id}>
-                    <td>{i++}</td>
+                    <td>{index+1}</td>
                     <td>{result.infoUser[0].username}</td>
                     <td>{result.examName}</td>
                     <td>{result.result}</td>
@@ -132,9 +130,9 @@ const Admin = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {sortUser.map((user) => (
+                    {sortUser.map((user, index) => (
                       <tr key={user._id}>
-                        <td>{t++}</td>
+                        <td>{index+1}</td>
                         <td>{user.username}</td>
                         <td>{user.createdAt.split('T')[0]}</td>
                       </tr>

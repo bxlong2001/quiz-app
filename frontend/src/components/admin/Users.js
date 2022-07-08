@@ -25,7 +25,6 @@ const Users = () => {
       </div>
     )
   
-  let i=1
   return (
       <Row>
         <Col>
@@ -46,13 +45,13 @@ const Users = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map(user => {
+                  {users.map((user, index) => {
                     if(!user.admin) 
                     return(
                         
                       <tr key={user._id}>
                             <td></td>
-                            <td>{i++}</td>
+                            <td>{index+1}</td>
                             <td>{user.username}</td>
                             <td>{user.fullname}</td>
                             <td>{user.createdAt.split('T')[0]}</td>

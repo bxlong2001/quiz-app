@@ -86,9 +86,6 @@ const TrialExam = () => {
             </Row>
         )
 
-    let indexNav = 1
-    let indexQues = 1
-
     return (
     <>
         <Modal show={show} onHide={handleClose} style={{verticalAlign: 'center'}}>
@@ -115,10 +112,10 @@ const TrialExam = () => {
                     <TimeOut submit={handleSubmit} timeOut={time.current} countdown={600}/>
                     <Card.Title>Số câu làm</Card.Title>
                     <div>
-                        {trialExams.map(trialExam => (
+                        {trialExams.map((trialExam, index) => (
                             <a href={`#${trialExam._id}`} key={trialExam._id}>
                                 <Badge id={`Badge-${trialExam._id}`} pill bg="primary" className="test__badge">
-                                    {indexNav++}
+                                    {index+1}
                                 </Badge>{' '} 
                             </a>
                         ))}
@@ -129,9 +126,9 @@ const TrialExam = () => {
         <Col sm={9}>
             <Form className="me-auto" onSubmit={handleSubmit}>
                 <MathJax>
-                    {trialExams.map(trialExam => (
+                    {trialExams.map((trialExam, index) => (
                         <Form.Group key={trialExam._id}>
-                            <SingleQuiz exam={trialExam} total={totalAnswerTrue.current} index={indexQues++}/>
+                            <SingleQuiz exam={trialExam} total={totalAnswerTrue.current} index={index+1}/>
                         </Form.Group>
                     ))}
                 </MathJax>

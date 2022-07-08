@@ -81,8 +81,6 @@ const ExamForm = () => {
         </>
         )
     else if(exams.length){
-        let indexNav = 1
-        let indexQuiz = 1
         body = (
             <Row className="mx-auto">
                 <Col sm={3}>
@@ -93,10 +91,10 @@ const ExamForm = () => {
                             <TimeOut submit={handleSubmit} timeOut={time.current} countdown={examTime}/>
                             <Card.Title>Số câu làm</Card.Title>
                             <div>
-                                {exams.map(exam => (
+                                {exams.map((exam,index) => (
                                     <a href={`#${exam._id}`} key={exam._id}>
                                         <Badge id={`Badge-${exam._id}`} pill bg="primary" className="test__badge">
-                                            {indexNav++}
+                                            {index+1}
                                         </Badge>{' '} 
                                     </a>
                                 ))}
@@ -107,9 +105,9 @@ const ExamForm = () => {
                 <Col sm={9}>
                     <Form className="me-auto" onSubmit={handleSubmit}>
                         <MathJax>
-                            {exams.map(exam => (
+                            {exams.map((exam,index) => (
                                 <Form.Group key={exam._id}>
-                                    <SingleQuiz exam={exam} total={totalAnswerTrue.current} index={indexQuiz++}/>
+                                    <SingleQuiz exam={exam} total={totalAnswerTrue.current} index={index+1}/>
                                 </Form.Group>
                             ))}
                         </MathJax>

@@ -26,7 +26,7 @@ const Home = () => {
             className="d-block w-100"
             src="https://www.itl.cat/pngfile/big/294-2941154_kaziranga-national-park.jpg"
             alt="Third slide"
-            style={{height: 330, borderRadius: 16}}
+            style={{height: 330}}
           />
           <Carousel.Caption >
             <p style={{fontSize: 26}}>Trắc nghiệm Kỳ thi THPT Quốc gia</p>
@@ -38,7 +38,7 @@ const Home = () => {
             className="d-block w-100"
             src="https://i.pinimg.com/736x/1f/a7/0c/1fa70ced77406850449774062c03fabf.jpg"
             alt="First slide"
-            style={{height: 330, borderRadius: 16}}
+            style={{height: 330}}
           />
           <Carousel.Caption>
             <p style={{fontSize: 26}}>Trắc nghiệm Tiếng Anh</p>
@@ -50,7 +50,7 @@ const Home = () => {
             className="d-block w-100"
             src="https://marmotamaps.com/de/fx/wallpaper/download/faszinationen/Marmotamaps_Wallpaper_Berchtesgaden_Desktop_1920x1080.jpg"
             alt="Second slide"
-            style={{height: 330, borderRadius: 16}}
+            style={{height: 330}}
           />
 
           <Carousel.Caption>

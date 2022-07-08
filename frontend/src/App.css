@@ -15,7 +15,7 @@ html {
 }
 
 body {
-    /* background-color: #E3DFEF; */
+    background-color: #f5f9fa;
 }
 
 div {
@@ -52,6 +52,7 @@ div {
     background-color: rgba(0,0,0,0.5);
     height: 100%;
 }
+
 
 .wrap {
     color: aliceblue;
@@ -135,8 +136,15 @@ input[type='radio']:checked::before {
     font-size: 1.16rem;
 }
 
+/* Home */
+.carousel-inner {
+    border-radius: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
 .img_subject {
     height: 150px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     background-color: rgba(0, 0, 0, .1);
     background-position: 50%;
     background-repeat: no-repeat;
@@ -221,6 +229,7 @@ input[type='radio']:checked::before {
     border-left: solid 10px #5F5490;
     padding: 30px;
     border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .ui-admin-title {
@@ -427,34 +436,58 @@ input[type='file']::-webkit-file-upload-button{
     line-height: 50px;
 }
 
-.on-top {
-    position: relative;
+/* general rank */
+.onTop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 24px;
 }
 
-.on-top::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 50px;
+.onTop__avt {
+    position: relative;
+    width: 150px;
+    padding-top: 20px;
+}
+.onTop__img {
+    width: 100%;
+    height: 150px;
     border-radius: 50%;
-    height: 50px;
-    background-color: #e74c3c;
+    margin: auto;
+    object-fit: cover;
+    border: 6px solid #eaeaea;
+}
+
+.onTop__avt::after {
+    content: "1st";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    border-radius: 50%;
+    height: 40px;
+    color: #d80000;
+    text-align: center;
+    line-height: 40px;
+    background-color: #f6d738;
     transition: .25s;
     z-index: 1;
-}
-
-.on-top::after {
-    content: "";
-    position: absolute;
-    bottom: -50%;
-    left: 0;
-    border-style: solid;
-    border-width: 100px;
-    border-color: #ccc #ccc transparent #ccc;
-    z-index: -1;
 }
 
 .rank2 {
     width: 150px;
     height: 150px;
+}
+
+.single-rank {
+    display: flex;
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }

@@ -36,7 +36,6 @@ const Rank = () => {
           <Spinner animation='border' variant='info' />
       </div>
 
-  let i = 1
   return (
     <>
     <Row>
@@ -64,13 +63,12 @@ const Rank = () => {
           </tr>
         </thead>
         <tbody>
-          { maxResults.map(maxResult => (
+          { maxResults.map((maxResult, index) => (
             <tr key={maxResult._id}>
               <td></td>
               <td></td>
               <td>
-                {i===1 ? <FontAwesomeIcon icon={faTrophy}/>: null}
-                {i++}
+                {(index+1)===1 ? <FontAwesomeIcon icon={faTrophy}/>: (index+1)}
               </td>
               <td>{maxResult.infoUser[0].username}</td>
               <td>{maxResult.infoUser[0].fullname}</td>
@@ -81,28 +79,62 @@ const Rank = () => {
         </tbody>
       </Table>
       :
-      maxResults.length !== 0 && 
+      maxResults.length !== 0 &&
+      <>
         <Row>
           <Col>
-            <div className='myrank-wrap'>
-              <div className='on-top'>
-                <img className='myrank-avt rank2' src={apiUrl + maxResults[1].avt} alt='avatar'/>
-                <div>Top 2</div>
-                <div>{maxResults[1].username}</div>
+            <div className='onTop'>
+              <div className='onTop__avt'>
+                <img className='onTop__img rank2' src={apiUrl + maxResults[1].avt} alt='avatar'/>
               </div>
-              <div className='on-top'>
-                <img className='myrank-avt' src={apiUrl + maxResults[0].avt} alt='avatar'/>
-                <div>Top 1</div>
-                <div>{maxResults[0].username}</div>
-              </div>
-              <div className='on-top'>
-                <img className='myrank-avt rank2' src={apiUrl + maxResults[2].avt} alt='avatar'/>
-                <div>Top 3</div>
-                <div>{maxResults[2].username}</div>
+              <div className='onTop__content'>
+                <div className='onTop__content__fullname'>{maxResults[1].fullname}</div>
+                <div className='onTop__content__username'>{maxResults[1].username}</div>
+                <div className='onTop__content__point'>{maxResults[1].point}</div>
               </div>
             </div>
           </Col>
+          <Col>
+            <div className='onTop'>
+              <div className='onTop__avt'>
+                <img className='onTop__img' src={apiUrl + maxResults[0].avt} alt='avatar'/>
+              </div>
+              <div className='onTop__content'>
+                <div className='onTop__content__fullname'>{maxResults[0].fullname}</div>
+                <div className='onTop__content__username'>{maxResults[0].username}</div>
+                <div className='onTop__content__point'>{maxResults[0].point}</div>
+              </div>
+            </div>
+          </Col>
+          <Col>
+            <div className='onTop'>
+              <div className='onTop__avt'>
+                <img className='onTop__img rank2' src={apiUrl + maxResults[2].avt} alt='avatar'/>
+              </div>
+              <div className='onTop__content'>
+                <div className='onTop__content__fullname'>{maxResults[2].fullname}</div>
+                <div className='onTop__content__username'>{maxResults[2].username}</div>
+                <div className='onTop__content__point'>{maxResults[2].point}</div>
+              </div>
+            </div>      
+          </Col>
         </Row>
+        <Row>
+          <Col>
+            <div>
+              {maxResults.map((maxResult,index) => (
+                index>=3 &&
+                  <div className='single-rank'>
+                    <div>{(index+1) + 'th'}</div>
+                    <div>{maxResult.fullname}</div>
+                    <div>{maxResult.username}</div>
+                    <div>{maxResult.point}</div>
+                  </div>
+              ))}
+            </div>
+          </Col>
+        </Row>
+        </>
       }
     </>
   )

@@ -17,7 +17,6 @@ const Exams = () => {
       </div>
     )
   
-  let i=1
   return (
       <Row>
         <Col>
@@ -33,10 +32,10 @@ const Exams = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {topics.map(topic => (
+                  {topics.map((topic, index) => (
                         <tr key={topic}>
                           <td></td>
-                          <td>{i++}</td>
+                          <td>{index+1}</td>
                           <td></td>
                           <td>{topic}</td>
                           <td></td>
