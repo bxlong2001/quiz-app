@@ -33,14 +33,12 @@ const SingleQuizUpdate = ({exam}) => {
                 handleCloseDeleteExam={handleCloseDeleteExam}
             />}
             <tr>
-                <td>
-                {exam.question}
-                </td>
+                <td>{exam.question}</td>
                 <td>{exam.answer_a}</td>
                 <td>{exam.answer_b}</td>
                 <td>{exam.answer_c}</td>
                 <td>{exam.answer_d}</td>
-            <td>{exam.answer_true}</td>
+                <td className='text-center'>{exam.answer_true}</td>
             <td>
                 <Button variant='success' onClick={() => handleShowUpdate(exam)}>
                 <FontAwesomeIcon icon={faPencil}/>

@@ -1,6 +1,6 @@
 const examReducer = (state, action) => {
     const {type, payload, total} = action
-    
+    console.log(total);
     switch(type) {
         case 'TOPICS_LOADED_SUCCESS':
             return {
@@ -17,8 +17,7 @@ const examReducer = (state, action) => {
         case 'EXAMS_LOADED_SUCCESS':
             return {
                 ...state,
-                exams: payload.exams,
-                examTime: payload.time,
+                exams: payload,
                 total,
                 examsLoading: false
             }
@@ -26,9 +25,26 @@ const examReducer = (state, action) => {
             return {
                 ...state,
                 exams: [],
+                examsLoading: false
+            }
+        
+        case 'EXAMS_TEST_LOADED_SUCCESS':
+            return {
+                ...state,
+                exams: payload.exams,
+                examTime: payload.time || null,
+                total,
+                examsLoading: false
+            }
+
+        case 'EXAMS_TEST_LOADED_FAIL':
+            return {
+                ...state,
+                exams: [],
                 examTime: null,
                 examsLoading: false
             }
+
         case 'SUBJECTS_LOADED_SUCCESS':
             return {
                 ...state,

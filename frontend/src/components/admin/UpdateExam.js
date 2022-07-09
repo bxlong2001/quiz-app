@@ -17,7 +17,7 @@ const UpdateExam = () => {
     const [page, setPage] = useState(1)
     const pagesize = new URLSearchParams(search).get('pagesize') ?? 10
     const {examState: {exams, examsLoading, total}, getAllExams} = useContext(AdminContext)
-
+    console.log(exams);
     useEffect(() => {
       const pageParam = new URLSearchParams(search).get('page') ?? 1
       setPage(+pageParam)
@@ -51,9 +51,7 @@ const UpdateExam = () => {
       });
     }
     
-
     if(examsLoading){
-      console.log(total);
       return (
         <div className="d-flex justify-content-center mt-2">
           <Spinner animation='border' variant='info' />
@@ -93,17 +91,14 @@ const UpdateExam = () => {
                 <Table striped hover responsive="lg">
                   <thead>
                     <tr>
-                      <th className='text-center'>Câu hỏi</th>
-                      <th></th>
-                      <th></th>
-                      <th>Đáp án</th>
-                      <th></th>
-                      <th>Đáp án đúng</th>
-                      <th>Tùy chỉnh</th>
+                      <th width='40%' className='text-center'>Câu hỏi</th>
+                      <th width='40%' colSpan={4} className='text-center'>Đáp án</th>
+                      <th className='text-center'>Đ/án đúng</th>
+                      <th className='text-center'>Tùy chỉnh</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {exams.map(exam => (
+                    {exams.length !== 0 && exams.map(exam => (
                       <SingleQuizUpdate exam={exam} key={exam._id}/>
                     ))}
                   </tbody>

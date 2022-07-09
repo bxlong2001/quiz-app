@@ -49,11 +49,11 @@ const ExamContextProvider = ({children}) => {
             })
             
             if (response.data.success) {
-                examDispatch({type: 'EXAMS_LOADED_SUCCESS', payload: {exams: response.data.exams, time: response.data.time.type[0].time}})
+                examDispatch({type: 'EXAMS_TEST_LOADED_SUCCESS', payload: {exams: response.data.exams, time: response.data.time.type[0].time}})
             }
 
         } catch (error) {
-            examDispatch({type: 'EXAMS_LOADED_FAIL'})
+            examDispatch({type: 'EXAMS_TEST_LOADED_FAIL'})
         }
     }
 

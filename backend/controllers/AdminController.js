@@ -77,7 +77,7 @@ const AdminController = {
 
     showExams: async (req, res) => {
         const {slug} = req.params
-        const {page = 1, pagesize = 15} = req.query
+        const {page = 1, pagesize = 10} = req.query
         try {
             const totalCount = await Exam.find({'name': slug}).count()
             const exams = await Exam.find({'name': slug}).skip((page-1)*pagesize).limit(pagesize)
