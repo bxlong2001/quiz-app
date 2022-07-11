@@ -3,8 +3,6 @@ import { memo, useEffect, useRef, useState } from "react"
 const TimeOut = ({submit, timeOut, countdown}) => {
     const [time, setTime] = useState(countdown)
     const intervalId = useRef()
-    console.log('time: ',time);
-    console.log('time out: ',timeOut);
     useEffect(() => {
         intervalId.current = setInterval(() => {
             setTime(prev => prev - 1)

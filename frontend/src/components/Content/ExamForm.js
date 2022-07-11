@@ -26,7 +26,6 @@ const ExamForm = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const {examState: {exams, examTime, examsLoading}, examDispatch,getExams} = useContext(ExamContext)
-    console.log(examsLoading);
     useEffect(() => {
         const cancelRequest = axios.CancelToken.source()
         

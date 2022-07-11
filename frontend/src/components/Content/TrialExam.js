@@ -25,17 +25,18 @@ const TrialExam = () => {
     const handleShow = () => setShow(true);
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e && e.preventDefault()
 
+        console.log(e);
         totalAnswerTrue.current.forEach((e) => {
-            total.current += e
+            total.current += e.isAnswerTrue
         })
 
         setShowToast(true)
     }
 
     const handleTime = () => {
-        const s = 1200 - time.current[0]
+        const s = 600 - time.current[0]
         const minutes = Math.floor(s/60)
         const second = s - minutes*60
         return minutes+' phút '+second+' giây'
