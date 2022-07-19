@@ -5,6 +5,7 @@ import { Col, Row, Spinner, Table } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { AdminContext } from "../../contexts/AdminContext"
 import CountUp from 'react-countup'
+import moment from 'moment'
 
 const Admin = () => {
   const {statisticState: {statistics, statisticsLoading}, getStatistic} = useContext(AdminContext)
@@ -106,7 +107,7 @@ const Admin = () => {
                     <td>{result.examName}</td>
                     <td>{result.result}</td>
                     <td>{convertTime(result.timeWork)}</td>
-                    <td>{result.updatedAt.split('T')[0]}</td>
+                    <td>{moment.utc(result.updatedAt).format('L')}</td>
                   </tr>
                 ))}
               </tbody>
@@ -134,7 +135,7 @@ const Admin = () => {
                       <tr key={user._id}>
                         <td>{index+1}</td>
                         <td>{user.username}</td>
-                        <td>{user.createdAt.split('T')[0]}</td>
+                        <td>{moment.utc(user.createdAt).format('L')}</td>
                       </tr>
                     ))}
                   </tbody>

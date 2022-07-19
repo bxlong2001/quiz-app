@@ -1,3 +1,4 @@
+import moment from 'moment'
 import React, { useContext, useEffect } from 'react'
 import { Col, Row, Spinner, Table } from 'react-bootstrap'
 import { ExamContext } from '../../contexts/ExamContext'
@@ -53,7 +54,7 @@ const History = () => {
                         <td>{result.frequency}</td>
                         <td>{result.result}</td>
                         <td>{handleTime(result.timeWork)}</td>
-                        <td>{result.createdAt.split('T')[0]}</td>
+                        <td>{moment.utc(result.createdAt).format('L')}</td>
                       </tr>
                   </tbody>
               ))}

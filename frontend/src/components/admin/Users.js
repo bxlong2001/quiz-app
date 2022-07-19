@@ -4,6 +4,7 @@ import { AdminContext } from "../../contexts/AdminContext"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons'
 import ModalDeleteUser from "../modals/ModalDeleteUser"
+import moment from "moment"
 const Users = () => {
   const id = useRef()
   const {userState: {users, usersLoading}, getUsers} = useContext(AdminContext)
@@ -54,7 +55,7 @@ const Users = () => {
                             <td>{index+1}</td>
                             <td>{user.username}</td>
                             <td>{user.fullname}</td>
-                            <td>{user.createdAt.split('T')[0]}</td>
+                            <td>{moment.utc(user.createdAt).format('L')}</td>
                             <td>
                               <Button variant='danger' onClick={() => handleShowDeleteUser(user._id)}>
                                 <FontAwesomeIcon icon={faUserSlash} />
