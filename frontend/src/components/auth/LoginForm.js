@@ -61,7 +61,7 @@ const LoginForm = () => {
                 <AlertMessage info={alert}/>
                 <Button variant='success' type='submit' size='lg' >Đăng nhập</Button>
             </Form>
-            <p>Bạn chưa có tài khoản? 
+            <p>{"Bạn chưa có tài khoản? "} 
                 <Link to='/register'>
                     <Button variant='info' size='sm'>Đăng ký</Button>
                 </Link>

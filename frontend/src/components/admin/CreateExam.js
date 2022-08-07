@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { AdminContext } from '../../contexts/AdminContext'
@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const CreateExam = () => {
+  const fileRef = useRef()
   const {slug} = useParams()
   const type = slug.split('-')[0]
   const {createExam} = useContext(AdminContext)
@@ -69,6 +70,7 @@ const CreateExam = () => {
           answer_true: ''
         })
         setImg({file: '', prev: ''})
+        fileRef.current.value = null
         return toast.success(submit.message)
       }
       return toast.error(submit.message)
@@ -99,7 +101,8 @@ const CreateExam = () => {
                 <Form.Control
                   type="file"
                   name='img'
-                  accept="image/png, image/jpeg, image/jpg"
+                  accept="image/*"
+                  ref={fileRef}
                   onChange={handleSeclectImg}
                 />
             </Form.Group>
@@ -113,6 +116,7 @@ const CreateExam = () => {
                   name='part'
                   value={part || ''}
                   onChange={handleChange}
+                  required
                 >
                 <option>--Chọn mức độ--</option>
                 <option value={1}>Cơ bản</option>
@@ -186,6 +190,7 @@ const CreateExam = () => {
                   name='answer_true'
                   value={answer_true || ''}
                   onChange={handleChange}
+                  required
                 >
                 <option>--Chọn đáp án đúng--</option>
                 <option value='A'>A</option>

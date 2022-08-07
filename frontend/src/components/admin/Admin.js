@@ -91,7 +91,7 @@ const Admin = () => {
             <Table variant="success">
               <thead>
                 <tr>
-                  <th>#</th>
+                  <th>STT</th>
                   <th>ID người dùng</th>
                   <th>Mã đề thi</th>
                   <th>Kết quả</th>
@@ -125,7 +125,7 @@ const Admin = () => {
                 <Table variant="success">
                   <thead>
                     <tr>
-                      <th>#</th>
+                      <th>STT</th>
                       <th>Tài khoản</th>
                       <th>Ngày tạo tài khoản</th>
                     </tr>

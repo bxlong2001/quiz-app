@@ -26,6 +26,7 @@ const Users = () => {
       </div>
     )
   
+  let index = 1
   return (
       <Row>
         <Col>
@@ -46,13 +47,12 @@ const Users = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((user, index) => {
+                  {users.map((user) => {
                     if(!user.admin) 
                     return(
-                        
                       <tr key={user._id}>
                             <td></td>
-                            <td>{index+1}</td>
+                            <td>{index++}</td>
                             <td>{user.username}</td>
                             <td>{user.fullname}</td>
                             <td>{moment.utc(user.createdAt).format('L')}</td>

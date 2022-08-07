@@ -97,7 +97,7 @@ const RegisterForm = () => {
             </Form.Group>
             <Button variant='success' type='submit' size='lg'>Đăng ký</Button>
         </Form>
-        <p>Bạn có đã có tài khoản? 
+        <p>{"Bạn có đã có tài khoản? "} 
             <Link to='/login'>
                 <Button variant='info' size='sm'>Đăng nhập</Button>
             </Link>

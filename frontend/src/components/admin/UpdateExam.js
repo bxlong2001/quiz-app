@@ -81,7 +81,7 @@ const UpdateExam = () => {
             <Link to={`/admin/exams-management/create/${slug}`}>
               <button className='btn-nav text-success'>
                 <FontAwesomeIcon icon={faCirclePlus}/>
-                Thêm câu hỏi
+                {" Thêm câu hỏi"}
               </button>
             </Link>
           </div>
