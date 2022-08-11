@@ -1,0 +1,30 @@
+.answer-false {
+    color: red;
+}
+
+.result-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.answer-select--true {
+    color: #3bb44b;
+}
+
+.answer-select--false {
+    color: red;
+}
+
+.btn-result {
+    display: flex;
+    justify-content: space-between;
+
+    .btn-nav {
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 9px 20px;    
+    }
+}

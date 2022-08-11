@@ -1,0 +1,32 @@
+.wallpaper {
+    background-image: url('https://wallpaperaccess.com/full/2020044.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    
+    .dark-overlay {
+        background-color: rgba(0,0,0,0.5);
+        height: 100%;
+    
+        .wrap {
+            color: aliceblue;
+            height: 100vh;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .wrap form {
+            width: 30vw;
+            margin: 10px 0;
+        }
+        
+        .wrap form input {
+            margin: 20px 0;
+        }
+    }
+}
+

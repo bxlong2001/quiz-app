@@ -1,0 +1,30 @@
+
+@import 'components/foundation/Base.scss';
+
+@import 'components/admin/Admin/Admin.scss';
+@import 'components/admin/CreateExam/CreateExam.scss';
+@import 'components/admin/UpdateExam/UpdateExam.scss';
+
+@import 'components/auth/LayoutRoute/LayoutRoute.scss';
+
+@import 'components/Content/ExamContent/ExamContent.scss';
+@import 'components/Content/ExamForm/ExamForm.scss';
+@import 'components/Content/ExamResult/ExamResult.scss';
+@import 'components/Content/NotFound/NotFound.scss';
+@import 'components/Content/Rank/Rank.scss';
+@import 'components/Content/TrialExam/TrialExam.scss';
+
+@import 'components/home/Home/Home.scss';
+
+@import 'components/layout/NavbarAptest/NavbarAptest.scss';
+@import 'components/layout/ScrollButton/ScrollButton.scss';
+
+@import 'components/me/Info/Info.scss';
+@import 'components/me/MyRank/MyRank.scss';
+
+@import 'components/single/SingleQuiz/SingleQuiz.scss';
+
+@import 'views/Auth/Auth.scss';
+
+
+

@@ -1,0 +1,43 @@
+$height_img: 270px;
+$color-primary: #34A25A;
+$color-button: #34A25A;
+
+.home-link {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ui-admin {
+    background-color: #fff;
+    border: solid 2px $color-primary;
+    border-left: solid 10px #5F5490;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    
+    &-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .ui-admin-number {
+            font-size: 40px;
+        }
+    }
+
+    &-text {
+        color: grey;
+        font-weight: 480;
+        font-size: 18px;
+    }
+}
+
+.btn-view {
+    font-size: 15px;
+    font-weight: 650;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background-color: #fff;
+    border: solid 2px $color-button;
+    color: $color-button;
+}

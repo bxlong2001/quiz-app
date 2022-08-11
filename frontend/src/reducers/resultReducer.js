@@ -2,6 +2,18 @@ const resultReducer = (state, action) => {
     const {type, payload} = action
 
     switch(type) {
+        case 'MYRANK_LOADED_SUCCESS':
+            return {
+                ...state,
+                rankInfo: payload,
+                rankInfoLoading: false
+            }
+        case 'MYRANK_LOADED_FAIL':
+            return {
+                ...state,
+                rankInfo: null,
+                rankInfoLoading: false
+            }
         case 'RESULTS_LOADED_SUCCESS':
             return {
                 ...state,

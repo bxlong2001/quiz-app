@@ -32,8 +32,9 @@ const upload = multer({
     fileFilter: imageFilter
 })
 
-router.patch('/info/:id/update-avatar', verifyToken, upload.single('avt'), UserController.updateAvatar)
-router.patch('/info/:id/update-fullname', verifyToken, UserController.updateInfo)
-router.patch('/info/:id/update-password', verifyToken, UserController.updatePassword)
+router.patch('/info/update-avatar', verifyToken, upload.single('avt'), UserController.updateAvatar)
+router.patch('/info/update-fullname', verifyToken, UserController.updateInfo)
+router.patch('/info/update-password', verifyToken, UserController.updatePassword)
+router.patch('/myrank', verifyToken, UserController.showRank)
 
 module.exports = router

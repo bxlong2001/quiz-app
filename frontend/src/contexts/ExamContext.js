@@ -22,6 +22,8 @@ const ExamContextProvider = ({children}) => {
     })
 
     const [resultState, resultDispatch] = useReducer(resultReducer, {
+        rankInfo: null,
+        rankInfoLoading: true,
         maxResults: [],
         results: [],
         maxResultsLoading: true,
@@ -94,14 +96,36 @@ const ExamContextProvider = ({children}) => {
         }
     }
 
+    //Get some result
+    const getResult = async() => {
+        try {
+            const response = await axios.get(apiUrl + 'results')
+            if(response.data.success)
+                resultDispatch({type: 'RESULTS_LOADED_SUCCESS', payload: response.data.result})
+        } catch (error) {
+            resultDispatch({type: 'RESULTS_LOADED_FAIL'})
+        }
+    }
+
     //Get all results
     const getResults = async() => {
         try {
-            const response = await axios.get(apiUrl + 'results')
+            const response = await axios.get(apiUrl + 'results/all')
             if(response.data.success)
                 resultDispatch({type: 'RESULTS_LOADED_SUCCESS', payload: response.data.results})
         } catch (error) {
             resultDispatch({type: 'RESULTS_LOADED_FAIL'})
+        }
+    }
+
+    const getMyRank = async () => {
+        try {
+            const response = await axios.patch(apiUrl + `me/myrank`)
+            if(response.data.success)
+                resultDispatch({type: 'MYRANK_LOADED_SUCCESS', payload: response.data.rankInfo})
+        } catch (error) {
+            resultDispatch({type: 'MYRANK_LOADED_FAIL'})
+
         }
     }
 
@@ -115,7 +139,7 @@ const ExamContextProvider = ({children}) => {
         }
     }
 
-    const examContextData = {examState, examDispatch, resultState, resultDispatch, saveResult, getExams, getTopic, getResults, getSubjects, getTrialExams, getRanks}
+    const examContextData = {examState, examDispatch, resultState, resultDispatch, saveResult, getExams, getTopic, getResults, getResult, getSubjects, getTrialExams, getRanks, getMyRank}
 
     return (
         <ExamContext.Provider value={examContextData}>

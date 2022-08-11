@@ -3,10 +3,9 @@ const fs = require('fs')
 
 const UserController = {
     updateInfo: async (req, res) => {
-        const {id} = req.params
         const {fullname} = req.body
         try {
-            const updateInfo = await User.findOneAndUpdate({_id: id}, {fullname: fullname}, {new: true}).select('fullname')
+            const updateInfo = await User.findOneAndUpdate({_id: req.id}, {fullname: fullname}, {new: true}).select('fullname')
             if(!updateInfo)
                 return res.status(401).json({success: false, message: 'Sửa thất bại'})
             res.json({success: true, message: 'Thay đổi thành công', info: updateInfo})
@@ -15,15 +14,14 @@ const UserController = {
             res.status(500).json({ success: false, message: 'Internal server error' })
         }
     },
-    updateAvatar: async(req, res, next) => {
-        const {id} = req.params
+    updateAvatar: async(req, res) => {
         const file = req.file
 
         if(!file)
             return res.status(401).json({success: false, message: 'Không tìm thấy hình ảnh tải lên'})
         
         try {
-            const findAvt = await User.findOne({_id: id})
+            const findAvt = await User.findOne({_id: req.id})
             
             if(!findAvt)
                 return res.status(401).json({success: false, message: 'Sửa thất bại'})
@@ -33,8 +31,8 @@ const UserController = {
                     return res.status(401).json({success: false, message: error})
                 })
             
-            const update = await User.findOneAndUpdate({_id: id},{avt: file.path},{new: true}).select('avt')
-            console.log(update);
+            const update = await User.findOneAndUpdate({_id: req.id},{avt: file.path},{new: true}).select('avt')
+
             if(!update)
                 return res.status(401).json({success: false, message: 'Sửa thất bại'})
             res.json({success: true, message: 'Thay đổi thành công', info: update})
@@ -44,12 +42,28 @@ const UserController = {
         }
     },
     updatePassword: async(req, res, next) => {
-        const {id} = req.params
-        
         try {
             
             res.json({success: true, message: 'Thay đổi thành công'})
         }catch(error){
+            console.log(error)
+            res.status(500).json({ success: false, message: 'Internal server error' })
+        }
+    },
+
+    showRank: async(req, res) => {
+        try {
+            const rankPoint = await User.find().select('-password').sort({point: -1}).limit(10)
+            let rank = 0
+            let point = 0
+            rankPoint.find((item, index) => {
+                rank = index + 1
+                point = item.point
+                return item.id === req.id
+            })
+            const rankInfo = {rank, point}
+            res.status(200).json({success:true, rankInfo})
+        } catch (error) {
             console.log(error)
             res.status(500).json({ success: false, message: 'Internal server error' })
         }

@@ -26,10 +26,20 @@ const ResultController = {
         
     },
 
-    show: async(req, res) => {
+    showAll: async(req, res) => {
         try {
             const results = await Result.find({idUser: req.id}).sort({createdAt: -1})
             res.json({success: true, results})
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({success: false, message: 'Internal server error'})
+        }
+    },
+
+    show: async(req, res) => {
+        try {
+            const result = await Result.find({idUser: req.id}).sort({createdAt: -1}).limit(5)
+            res.json({success: true, result})
         } catch (error) {
             console.log(error);
             res.status(500).json({success: false, message: 'Internal server error'})

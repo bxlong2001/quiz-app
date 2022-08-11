@@ -1,28 +1,27 @@
-import './App.css';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import Home from './components/home/Home'
-import Auth from './views/Auth'
+import Home from './components/home/Home/Home'
+import Auth from './views/Auth/Auth'
 import AuthContextProvider from './contexts/AuthContext';
-import Landing from './components/auth/Landing';
-import ProtectedRoute from './components/auth/ProtectedRoute';
+import Landing from './components/auth/Landing/Landing';
+import ProtectedRoute from './components/auth/ProtectedRoute/ProtectedRoute';
 import ExamContextProvider from './contexts/ExamContext';
-import TestForm from './components/Content/ExamForm';
-import History from './components/me/History'
-import Info from './components/me/Info'
-import NotFound from './components/Content/NotFound';
-import Rank from './components/Content/Rank';
-import Admin from './components/admin/Admin';
-import ProtectedAdmin from './components/auth/ProtectedAdmin';
-import Exams from './components/admin/Exams';
-import Users from './components/admin/Users';
+import TestForm from './components/Content/ExamForm/ExamForm';
+import History from './components/me/History/History'
+import Info from './components/me/Info/Info'
+import NotFound from './components/Content/NotFound/NotFound';
+import Rank from './components/Content/Rank/Rank';
+import Admin from './components/admin/Admin/Admin';
+import ProtectedAdmin from './components/auth/ProtectedAdmin/ProtectedAdmin';
+import Exams from './components/admin/Exams/Exams';
+import Users from './components/admin/Users/Users';
 import AdminContextProvider from './contexts/AdminContext';
-import UpdateExam from './components/admin/UpdateExam';
+import UpdateExam from './components/admin/UpdateExam/UpdateExam';
 import { MathJaxContext } from 'better-react-mathjax'
-import LayoutRoute from './components/auth/LayoutRoute';
-import ExamContext from './components/Content/ExamContent';
-import MyRank from './components/me/MyRank';
-import CreateExam from './components/admin/CreateExam';
-import TrialExam from './components/Content/TrialExam';
+import LayoutRoute from './components/auth/LayoutRoute/LayoutRoute';
+import ExamContext from './components/Content/ExamContent/ExamContent';
+import MyRank from './components/me/MyRank/MyRank';
+import CreateExam from './components/admin/CreateExam/CreateExam';
+import TrialExam from './components/Content/TrialExam/TrialExam';
 import UserContextProvider from './contexts/UserContext';
 
 function App() {  
@@ -44,7 +43,6 @@ function App() {
                   <Route path='/admin/exams-management' element={<ProtectedAdmin Component={Exams} />}/>
                   <Route path='/admin/users-management' element={<ProtectedAdmin Component={Users} />}/>
                   <Route path='/rank' element={<LayoutRoute Component={Rank}/>}/>
-                  {/* <Route path='/exams' element={<ListExams />} /> */}
                   <Route path='/exams' element={<LayoutRoute Component={ExamContext}/>} />
                   <Route path='/exams/try/:slug' element={<LayoutRoute Component={TrialExam} flag='no-nav'/>} />
                   <Route path='/exams/:slug' element={<ProtectedRoute Component={TestForm} flag='no-nav' />} />

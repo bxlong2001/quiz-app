@@ -12,7 +12,7 @@ const UserContextProvider = ({children}) => {
 
     const updateInfo = async (info, id) => {
         try {
-            const response = await axios.patch(apiUrl + `me/info/${id}/update-fullname`, {fullname: info})
+            const response = await axios.patch(apiUrl + `me/info/update-fullname`, {fullname: info})
             if(response.data.success)
                 authDispatch({type: 'UPDATE_FULLNAME', payload: {user: response.data.info.fullname}})
             console.log(response.data.info.fullname);
@@ -24,7 +24,7 @@ const UserContextProvider = ({children}) => {
         }
     }
 
-    const updateImg = async (img, id, oldFile) => {
+    const updateImg = async (img, oldFile) => {
         const formData = new FormData();
         formData.append('avt', img, img.name)
 
@@ -34,7 +34,7 @@ const UserContextProvider = ({children}) => {
             }
         }
         try {
-            const response = await axios.patch(apiUrl + `me/info/${id}/update-avatar`, formData, oldFile, config)
+            const response = await axios.patch(apiUrl + `me/info/update-avatar`, formData, oldFile, config)
             if(response.data.success)
                 authDispatch({type: 'UPDATE_AVT', payload: {user: response.data.info.avt}})
             return response.data
@@ -48,7 +48,7 @@ const UserContextProvider = ({children}) => {
     const updatePassword = async (img, id, oldFile) => {
 
         try {
-            const response = await axios.patch(apiUrl + `me/info/${id}/update-password`)
+            const response = await axios.patch(apiUrl + `me/info/update-password`)
             return response.data
         } catch (error) {
             return error.response.data
@@ -56,6 +56,8 @@ const UserContextProvider = ({children}) => {
 				: { success: false, message: 'Lỗi server' }
         }
     }
+
+    
 
     const userContextData = {updateInfo, updateImg, updatePassword}
 
