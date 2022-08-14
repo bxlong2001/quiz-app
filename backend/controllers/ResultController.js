@@ -7,7 +7,7 @@ const ResultController = {
         
         try {
             const findResult = await Result.find({idUser: req.id, examName: examName}).sort({frequency: -1})
-
+            
             const newResult = new Result({
                 idUser: req.id,
                 examName,
@@ -16,6 +16,8 @@ const ResultController = {
                 timeWork
             })
             
+            await User.findOneAndUpdate({_id: req.id}, { $inc: {point: result} })
+
             await newResult.save()
 
             res.json({success: true, message: 'Lưu kết quả thành công', result: newResult})

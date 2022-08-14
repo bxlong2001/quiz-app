@@ -45,10 +45,9 @@ const UserContextProvider = ({children}) => {
         }
     }
 
-    const updatePassword = async (img, id, oldFile) => {
-
+    const changePassword = async (form) => {
         try {
-            const response = await axios.patch(apiUrl + `me/info/update-password`)
+            const response = await axios.patch(apiUrl + `me/info/update-password`, form)
             return response.data
         } catch (error) {
             return error.response.data
@@ -59,7 +58,7 @@ const UserContextProvider = ({children}) => {
 
     
 
-    const userContextData = {updateInfo, updateImg, updatePassword}
+    const userContextData = {updateInfo, updateImg, changePassword}
 
     return (
         <UserContext.Provider value={userContextData}>

@@ -1,3 +1,4 @@
+const argon2 = require('argon2')
 const User = require('../models/User')
 const fs = require('fs')
 
@@ -43,7 +44,18 @@ const UserController = {
     },
     updatePassword: async(req, res, next) => {
         try {
+            const {oldPassword, newPassword} = req.body
+            const user = await User.findOne({_id: req.id}).select('password')
             
+            const isPass = await argon2.verify(user.password, oldPassword)
+
+            if(!isPass)
+                return res.status(400).json({success: false, message: 'Mật khẩu cũ không chính xác'})
+
+            const hashPass = await argon2.hash(newPassword)
+            
+            await User.findOneAndUpdate({_id: req.id}, {password: hashPass})
+                
             res.json({success: true, message: 'Thay đổi thành công'})
         }catch(error){
             console.log(error)

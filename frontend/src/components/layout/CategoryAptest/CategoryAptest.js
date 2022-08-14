@@ -5,7 +5,7 @@ import { faChartSimple, faClockRotateLeft, faHouse, faPencil } from "@fortawesom
 
 const CategoryAptest = () => {
   return (
-    <Nav fill variant="tabs" defaultActiveKey="/home" className="flex-column">
+    <Nav fill variant="tabs" defaultActiveKey="/home" className="flex-column" line="none">
       <Nav.Item>
         <Nav.Link to="/" as={Link}>
           <FontAwesomeIcon icon={faHouse}/>

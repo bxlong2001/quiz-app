@@ -69,6 +69,8 @@ const RegisterForm = () => {
                     type='text'
                     placeholder='Nhập tài khoản'
                     name='username'
+                    maxLength={20}
+                    minLength={6}
                     required
                     value={username}
                     onChange={handleRegister}
@@ -77,6 +79,8 @@ const RegisterForm = () => {
             <Form.Group>
                 <Form.Control
                     type='password'
+                    maxLength={20}
+                    minLength={6}
                     placeholder='Nhập mật khẩu'
                     name='password'
                     required
@@ -87,6 +91,8 @@ const RegisterForm = () => {
             <Form.Group>
                 <Form.Control
                     type='password'
+                    maxLength={20}
+                    minLength={6}
                     placeholder='Nhập lại mật khẩu'
                     name='confirmPassword'
                     required

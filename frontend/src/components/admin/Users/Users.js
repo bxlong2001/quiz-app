@@ -11,6 +11,7 @@ const Users = () => {
   const [showDeleteUser, setShowDeleteUser] = useState(false);
   
   const handleCloseDeleteUser = useCallback(() => setShowDeleteUser(false), [])
+  const [pageSize, setPageSize] = useState(10)
   
   useEffect(() => {getUsers()}, [])
  
@@ -48,7 +49,7 @@ const Users = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((user) => {
+                  {users.slice(0,pageSize + 1).map((user) => {
                     if(!user.admin) 
                     return(
                       <tr key={user._id}>
@@ -68,6 +69,7 @@ const Users = () => {
                 </tbody>
             </Table>
         </Col>
+        {pageSize<=users.length && <Button style={{marginBottom: 10}} onClick={() => setPageSize(prev => prev + 10)}>Xem thêm</Button>}
       </Row>
   )
 }

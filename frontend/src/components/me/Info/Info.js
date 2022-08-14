@@ -11,15 +11,24 @@ import { apiUrl } from '../../../contexts/constaints'
 
 const Info = () => {
   const inputFocus = useRef()
-  const [isDisabledEdit, setDisabledEdit] = useState(true)
+  const [isDisabledEditName, setDisabledEditName] = useState(true)
+  const [isDisabledEditPassword, setDisabledEditPassword] = useState(true)
   const {authState: {user}} = useContext(AuthContext)
   const [fullname, setFullname] = useState(user.fullname)
+  const [changePasswordForm, setChangePasswordForm] = useState({
+    oldPassword: '',
+    newPassword: '',
+    confirmNewPassword: ''
+  })
+
+  const {oldPassword, newPassword, confirmNewPassword} = changePasswordForm
+
   const [img, setImg] = useState({file: '', prev: ''})
-  const {updateInfo, updateImg} = useContext(UserContext)
+  const {updateInfo, updateImg, changePassword} = useContext(UserContext)
 
   useEffect(() => {
     inputFocus.current.focus()
-  }, [isDisabledEdit])
+  }, [isDisabledEditName])
 
   useEffect(() => {
     return () => {
@@ -32,19 +41,44 @@ const Info = () => {
       setImg({file: e.target.files[0], prev: URL.createObjectURL(e.target.files[0])})
   }
 
-  const handleChange = (e) => {
+  const handleChangeName = (e) => {
     setFullname(e.target.value)
+  }
+
+  const handleChangePassword = (e) => {
+    setChangePasswordForm({
+        ...changePasswordForm,
+        [e.target.name]: e.target.value
+    })  
+  }
+
+  const submitChangePassword = async (e) => {
+    if(newPassword !== confirmNewPassword){
+        alert('Mật khẩu không khớp')
+    }
+
+    try {
+        const response = await changePassword({oldPassword, newPassword})
+        if(!response.success) {
+          return toast.error(response.message)
+        }
+        toast.success(response.message)
+        setChangePasswordForm({oldPassword: '', newPassword: '', confirmNewPassword: ''})
+        setDisabledEditPassword(true)
+    } catch (error) {
+        console.log(error);
+    }
   }
 
   const submitUpdateFullname = async (e) => {
 
     try {
-      const req = await updateInfo(fullname)
-      if(req.success){
-        toast.success(req.message)
-        return setDisabledEdit(true)
+      const response = await updateInfo(fullname)
+      if(response.success){
+        toast.success(response.message)
+        return setDisabledEditName(true)
       }
-      toast.error(req.message)
+      toast.error(response.message)
     } catch (error) {
       console.log(error);
     }
@@ -54,13 +88,13 @@ const Info = () => {
     e.preventDefault()
     
     try {
-      const req = await updateImg(img.file, user.avt)
-      if(req.success){
+      const response = await updateImg(img.file, user.avt)
+      if(response.success){
         URL.revokeObjectURL(img.prev)
         setImg({file: '', prev: ''})
-        return toast.success(req.message)
+        return toast.success(response.message)
       }
-      toast.error(req.message)
+      toast.error(response.message)
     } catch (error) {
       console.log(error);
     }
@@ -84,28 +118,87 @@ const Info = () => {
                 maxLength={50}
                 placeholder='Thêm tên của bạn'
                 value={fullname}
-                onChange={e => handleChange(e)}
-                disabled={isDisabledEdit}
+                onChange={e => handleChangeName(e)}
+                disabled={isDisabledEditName}
               />
               <p className='info-description'>
                 Tên của bạn sẽ xuất hiện trên trang cá nhân
               </p>
             </div>
-            {isDisabledEdit?
-              <button className='btn-view info-btn' onClick={() => setDisabledEdit(false)}>
+            {isDisabledEditName?
+              <button className='btn-view info-btn' onClick={() => setDisabledEditName(false)}>
                 Sửa
               </button>
                 :
               <>
-                <button className='btn-view info-btn' onClick={e => submitUpdateFullname(e)}>
+                <button className='btn-view info-btn' onClick={e => submitUpdateFullname(e)} style={{marginRight: 5}}>
                   Lưu
                 </button>
-                <button className='btn-view info-btn' style={{color: 'red', borderColor: 'red'}} onClick={() => {setFullname(user.fullname); setDisabledEdit(true)}}>
+                <button className='btn-view info-btn' style={{color: 'red', borderColor: 'red'}} onClick={() => {setFullname(user.fullname); setDisabledEditName(true)}}>
                   Hủy
                 </button>
               </>
             }
           </div>
+          <div className='info'>
+              <div className='info-content'>
+                <span className='info-label'>Đổi mật khẩu</span>
+              {isDisabledEditPassword ?
+                <input
+                  type='password'
+                  className='info-input-name'
+                  value="mypassword"
+                  onChange={handleChangePassword}
+                  disabled={true}
+                />
+                :
+                <>
+                  <input
+                    type='password'
+                    name='oldPassword'
+                    className='info-input-name'
+                    placeholder='Mật khẩu cũ'
+                    value={oldPassword}
+                    required
+                    onChange={handleChangePassword}
+                  />
+                  <input
+                    type='password'
+                    name='newPassword'
+                    className='info-input-name'
+                    placeholder='Mật khẩu mới'
+                    value={newPassword}
+                    required
+                    onChange={handleChangePassword}
+                  />
+                  <input
+                    type='password'
+                    name='confirmNewPassword'
+                    className='info-input-name'
+                    placeholder='Xác nhận mật khẩu mới'
+                    value={confirmNewPassword}
+                    required
+                    onChange={handleChangePassword}
+                  />
+                </>
+              }
+              </div>
+              
+            {isDisabledEditPassword?
+              <button className='btn-view info-btn' onClick={() => setDisabledEditPassword(false)}>
+                Đổi
+              </button>
+                :
+              <>
+                <button className='btn-view info-btn' onClick={() => submitChangePassword()} style={{marginRight: 5}}>
+                  Lưu
+                </button>
+                <button className='btn-view info-btn' style={{color: 'red', borderColor: 'red'}} onClick={() => {setDisabledEditPassword(true)}}>
+                  Hủy
+                </button>
+              </>
+            }
+          </div>  
           <div className='info'>
             <div className='info-content'>
               <span className='info-label'>Hình đại diện</span>
@@ -139,11 +232,12 @@ const Info = () => {
                 name='full_name'
                 className='info-input-name'
                 value={user.username}
-                onChange={handleChange}
+                onChange={handleChangeName}
                 disabled={true}
               />
             </div>
-          </div>   
+          </div>
+           
         </Col>
         <Col sm={2}/>
       </Row>

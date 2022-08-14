@@ -34,7 +34,7 @@ const Admin = () => {
     return (
       <>
         <Row>
-          <Col sm={6} md={6} xl={3} className='mb-2'>
+          <Col sm={6} md={6} xl={3}>
             <div className="ui-admin">
               <div className="ui-admin-title">
                 <span className="ui-admin-number">
@@ -45,7 +45,7 @@ const Admin = () => {
               <span className="ui-admin-text">Người dùng</span>
             </div>
           </Col>
-          <Col sm={6} md={6} xl={3} className='mb-2'>
+          <Col sm={6} md={6} xl={3}>
             <div className="ui-admin">
               <div className="ui-admin-title">
                 <span className="ui-admin-number">
@@ -56,7 +56,7 @@ const Admin = () => {
               <span className="ui-admin-text">Môn thi</span>
             </div>
           </Col>
-          <Col sm={6} md={6} xl={3}  className='mb-2'>
+          <Col sm={6} md={6} xl={3} >
             <div className="ui-admin">
               <div className="ui-admin-title">
                 <span className="ui-admin-number">
@@ -67,7 +67,7 @@ const Admin = () => {
               <span className="ui-admin-text">Đề thi</span>
             </div>
           </Col>
-          <Col sm={6} md={6} xl={3}  className='mb-2'>
+          <Col sm={6} md={6} xl={3} >
             <div className="ui-admin">
               <div className="ui-admin-title">
                 <span className="ui-admin-number">
