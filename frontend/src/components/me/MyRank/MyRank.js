@@ -1,3 +1,5 @@
+import { faCrow, faCrown, faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import React, { useContext, useEffect } from "react";
 import { Button, Col, Row, Spinner, Table } from "react-bootstrap";
@@ -7,18 +9,21 @@ import { apiUrl } from "../../../contexts/constaints";
 import { ExamContext } from "../../../contexts/ExamContext";
 import "./MyRank.scss";
 
+
 const MyRank = () => {
+
+
+
   const {
     authState: { user },
   } = useContext(AuthContext);
 
-  
   const {
     resultState: { results, resultsLoading, rankInfo, rankInfoLoading },
     getResult,
     getMyRank,
   } = useContext(ExamContext);
-  
+
   console.log(rankInfo);
 
   useEffect(() => {
@@ -46,25 +51,41 @@ const MyRank = () => {
           <div className="myrank__above">
             <span style={{ fontSize: 30 }}>Xếp hạng cá nhân</span>
 
-            <div className="myrank__heading">
-              <img
-                className="myrank__heading__avt"
-                src={apiUrl + user.avt}
-                alt="avatar"
-              ></img>
-              <p className="myrank__heading__name">{user.fullname}</p>
+            <div className="myrank__head">
+              <div className="myrank__head__wrap">
+                <FontAwesomeIcon className="myrank__head__crown" icon={faCrown} />
+
+                <img
+                  className="myrank__head__avt"
+                  src={apiUrl + user.avt}
+                  alt="avatar"
+                ></img>
+
+                <div className="myrank__medal1">
+                  <div className="myrank__medal2">
+                    <img
+                      className="myrank__head__medal"
+                      src="https://cdn-icons-png.flaticon.com/512/744/744984.png"
+                      // src="https://cdn.pixabay.com/photo/2017/03/21/21/05/medal-2163345_1280.png"
+                      alt="medal"
+                    ></img>
+
+                    <div className="myrank__head__top">{rankInfo?.rank}</div>
+                  </div>
+                </div>
+              </div>
+
+              <p className="myrank__head__name">{user.fullname}</p>
+              <p className="myrank__head__acc">{user.username}</p>
             </div>
 
             <div className="myrank__main">
-              <div className="myrank__body">
-                <div className="myrank__body__wrap">
-                  <div className="myrank__body__wrap__title">Xếp hạng</div>
-                  <div className="ranking__num myrank__body__wrap__num">{rankInfo?.rank}</div>
-                </div>
+              <div className="myrank__main__ribbon">
+                <div className="myrank__main__ribbon__title"> 
 
-                <div className="myrank__body__wrap">
-                  <div className="myrank__body__wrap__title">Điểm tích lũy</div>
-                  <div className="point__num myrank__body__wrap__num">{rankInfo?.point}</div>
+                  Điểm tích lũy: {rankInfo?.point}
+                  <FontAwesomeIcon className="myrank__star" icon={faStar} />
+
                 </div>
               </div>
             </div>
@@ -78,7 +99,7 @@ const MyRank = () => {
               <thead>
                 <tr>
                   <th></th>
-                  <th></th>
+                  <th>STT</th>
                   <th>Môn thi</th>
                   <th>Số lần thi</th>
                   <th>Điểm</th>
@@ -99,11 +120,11 @@ const MyRank = () => {
                   </tr>
                 </tbody>
               ) : (
-                results.map((result) => (
+                results.map((result, index) => (
                   <tbody key={result._id}>
                     <tr>
                       <td></td>
-                      <td></td>
+                      <td>{index+1}</td>
                       <td>{result.examName}</td>
                       <td>{result.frequency}</td>
                       <td>{result.result}</td>
@@ -117,10 +138,13 @@ const MyRank = () => {
           </Col>
           <Button to='/me/history' as={Link} style={{marginBottom: 20}}>Xem chi tiết</Button>
         </Row>
-      </>
-      );
 
-  return <>{body}</>;
+        </>
+        );
+
+        return <>{body}</>;
 };
 
-export default MyRank;
+
+
+        export default MyRank;
