@@ -204,7 +204,7 @@ const Info = () => {
               <span className='info-label'>Hình đại diện</span>
               <br/>
               <div className='info-avatar'>
-                <img className='info-img' src={img.prev ? img.prev : apiUrl.concat(user.avt)} alt='avatar'/>
+                <img className='info-img' src={img.prev ? img.prev : user.avt} alt='avatar'/>
                 <div className='info-round'>
                   <input
                     type='file'

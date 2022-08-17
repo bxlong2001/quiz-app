@@ -1,6 +1,7 @@
 const argon2 = require('argon2')
 const User = require('../models/User')
 const fs = require('fs')
+const { cloudinary } = require('../utils/cloudinary')
 
 const UserController = {
     updateInfo: async (req, res) => {
@@ -17,20 +18,21 @@ const UserController = {
     },
     updateAvatar: async(req, res) => {
         const file = req.file
+        console.log('file: ', file);
 
         if(!file)
             return res.status(401).json({success: false, message: 'Không tìm thấy hình ảnh tải lên'})
         
         try {
+
+            // console.log(uploadedResponse);
             const findAvt = await User.findOne({_id: req.id})
             
             if(!findAvt)
                 return res.status(401).json({success: false, message: 'Sửa thất bại'})
 
-            if(findAvt.avt !== 'uploads\\no-avatar.png')
-                fs.unlinkSync(findAvt.avt, error => {
-                    return res.status(401).json({success: false, message: error})
-                })
+            // if(findAvt.avt !== 'https://res.cloudinary.com/aptestcloud/image/upload/v1660753640/img/no-avatar.png')
+            //     cloudinary.uploader.destroy()
             
             const update = await User.findOneAndUpdate({_id: req.id},{avt: file.path},{new: true}).select('avt')
 
@@ -65,7 +67,7 @@ const UserController = {
 
     showRank: async(req, res) => {
         try {
-            const rankPoint = await User.find().select('-password').sort({point: -1}).limit(10)
+            const rankPoint = await User.find().select('point').sort({point: -1})
             let rank = 0
             let point = 0
             rankPoint.find((item, index) => {

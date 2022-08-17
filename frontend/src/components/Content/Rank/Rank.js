@@ -3,7 +3,6 @@ import { Col, Form, Row, Spinner, Table } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { ExamContext } from '../../../contexts/ExamContext'
-import { apiUrl } from '../../../contexts/constaints'
 
 const Rank = () => {
   const [value, setValue] = useState('all')
@@ -85,7 +84,7 @@ const Rank = () => {
             <Col>
               <div className='onTop'>
                 <div className='onTop__avt rank2'>
-                  <img className='onTop__img' src={apiUrl + maxResults[1].avt} alt='avatar' />
+                  <img className='onTop__img' src={maxResults[1].avt} alt='avatar' />
                 </div>
                 <div className='onTop__content'>
                   <div className='onTop__content__fullname'>{maxResults[1].fullname}</div>
@@ -100,7 +99,7 @@ const Rank = () => {
             <Col>
               <div className='onTop'>
                 <div className='onTop__avt rank1'>
-                  <img className='onTop__img' src={apiUrl + maxResults[0].avt} alt='avatar' />
+                  <img className='onTop__img' src={maxResults[0].avt} alt='avatar' />
                 </div>
                 <div className='onTop__content'>
                   <div className='onTop__content__fullname'>{maxResults[0].fullname}</div>
@@ -115,7 +114,7 @@ const Rank = () => {
             <Col>
               <div className='onTop'>
                 <div className='onTop__avt rank3'>
-                  <img className='onTop__img' src={apiUrl + maxResults[2].avt} alt='avatar' />
+                  <img className='onTop__img' src={maxResults[2].avt} alt='avatar' />
                 </div>
                 <div className='onTop__content'>
                   <div className='onTop__content__fullname'>{maxResults[2].fullname}</div>
@@ -137,7 +136,7 @@ const Rank = () => {
                     <div className='single__rank__index'>{(index + 1) + 'th'}</div>
 
                     <div className='single__rank__content'>
-                      <img src={apiUrl + maxResult.avt} alt='avatar' />
+                      <img src={maxResult.avt} alt='avatar' />
 
                       <div>
                         <div className='sr__content__fullname'>{maxResult.fullname}</div>

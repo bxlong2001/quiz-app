@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+require('dotenv').config()
 
 const User = new mongoose.Schema({
     username: {
@@ -15,7 +16,7 @@ const User = new mongoose.Schema({
     },
     avt: {
         type: String,
-        default: 'uploads\\no-avatar.png'
+        default: 'https://res.cloudinary.com/aptestcloud/image/upload/v1660753640/img/no-avatar.png'
     },
     fullname: {
         type: String,

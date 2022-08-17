@@ -93,7 +93,13 @@ const AdminController = {
 
         if(!img)
             return res.status(401).json({success: false, message: 'Không tìm thấy hình ảnh tải lên'})
+        
+        try {
             
+        } catch (error) {
+            
+        }
+        
         res.json({success: true, message: 'Tải ảnh thành công', imgPath: img.path})
     },
 

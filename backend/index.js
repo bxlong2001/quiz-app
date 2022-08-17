@@ -8,7 +8,6 @@ const examRouter = require('./routes/exam')
 const resultRouter = require('./routes/result')
 const userRouter = require('./routes/user')
 const bodyParser = require('body-parser')
-const path = require('path')
 
 
 const app = express()
