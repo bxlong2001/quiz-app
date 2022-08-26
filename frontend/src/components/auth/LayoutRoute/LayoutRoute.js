@@ -1,7 +1,6 @@
 import { Col, Container, Row} from "react-bootstrap"
 import NavbarAptest from "../../layout/NavbarAptest/NavbarAptest"
 import CategoryAptest from "../../layout/CategoryAptest/CategoryAptest"
-import { FooterAptest } from "../../layout/FooterAptest/FooterAptest"
 
 const LayoutRoute = ({Component, flag}) => {
     return (
@@ -18,7 +17,6 @@ const LayoutRoute = ({Component, flag}) => {
                 </Row>:
                 <Component/>
             }
-            <FooterAptest />
         </Container>
     )
 }
