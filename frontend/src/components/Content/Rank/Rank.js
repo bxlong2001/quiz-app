@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import { Col, Form, Row, Spinner, Table } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrophy } from '@fortawesome/free-solid-svg-icons'
+import { faTrophy, faStar } from '@fortawesome/free-solid-svg-icons'
 import { ExamContext } from '../../../contexts/ExamContext'
 
 const Rank = () => {
@@ -82,7 +82,7 @@ const Rank = () => {
         <>
           <Row>
             <Col>
-            <div className='onTop cover-img-left'>
+              <div className='onTop cover-img-left'>
                 <div className='onTop__avt rank2'>
                   
                   <img className='onTop__img' src={maxResults[1].avt} alt='avatar' />
@@ -98,13 +98,15 @@ const Rank = () => {
                   <div className='onTop__content__username'>{maxResults[1].username}</div>
                 
                   <div className='single__rank__box'>
-                    <div className='onTop__content__point'>{maxResults[1].point + ' điểm tích lũy'}</div>
+                    <div className='onTop__content__point'>{'Điểm tích lũy: ' + maxResults[1].point}
+                      <FontAwesomeIcon className="myrank__star" icon={faStar} />
+                    </div>
                   </div>
                 </div>
               </div>
             </Col>
             <Col>
-            <div className='onTop cover-img-center'>
+              <div className='onTop cover-img-center'>
                 <div className='onTop__avt rank1'>
                   
                   <img className='onTop__img' src={maxResults[0].avt} alt='avatar' />
@@ -120,13 +122,15 @@ const Rank = () => {
                   <div className='onTop__content__username'>{maxResults[0].username}</div>
                   
                   <div className='single__rank__box'>
-                   <div className='onTop__content__point'>{maxResults[0].point + ' điểm tích lũy'}</div>
+                    <div className='onTop__content__point'>{'Điểm tích lũy: ' + maxResults[0].point}
+                      <FontAwesomeIcon className="myrank__star" icon={faStar} />
+                    </div>
                   </div>
                 </div>
               </div>
             </Col>
             <Col>
-            <div className='onTop cover-img-right'>
+              <div className='onTop cover-img-right'>
                 <div className='onTop__avt rank3'>
                   
                   <img className='onTop__img' src={maxResults[2].avt} alt='avatar' />
@@ -142,7 +146,9 @@ const Rank = () => {
                   <div className='onTop__content__username'>{maxResults[2].username}</div>
                 
                   <div className='single__rank__box'>
-                    <div className='onTop__content__point'>{maxResults[2].point + ' điểm tích lũy'}</div>
+                    <div className='onTop__content__point'>{'Điểm tích lũy: ' + maxResults[2].point}
+                      <FontAwesomeIcon className="myrank__star" icon={faStar} />
+                    </div>
                   </div>
                 </div>
               </div>
