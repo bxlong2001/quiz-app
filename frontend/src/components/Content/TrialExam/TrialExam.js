@@ -64,13 +64,6 @@ const TrialExam = () => {
                             </button>
                         </Link>
 
-                        <Link to='/me/history'>
-                            <button className='btn-nav text-success'>
-                                <FontAwesomeIcon icon={faClockRotateLeft} />
-                                {" Lịch sử thi"}
-                            </button>
-                        </Link>
-
                     </div>
                     <Table striped hover>
                         <thead>
