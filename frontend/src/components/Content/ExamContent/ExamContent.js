@@ -56,9 +56,13 @@ const ExamContent = () => {
                       <Card.Body className='flex-column'>
                         <Card.Title className='text-center'>{type.title}</Card.Title>
                         <Card.Text>
-                          {`Thời gian làm bài: ${type.time/60} phút`}
+                          {isAuthenticated ?
+                            `Thời gian làm bài: ${type.time/60} phút`
+                            :
+                            'Thời gian làm bài: 10 phút'
+                          }
                           <br></br>
-                          Số câu hỏi: 20 câu
+                          Số câu hỏi: {isAuthenticated ? '20 câu' : '10 câu'}
                         </Card.Text>
                         {isAuthenticated ? 
                           <Button className='mx-auto mt-2 d-flex' variant='success'>

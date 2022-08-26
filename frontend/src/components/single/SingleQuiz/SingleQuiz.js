@@ -21,7 +21,7 @@ const SingleQuiz = ({exam: {_id, question, answer_a, answer_b, answer_c, answer_
             <div id={_id} className="mb-1 title__question">
                 {`Câu ${index}: ${question}`}
                 <br></br>
-                {img && <img src={img.split('\\')[0]==='uploads' ? apiUrl + img : img} alt="Ảnh câu hỏi" width={200} height={160}/>}
+                {img && <img src={img.split('\\')[0]==='uploads' ? apiUrl + img : img} alt="Ảnh câu hỏi" maxWidth={300} maxHeight={200} minWidth={200} minHeight={160}/>}
             </div>
             <Row>
                 <Col>
