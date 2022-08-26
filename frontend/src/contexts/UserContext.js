@@ -15,7 +15,6 @@ const UserContextProvider = ({children}) => {
             const response = await axios.patch(apiUrl + `me/info/update-fullname`, {fullname: info})
             if(response.data.success)
                 authDispatch({type: 'UPDATE_FULLNAME', payload: {user: response.data.info.fullname}})
-            console.log(response.data.info.fullname);
             return response.data
         } catch (error) {
             return error.response.data
@@ -28,13 +27,8 @@ const UserContextProvider = ({children}) => {
         const formData = new FormData();
         formData.append('avt', img, img.name)
 
-        const config = {
-            headers: {
-                "Content-Type": 'multipart/form-data; boundary=XXX;'
-            }
-        }
         try {
-            const response = await axios.patch(apiUrl + `me/info/update-avatar`, formData, oldFile, config)
+            const response = await axios.patch(apiUrl + `me/info/update-avatar`, formData, oldFile)
             if(response.data.success)
                 authDispatch({type: 'UPDATE_AVT', payload: {user: response.data.info.avt}})
             return response.data

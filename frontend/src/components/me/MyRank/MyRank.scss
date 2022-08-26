@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Baloo+Chettan+2:wght@500&family=Baloo+Da+2:wght@700&family=Baloo+Thambi+2&family=Bungee&family=Bungee+Shade&family=Coiny&family=Lemonada:wght@300&display=swap');
+
 #myrank {
+
     .myrank__above {
         background-image: url("https://img.freepik.com/premium-vector/confetti-concept-design-holiday-happy-day-background-celebration_29865-1734.jpg?w=2000");
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        height: 435px;
+        height: 460px;
         text-align: center;
         position: relative;
 
@@ -17,8 +20,7 @@
     
             &__wrap {
                 position: relative;
-                margin-bottom: 14px;
-                cursor: pointer;
+                margin-bottom: 18px;
 
                 .myrank__head__crown {
                     position: absolute;
@@ -75,16 +77,9 @@
             &__name {
                 position: absolute;
                 bottom: 0;
-                font-size: 32px;
-            }
-
-            &__acc {
-                position: absolute;
-                bottom: -22px;
-                font-weight: 600;
-                font-size: 16px;
-                font-style: italic;
-                color: #b3b3b3;
+                margin-bottom: 0;
+                font-size: 40px;
+                font-family: 'Bungee Shade', cursive;
             }
         }
 
@@ -98,13 +93,14 @@
             &__ribbon {
                 background: hsl(30, 90%, 65%) url(http://portfolio.queenofwhisks.com/demo/overlay/noise.png);
                 box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.5);
-                font-size: 24px;
                 line-height: 1.0;
                 text-align: center;
                 margin: 0 auto;
                 padding: 0.25em 0;
                 position: relative;
                 width: 30%;
+                font-family: 'Coiny', cursive;
+                font-weight: 100;
         
                 &__title {
                     border-top: 0.0625em dashed hsl(30, 90%, 44%);
@@ -112,12 +108,15 @@
                     box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.08), inset 0px -1px 1px rgba(255, 255, 255, 0.08), 0px -1px 1px rgba(255, 255, 255, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.08);
                     display: block;
                     padding: 0.6875em 0;
-                    color: black;
+                    color: #fff;
+                    text-shadow: 2px 3px rgb(95, 95, 95);
+                    font-size: 24px;
                 }
 
                 .myrank__star {
                     margin-left: 5px;
                     color: yellow;
+                    font-size: 20px;
                 }
         
                 &__title:before,
@@ -167,7 +166,6 @@
             
             &:hover {
                 cursor: pointer;
-                animation: zoom-in-zoom-out 2s ease infinite;
             }
         }
 
@@ -221,16 +219,8 @@
     }
 }
 
-
-@keyframes zoom-in-zoom-out {
-    0% {
-      transform: scale(1, 1);
-    }
-    50% {
-      transform: scale(1.1, 1.1);
-    }
-    // 100% {
-    //   transform: scale(1, 1);
-    // }
-  }
+.myrank__title {
+    font-family: 'Coiny', cursive;
+    font-weight: 200;
+}
 

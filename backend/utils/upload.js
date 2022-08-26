@@ -4,10 +4,9 @@ const { cloudinary } = require("../utils/cloudinary");
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  // allowedFormats: ['jpg', 'png'],
   params: {
     folder: "img",
-    format: async (req, file) => {'jpg', 'jpeg', 'png'},
+    format: (req, file) => {'jpg', 'jpeg', 'png'},
     public_id: (req, file, cb) => (Date.now() + "--" + file.originalname)
   },
 });

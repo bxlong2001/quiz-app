@@ -128,7 +128,7 @@ const ExamForm = () => {
                             </Modal.Body>
                             <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>
-                                Kiểm tra lại
+                                Hủy
                             </Button>
                             <Button id="button-submit" variant="success" onClick={handleSubmit}>
                                 Nộp bài

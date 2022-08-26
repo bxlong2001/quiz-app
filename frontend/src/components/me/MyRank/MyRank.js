@@ -49,7 +49,7 @@ const MyRank = () => {
       <>
         <div id="myrank">
           <div className="myrank__above">
-            <span style={{ fontSize: 30 }}>Xếp hạng cá nhân</span>
+            <span className="myrank__title" style={{ fontSize: 40 }}>Xếp hạng cá nhân</span>
 
             <div className="myrank__head">
               <div className="myrank__head__wrap">
@@ -76,7 +76,6 @@ const MyRank = () => {
               </div>
 
               <p className="myrank__head__name">{user.fullname}</p>
-              <p className="myrank__head__acc">{user.username}</p>
             </div>
 
             <div className="myrank__main">
@@ -93,7 +92,7 @@ const MyRank = () => {
         </div>
 
         <Row>
-          <span style={{paddingTop: 80, fontSize: 30, textAlign: 'center'}}>Lịch sử thi gần nhất</span>
+          <span className="myrank__title" style={{paddingTop: 80, fontSize: 30, textAlign: 'center'}}>Lịch sử thi gần nhất</span>
           <Col>
             <Table striped hover>
               <thead>

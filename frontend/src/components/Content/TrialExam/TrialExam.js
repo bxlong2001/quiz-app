@@ -1,10 +1,13 @@
 import { MathJax } from "better-react-mathjax"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretLeft, faClockRotateLeft } from "@fortawesome/free-solid-svg-icons"
 import { useContext, useEffect, useRef, useState } from "react"
 import { Badge, Button, Card, Col, Form, Modal, Row, Spinner, Table } from "react-bootstrap"
 import { Link, useParams } from "react-router-dom"
 import { ExamContext } from "../../../contexts/ExamContext"
 import SingleQuiz from "../../single/SingleQuiz/SingleQuiz"
 import TimeOut from "../TimeOut/TimeOut"
+
 
 const TrialExam = () => {
     let {slug} = useParams()
@@ -53,9 +56,22 @@ const TrialExam = () => {
         return (
             <Row>
                 <Col>
-                    <Link to='/home'>Quay về trang chủ</Link>
-                    <br></br>
-                    <Link to='/me/history'>Lịch sử thi</Link>
+                <div className="btn-trial">
+                        <Link to='/home'>
+                            <button className='btn-nav text-success'>
+                                <FontAwesomeIcon icon={faCaretLeft} />
+                                {" Quay về trang chủ"}
+                            </button>
+                        </Link>
+
+                        <Link to='/me/history'>
+                            <button className='btn-nav text-success'>
+                                <FontAwesomeIcon icon={faClockRotateLeft} />
+                                {" Lịch sử thi"}
+                            </button>
+                        </Link>
+
+                    </div>
                     <Table striped hover>
                         <thead>
                             <tr>
@@ -97,7 +113,7 @@ const TrialExam = () => {
             </Modal.Body>
             <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
-                Kiểm tra lại
+                Hủy
             </Button>
             <Button id="button-submit" variant="success" onClick={handleSubmit}>
                 Nộp bài

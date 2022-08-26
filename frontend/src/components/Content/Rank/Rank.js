@@ -82,9 +82,16 @@ const Rank = () => {
         <>
           <Row>
             <Col>
-              <div className='onTop'>
+            <div className='onTop cover-img-left'>
                 <div className='onTop__avt rank2'>
+                  
                   <img className='onTop__img' src={maxResults[1].avt} alt='avatar' />
+                  <img
+                      className="onTop__img__medal"
+                      src="https://cdn-icons-png.flaticon.com/512/2583/2583319.png"
+                      alt="silver-medal"
+                    ></img>
+
                 </div>
                 <div className='onTop__content'>
                   <div className='onTop__content__fullname'>{maxResults[1].fullname}</div>
@@ -97,9 +104,16 @@ const Rank = () => {
               </div>
             </Col>
             <Col>
-              <div className='onTop'>
+            <div className='onTop cover-img-center'>
                 <div className='onTop__avt rank1'>
+                  
                   <img className='onTop__img' src={maxResults[0].avt} alt='avatar' />
+                  <img
+                      className="onTop__img__medal"
+                      src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png"
+                      alt="gold-medal"
+                    ></img>
+
                 </div>
                 <div className='onTop__content'>
                   <div className='onTop__content__fullname'>{maxResults[0].fullname}</div>
@@ -112,9 +126,16 @@ const Rank = () => {
               </div>
             </Col>
             <Col>
-              <div className='onTop'>
+            <div className='onTop cover-img-right'>
                 <div className='onTop__avt rank3'>
+                  
                   <img className='onTop__img' src={maxResults[2].avt} alt='avatar' />
+                  <img
+                      className="onTop__img__medal"
+                      src="https://cdn-icons-png.flaticon.com/512/2583/2583434.png"
+                      alt="bronze-medal"
+                    ></img>
+
                 </div>
                 <div className='onTop__content'>
                   <div className='onTop__content__fullname'>{maxResults[2].fullname}</div>

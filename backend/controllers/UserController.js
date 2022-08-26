@@ -1,7 +1,5 @@
 const argon2 = require('argon2')
 const User = require('../models/User')
-const fs = require('fs')
-const { cloudinary } = require('../utils/cloudinary')
 
 const UserController = {
     updateInfo: async (req, res) => {
@@ -26,7 +24,7 @@ const UserController = {
         try {
 
             // console.log(uploadedResponse);
-            const findAvt = await User.findOne({_id: req.id})
+            const findAvt = await User.findOne({_id: req.id}).select('avt')
             
             if(!findAvt)
                 return res.status(401).json({success: false, message: 'Sửa thất bại'})

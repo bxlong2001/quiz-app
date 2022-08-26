@@ -76,7 +76,13 @@ const UpdateExam = () => {
         <>
           <ToastContainer theme='colored' />
           <div className='home-link'>
-            <Link to='/admin/exams-management'>Quay lại</Link>
+            <Link to='/admin/exams-management'>
+              <button className='btn-nav text-success'>
+                <FontAwesomeIcon icon={faCaretLeft}/>
+                {" Quay lại"}
+              </button>
+            </Link>
+            
             <Link to={`/admin/exams-management/create/${slug}`}>
               <button className='btn-nav text-success'>
                 <FontAwesomeIcon icon={faCirclePlus}/>

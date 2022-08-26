@@ -3,7 +3,7 @@ import React, { memo, useState } from 'react'
 import { Button, Col, Row, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faClockRotateLeft, faCaretLeft, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 import ScrollButton from '../../layout/ScrollButton/ScrollButton'
 import { apiUrl } from '../../../contexts/constaints'
 
@@ -19,9 +19,22 @@ const ExamResult = ({time, total, exams, examTime, totalAnswerTrue}) => {
 
     return (
         <Row>
-            <Link to='/exams'>Quay trở lại</Link>
-            <br></br>
-            <Link to='/me/history'>Lịch sử thi</Link>
+            <div className='btn-result'>
+                <Link to='/exams'>
+                    <button className='btn-nav text-success'>
+                        <FontAwesomeIcon icon={faCaretLeft} />
+                        {" Quay trở lại"}
+                    </button>
+                </Link>
+
+                <Link to='/me/history'>
+                    <button className='btn-nav text-success'>
+                        <FontAwesomeIcon icon={faClockRotateLeft} />
+                        {" Lịch sử thi"}
+                    </button>
+                </Link>
+
+            </div>
             {!showAnswerTrue ?
             <Col sm={12}>
                 <Table striped hover>

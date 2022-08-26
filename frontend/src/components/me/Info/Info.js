@@ -6,7 +6,6 @@ import { UserContext } from '../../../contexts/UserContext'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { faCamera } from '@fortawesome/free-solid-svg-icons'
-import { apiUrl } from '../../../contexts/constaints'
 
 
 const Info = () => {
@@ -86,15 +85,15 @@ const Info = () => {
 
   const submitUpdateImg = async (e) => {
     e.preventDefault()
-    
+    const id = toast.loading("Đang tải lên...")
     try {
       const response = await updateImg(img.file, user.avt)
       if(response.success){
         URL.revokeObjectURL(img.prev)
         setImg({file: '', prev: ''})
-        return toast.success(response.message)
+        return toast.update(id, {render: response.message, type: 'success', isLoading: false, autoClose: 5000, theme: 'colored', pauseOnHover: false,})
       }
-      toast.error(response.message)
+      return toast.update(id, {render: response.message, type: 'error', isLoading: false, autoClose: 5000, theme: 'colored', pauseOnHover: false,})
     } catch (error) {
       console.log(error);
     }
@@ -102,7 +101,9 @@ const Info = () => {
 
   return (
     <>
-      <ToastContainer theme='colored'/>
+      <ToastContainer 
+        
+      />
       <Row>
         <Col sm={2}/>
         <Col sm={8}>
