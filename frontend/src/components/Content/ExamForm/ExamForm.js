@@ -18,7 +18,8 @@ const ExamForm = () => {
     const {saveResult} = useContext(ExamContext)
 
     const [show, setShow] = useState(false);
-    const [showToast, setShowToast] = useState(false);
+    const [showToast, setShowToast] = useState(false)
+    const [frequency, setFrequency] = useState()
     const totalAnswerTrue = useRef([])
     const time = useRef([])
     const total = useRef(0)
@@ -51,8 +52,10 @@ const ExamForm = () => {
         }
 
         try {
+            debugger
             const resultData = await saveResult(resultForm)
             if(resultData.success) {
+                setFrequency(resultData.result.frequency)
                 setShowToast(true)
                 return toast.success(resultData.message)
             }
@@ -76,7 +79,7 @@ const ExamForm = () => {
     body = (
         <>
             <ToastContainer theme="colored"/>
-            <ExamResult time={time.current} total={total.current} exams={[...exams]} examTime={examTime} totalAnswerTrue={totalAnswerTrue.current} />
+            <ExamResult frequency={frequency} time={time.current} total={total.current} exams={[...exams]} examTime={examTime} totalAnswerTrue={totalAnswerTrue.current} />
         </>
         )
     else if(exams.length){

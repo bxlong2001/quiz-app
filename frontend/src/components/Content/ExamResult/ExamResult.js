@@ -7,7 +7,7 @@ import { faClockRotateLeft, faCaretLeft, faCheck, faXmark } from '@fortawesome/f
 import ScrollButton from '../../layout/ScrollButton/ScrollButton'
 import { apiUrl } from '../../../contexts/constaints'
 
-const ExamResult = ({time, total, exams, examTime, totalAnswerTrue}) => {
+const ExamResult = ({frequency, time, total, exams, examTime, totalAnswerTrue}) => {
     const [showAnswerTrue, setShowAnswerTrue] = useState(false);
     
     const handleTime = () => {
@@ -44,7 +44,7 @@ const ExamResult = ({time, total, exams, examTime, totalAnswerTrue}) => {
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
+                        <th>Số lần thi</th>
                         <th>Số câu đúng</th>
                         <th>Thời gian làm bài</th>
                         </tr>
@@ -55,7 +55,7 @@ const ExamResult = ({time, total, exams, examTime, totalAnswerTrue}) => {
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td>{frequency}</td>
                         <td>{`${total}/${exams.length}`}</td>
                         <td>{handleTime()}</td>
                         </tr>
