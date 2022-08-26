@@ -142,11 +142,6 @@ const AdminController = {
             if(!deleteExam)
                 return res.status(401).json({success: false,message: 'Xóa thất bại'})
 
-            if(deleteExam.img)
-                fs.unlinkSync(deleteExam.img, err => {
-                    console.log(err);
-                })
-
             res.json({success: true, message: 'Xóa thành công', exam: deleteExam})
         }catch(error){
             console.log(error)
