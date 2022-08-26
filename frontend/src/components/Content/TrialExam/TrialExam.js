@@ -96,8 +96,13 @@ const TrialExam = () => {
                             </tr>
                         </tbody>
                     </Table>
-                    <div className='mt-4 col-lg-2 mx-auto'>
-                        <Button variant="info" onClick={() => window.location.reload(false)}>Thi lại</Button>
+                    <div className="text-center fst-italic" style={{fontWeight: 500}}>{'Hãy '} 
+                        <Link to='/login'>đăng nhập</Link>
+                        {' và thi thật để thi được nhiều dạng đề hơn !'}
+                    </div>
+                    <div className='mt-2 col-lg-2 mx-auto'>
+                        <Button variant="info" style={{marginRight: 5}} onClick={() => window.location.reload(false)}>Thi lại</Button>
+                        <Button variant="success" style={{marginLeft: 5}} to='/login' as={Link}>Thi thật</Button>
                     </div>
                 </Col>
             </Row>
