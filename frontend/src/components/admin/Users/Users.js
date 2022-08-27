@@ -4,6 +4,7 @@ import { AdminContext } from "../../../contexts/AdminContext"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons'
 import ModalDeleteUser from "../../modals/ModalDeleteUser/ModalDeleteUser"
+import { ToastContainer } from 'react-toastify'
 import moment from "moment"
 const Users = () => {
   const id = useRef()
@@ -31,6 +32,7 @@ const Users = () => {
   return (
       <Row>
         <Col>
+        <ToastContainer theme='colored' />
         {showDeleteUser && <ModalDeleteUser
           id={id.current}
           showDeleteUser={showDeleteUser}
